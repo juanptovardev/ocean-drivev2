@@ -1,0 +1,116 @@
+<section class="relative py-12 overflow-hidden bg-fixed bg-center bg-cover"
+    style="background-image: url('assets/imgs/icon-pasos/fondo.webp');">
+    <!-- Overlay Azul para mejor contraste -->
+    <div class="absolute inset-0 bg-[#002B5B]/50"></div>
+
+    <div class="container mx-auto px-6 relative z-10 animate-fade-up">
+
+        <!-- Título de la Sección -->
+        <div class="text-center mb-14">
+            <h2 class="text-4xl md:text-4xl font-bold tracking-[0.05em]">
+                <span class="text-white">{{ lang.t('steps.title1') }}</span><br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ffffff] to-[#FF6F61]">{{
+                    lang.t('steps.title2') }}</span>
+            </h2>
+        </div>
+
+        <!-- Línea Conectora (Fondo) -->
+        <div
+            class="hidden md:block absolute top-[54%] left-10 right-10 h-[2px] bg-gradient-to-r from-[#002B5B] via-[#002B5B]/5 via-[#FF6F61]/5 to-[#FF6F61] z-0">
+        </div>
+
+        <!-- Grid de Pasos -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+
+            <!--PASO 1: Reserva -->
+            <div class="flex flex-col items-center text-center group cursor-default">
+                <!-- Orbe de Cristal -->
+                <div
+                    class="w-32 h-32 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-xl flex items-center justify-center relative mb-2 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_50px_-10px_rgba(255,111,97,0.3)] overflow-hidden">
+
+                    <!-- Brillo interno -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <!-- Icono -->
+                    <div class="relative z-10 transition-transform duration-300 group-hover:scale-110 -translate-y-3">
+                        <img src="assets/imgs/icon-pasos/reserva.webp" alt="Reserva" class="w-14 h-14 object-contain">
+                    </div>
+
+                    <!-- Badge Número -->
+                    <div
+                        class="absolute bottom-4 w-6 h-6 rounded-full bg-[#002B5B] text-white text-[10px] font-bold flex items-center justify-center shadow-md group-hover:bg-[#FF6F61] transition-colors">
+                        1</div>
+                </div>
+
+                <!-- Texto -->
+                <h3 class="font-bold text-white tracking-[0.07em] text-[22px] mb-1">{{ lang.t('steps.step1.title') }}
+                </h3>
+                <p class="text-white/90 max-w-[180px] mx-auto leading-relaxed">{{ lang.t('steps.step1.desc') }}
+                </p>
+            </div>
+
+            <!-- PASO 2: Recoge -->
+            <div class="flex flex-col items-center text-center group cursor-default">
+                <div
+                    class="w-32 h-32 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-xl flex items-center justify-center relative mb-2 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_50px_-10px_rgba(255,111,97,0.3)] overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white via-transparent to-transparent opacity-50">
+                    </div>
+                    <div class="relative z-10 transition-transform duration-300 group-hover:scale-110 -translate-y-2">
+                        <img src="assets/imgs/icon-pasos/recoge.webp" alt="Recoge" class="w-16 h-16 object-contain">
+                    </div>
+                    <div
+                        class="absolute bottom-4 w-6 h-6 rounded-full bg-[#002B5B] text-white text-[10px] font-bold flex items-center justify-center shadow-md group-hover:bg-[#FF6F61] transition-colors">
+                        2</div>
+                </div>
+                <h3 class="font-bold text-white text-[22px] mb-1 tracking-[0.07em]">{{ lang.t('steps.step2.title') }}
+                </h3>
+                <p class="text-white/90 max-w-[180px] mx-auto leading-relaxed">{{ lang.t('steps.step2.desc') }}
+                </p>
+            </div>
+
+            <!-- PASO 3: Disfruta -->
+            <div class="flex flex-col items-center text-center group cursor-default">
+                <div
+                    class="w-32 h-32 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-xl flex items-center justify-center relative mb-2 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_50px_-10px_rgba(255,111,97,0.3)] overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white via-transparent to-transparent opacity-50">
+                    </div>
+                    <div class="relative z-10 transition-transform duration-300 group-hover:scale-110 -translate-y-3">
+                        <img src="assets/imgs/icon-pasos/disfruta.webp" alt="Disfruta" class="w-20 h-20 object-contain">
+                    </div>
+                    <div
+                        class="absolute bottom-4 w-6 h-6 rounded-full bg-[#002B5B] text-white text-[10px] font-bold flex items-center justify-center shadow-md group-hover:bg-[#FF6F61] transition-colors">
+                        3</div>
+                </div>
+                <h3 class="font-bold text-white text-[22px] mb-1 tracking-[0.07em]">{{ lang.t('steps.step3.title') }}
+                </h3>
+                <p class="text-white/90 max-w-[180px] mx-auto leading-relaxed">{{ lang.t('steps.step3.desc') }}
+                </p>
+            </div>
+
+            <!-- PASO 4: Entrega -->
+            <div class="flex flex-col items-center text-center group cursor-default">
+                <div
+                    class="w-32 h-32 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-xl flex items-center justify-center relative mb-2 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_50px_-10px_rgba(255,111,97,0.3)] overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white via-transparent to-transparent opacity-50">
+                    </div>
+                    <div class="relative z-10 transition-transform duration-300 group-hover:scale-110 -translate-y-3">
+                        <img src="assets/imgs/icon-pasos/entrega.webp" alt="Entrega" class="w-14 h-14 object-contain">
+                    </div>
+                    <div
+                        class="absolute bottom-4 w-6 h-6 rounded-full bg-[#002B5B] text-white text-[10px] font-bold flex items-center justify-center shadow-md group-hover:bg-[#FF6F61] transition-colors">
+                        4</div>
+                </div>
+                <h3 class="font-bold text-white text-[22px] mb-1 tracking-[0.07em]">{{ lang.t('steps.step4.title') }}
+                </h3>
+                <p class="text-white/90 max-w-[180px] mx-auto leading-relaxed">{{ lang.t('steps.step4.desc') }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>

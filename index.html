@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth antialiased">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Ocean Drive Car Rental</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Cache Control Meta Tags - Force no caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- Content Security Policy — MED-03 FIX: Eliminado unsafe-eval y CDN de Tailwind -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://oceandrivecarental.com https://maps.googleapis.com https://api.exchangerate-api.com; frame-src 'self' https://www.google.com https://maps.google.com;" />
+
+  <script>
+    (function () {
+      // ===========================================
+      // CACHE CLEARING ON PAGE LOAD
+      // ===========================================
+
+      // Clear caches on every page load to prevent bugs
+      function clearAllCaches() {
+        // Clear service worker caches
+        if ('caches' in window) {
+          caches.keys().then(function (names) {
+            names.forEach(function (name) {
+              caches.delete(name);
+            });
+          });
+        }
+
+        // Unregister service workers
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            registrations.forEach(function (registration) {
+              registration.unregister();
+            });
+          });
+        }
+      }
+
+      // Execute cache clearing
+      clearAllCaches();
+
+      // ===========================================
+      // TOKEN EXPIRATION CHECK (2 HOURS)
+      // ===========================================
+
+      var TOKEN_EXPIRATION_MS = 2 * 60 * 60 * 1000; // 2 hours
+
+      function checkTokenExpiration() {
+        var loginTime = localStorage.getItem('loginTime');
+        if (loginTime) {
+          var elapsed = Date.now() - parseInt(loginTime, 10);
+          if (elapsed >= TOKEN_EXPIRATION_MS) {
+            // Token has expired
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('loginTime');
+            sessionStorage.setItem('logoutMessage', 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+
+            // Check if current page requires authentication
+            var protectedRoutes = ['/reservas', '/profile', '/admin', '/paso-4', '/paso-5'];
+            var currentPath = window.location.pathname;
+
+            var requiresAuth = protectedRoutes.some(function (route) {
+              return currentPath.startsWith(route);
+            });
+
+            if (requiresAuth) {
+              window.location.href = '/login';
+            }
+          }
+        }
+      }
+
+      // Check token on page load
+      checkTokenExpiration();
+
+      // Check token periodically (every 5 minutes)
+      setInterval(checkTokenExpiration, 5 * 60 * 1000);
+
+      // ===========================================
+      // FAVICON LOGIC
+      // ===========================================
+
+      // Lógica de Favicon:
+      // Navegador Claro -> Versión Azul (Logotipo positivo)
+      // Navegador Oscuro -> Versión Blanca (Logotipo Negativo)
+
+      // 1. Limpiar enlaces existentes
+      var existingLinks = document.querySelectorAll("link[rel*='icon']");
+      existingLinks.forEach(function (el) { el.remove(); });
+
+      // 2. Crear nuevo elemento link
+      var link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      document.head.appendChild(link);
+
+      // 3. Definir Assets (Corregido: Negativo es Azul, Positivo es Blanco)
+      var blueIcon = 'assets/imgs/logo/LogotipoNegativo.webp'; // Azul (para fondo claro)
+      var whiteIcon = 'assets/imgs/logo/LogotipoPositivo.webp'; // Blanco (para fondo oscuro)
+
+      // 4. Función de actualización
+      function updateFavicon() {
+        try {
+          var matcher = window.matchMedia('(prefers-color-scheme: dark)');
+          var isDark = matcher.matches;
+
+          // Selección basada en la solicitud del usuario
+          // Oscuro -> Blanco
+          // Claro -> Azul
+          var selectedIcon = isDark ? whiteIcon : blueIcon;
+
+          // Cache busting para forzar actualización
+          link.href = selectedIcon + '?v=' + new Date().getTime();
+
+        } catch (e) {
+          link.href = blueIcon; // Fallback a azul
+        }
+      }
+
+      // 5. Inicializar y escuchar cambios
+      updateFavicon();
+
+      var matcher = window.matchMedia('(prefers-color-scheme: dark)');
+      if (matcher.addEventListener) {
+        matcher.addEventListener('change', updateFavicon);
+      } else if (matcher.addListener) {
+        matcher.addListener(updateFavicon);
+      }
+
+      // ===========================================
+      // CONSOLE WARNING SUPPRESSION
+      // ===========================================
+
+      var origWarn = console.warn;
+      console.warn = function () {
+        var args = Array.prototype.slice.call(arguments);
+        if (args[0] && typeof args[0] === 'string') {
+          if (args[0].includes('cdn.tailwindcss.com')) return; // Tailwind CDN warning
+          if (args[0].includes('NG0913')) return; // Angular OptimizedImage size warning
+        }
+        origWarn.apply(console, args);
+      };
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Disable automatic 'media' strategy
+      theme: {
+        extend: {
+          colors: {
+            // Force light colors even if dark classes are present
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+  {
+    "imports": {
+      "rxjs": "https://aistudiocdn.com/rxjs@^7.8.2?conditions=es2015",
+      "rxjs/operators": "https://aistudiocdn.com/rxjs@^7.8.2/operators?conditions=es2015",
+      "rxjs/ajax": "https://aistudiocdn.com/rxjs@^7.8.2/ajax?conditions=es2015",
+      "rxjs/webSocket": "https://aistudiocdn.com/rxjs@^7.8.2/webSocket?conditions=es2015",
+      "rxjs/testing": "https://aistudiocdn.com/rxjs@^7.8.2/testing?conditions=es2015",
+      "rxjs/fetch": "https://aistudiocdn.com/rxjs@^7.8.2/fetch?conditions=es2015",
+      "@angular/compiler": "https://next.esm.sh/@angular/compiler@^19.0.0?external=rxjs",
+      "@angular/platform-browser": "https://next.esm.sh/@angular/platform-browser@^19.0.0?external=rxjs",
+      "@angular/core": "https://next.esm.sh/@angular/core@^19.0.0?external=rxjs",
+      "@angular/common": "https://next.esm.sh/@angular/common@^19.0.0?external=rxjs",
+      "zone.js": "https://next.esm.sh/zone.js@^0.16.0?external=rxjs"
+    }
+  }
+  </script>
+
+</head>
+
+<body class="bg-[#F7F9FC] text-gray-800 selection:bg-[#FF6F61] selection:text-white overflow-x-hidden">
+  <app-root></app-root>
+</body>
+
+</html>

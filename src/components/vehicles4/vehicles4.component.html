@@ -1,0 +1,252 @@
+<section class="pt-16 pb-16 relative bg-gradient-to-b from-[#F7FBFF] via-white to-white overflow-hidden">
+
+    <!-- Decorative Ambient Glows -->
+    <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-[#B3E5FF] rounded-full mix-blend-multiply filter blur-[120px] opacity-40 pointer-events-none">
+    </div>
+
+
+    <div class="container max-w-screen-2xl mx-auto px-6 sm:px-20 lg:px-32 relative z-10">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-4 gap-6">
+            <div class="text-center md:text-left">
+                <h4
+                    class="text-[#FF6F61] font-bold tracking-[0.2em] text-sm uppercase mb-2 flex items-center justify-center md:justify-start gap-2">
+                    <span class="w-8 h-[2px] bg-[#FF6F61]"></span> {{ lang.t('vehicles.sectionTitle') }}
+                </h4>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tighter leading-none">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#002B5B] to-[#FF6F61]">{{
+                        lang.t('vehicles.title1') }}</span>
+                    <br /> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#002B5B] to-[#FF6F61]">{{
+                        lang.t('vehicles.title2') }}</span>
+                </h2>
+            </div>
+
+            <!-- Custom Navigation Buttons -->
+            <div class="hidden lg:flex gap-3 pb-2">
+                <button (click)="scroll('left')"
+                    class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all duration-300 active:scale-90 group">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button (click)="scroll('right')"
+                    class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all duration-300 active:scale-90 group">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Slider Container Wrapper -->
+        <div class="relative w-full group">
+
+            <!-- Scrollable Track -->
+            <div #scrollContainer (scroll)="onScroll()"
+                class="flex overflow-x-auto gap-6 pb-10 pt-4 snap-x snap-mandatory hide-scrollbar scroll-smooth items-stretch">
+                @for(service of services(); track service.title; let i = $index) {
+
+                <!-- POSTER CARD -->
+                <div class="w-[280px] md:w-[320px] shrink-0 snap-center relative rounded-[2rem] overflow-hidden group/card cursor-pointer transition-all duration-500 hover:-translate-y-3 h-[360px] shadow-lg hover:shadow-2xl shadow-blue-900/10 animate-fade-up opacity-0"
+                    [style.animation-delay]="(i * 100) + 'ms'" (click)="scrollToIndex(i)">
+
+                    <!-- Full Background Image -->
+                    <div class="absolute inset-0 w-full h-full bg-gray-200">
+                        <img [src]="service.imageUrl"
+                            [srcset]="service.imageUrl + ' 1x, ' + service.imageUrl.replace('low.png', '.png') + ' 2x'"
+                            [alt]="service.title"
+                            class="object-cover w-full h-full transition-transform duration-[2s] ease-out group-hover/card:scale-110">
+                    </div>
+
+                    <!-- Gradient Overlay (Navy to Transparent) -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#002B5B] via-[#002B5B]/50 to-transparent opacity-90">
+                    </div>
+
+                    <!-- Top Content: Price (Simplified) -->
+                    <div class="absolute top-0 left-0 w-full p-5 flex justify-end items-start z-20">
+                        <div
+                            class="flex items-baseline gap-1 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 shadow-sm">
+                            <span class="text-[0.7rem] text-white/90 font-medium mr-1">{{ lang.t('vehicles.from')
+                                }}</span>
+                            <span class="text-white font-bold text-[0.95rem]">{{ formatPrice(getCurrentPrice(service))
+                                }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content: Info -->
+                    <div
+                        class="absolute bottom-0 left-0 w-full p-6 z-20 translate-y-2 transition-transform duration-500 group-hover/card:translate-y-0">
+
+                        <h3 class="text-2xl font-bold tracking-[0.12em] text-white mb-1 leading-tight">{{ service.title
+                            }}</h3>
+                        <p class="text-base text-gray-300 font-medium mb-2 border-l-2 border-[#FF6F61] pl-3">{{
+                            service.description
+                            }}
+                        </p>
+
+                        <!-- Divider -->
+                        <div class="w-full h-px bg-white/20 mb-2"></div>
+
+                        <!-- Specs Grid -->
+                        <div class="grid grid-cols-2 gap-y-2 gap-x-4 mb-5">
+                            @for(spec of service.specs; track spec.text) {
+                            <div class="flex items-center gap-2 text-sm md:text-base text-gray-200">
+                                @if(spec.icon === 'users') { <svg class="w-3.5 h-3.5 text-[#FF6F61]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg> }
+                                @if(spec.icon === 'case') { <svg class="w-3.5 h-3.5 text-[#FF6F61]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
+                                </svg> }
+                                @if(spec.icon === 'traction') { <svg class="w-3.5 h-3.5 text-[#FF6F61]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg> }
+                                @if(spec.icon === 'gear') { <svg class="w-3.5 h-3.5 text-[#FF6F61]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg> }
+                                <span>{{ spec.text }}</span>
+                            </div>
+                            }
+                        </div>
+
+                        <!-- Reserve Button -->
+                        <button (click)="onReserve(service, $event)"
+                            class="group/btn w-full py-3 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-sm flex items-center justify-center">
+
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                {{ lang.t('vehicles.book') }}
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </span>
+
+                            <div
+                                class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 ease-in-out">
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+                }
+            </div>
+
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="flex lg:hidden justify-center gap-6 mt-2">
+            <button (click)="scroll('left')"
+                class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] active:bg-[#002B5B] active:text-white shadow-sm bg-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button (click)="scroll('right')"
+                class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] active:bg-[#002B5B] active:text-white shadow-sm bg-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+    <style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</section>
+
+<!-- AVAILABILITY NOTIFICATION MODAL -->
+@if (showAvailabilityModal()) {
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md animate-scale-in"
+    (click)="closeModal()">
+    <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden animate-slide-up relative"
+        (click)="$event.stopPropagation()">
+
+        <!-- Decorative Background Element -->
+        <div class="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-[#FF6F61]/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 bg-[#002B5B]/5 rounded-full blur-3xl"></div>
+
+        <!-- Header Section -->
+        <div class="relative px-8 pt-8 pb-4 text-center">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-orange-50 rounded-full mb-4 ring-8 ring-orange-50/50">
+                <svg class="w-8 h-8 text-[#FF6F61]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-black text-[#002B5B] uppercase tracking-tighter italic leading-none mb-2">{{
+                lang.t('vehicles.modalTitle') }}</h3>
+            <p class="text-slate-500 text-sm font-medium leading-relaxed px-4">
+                {{ lang.t('vehicles.modalMsg1') }} <span class="text-[#FF6F61] font-bold">{{
+                    unavailableCategory()?.title }}</span> {{ lang.t('vehicles.modalMsg2') }}
+                <br><span class="text-xs italic opacity-75 mt-1 block">{{ lang.t('vehicles.modalMsg3') }}</span>
+            </p>
+        </div>
+
+        <!-- Suggested Alternatives -->
+        <div class="px-8 pb-6">
+            <div class="space-y-3 mt-2">
+                @for (suggested of suggestedCategories(); track suggested.id) {
+                <div (click)="selectAlternative(suggested)"
+                    class="group flex items-center gap-4 p-3 bg-slate-50 hover:bg-[#002B5B] rounded-2xl border border-slate-100 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-900/10">
+                    <div
+                        class="w-16 h-16 rounded-xl overflow-hidden bg-white flex-shrink-0 border border-slate-200 group-hover:border-transparent transition-colors">
+                        <img [src]="suggested.image_url" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4
+                            class="font-black text-[#002B5B] group-hover:text-white uppercase italic tracking-tighter text-sm transition-colors">
+                            {{ suggested.name }}</h4>
+                        <p
+                            class="text-[0.65rem] font-bold text-slate-400 group-hover:text-white/60 uppercase transition-colors">
+                            {{ lang.t('vehicles.availableNow') }}</p>
+                    </div>
+                    <div
+                        class="text-[#FF6F61] group-hover:text-white font-black text-sm px-4 py-2 bg-white group-hover:bg-white/10 rounded-full shadow-sm transition-all">
+                        {{ lang.t('vehicles.choose') }}
+                    </div>
+                </div>
+                }
+            </div>
+
+            <!-- Close Button -->
+            <button (click)="closeModal()"
+                class="w-full mt-6 py-4 text-xs font-black text-slate-400 hover:text-[#002B5B] uppercase tracking-[0.2em] transition-colors">
+                {{ lang.t('vehicles.viewAll') }}
+            </button>
+        </div>
+    </div>
+</div>
+}

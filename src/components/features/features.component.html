@@ -1,0 +1,167 @@
+<section class="py-8 md:py-10 bg-gradient-to-br from-white via-[#B3E5FF]/10 to-white relative overflow-hidden">
+    <!-- Animated background blobs -->
+    <div
+        class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#B3E5FF]/30 rounded-full blur-3xl pointer-events-none -mr-40 opacity-70 animate-pulse-slow">
+    </div>
+    <div
+        class="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#B3E5FF]/20 rounded-full blur-3xl pointer-events-none -ml-20 opacity-50 animate-pulse-slower">
+    </div>
+    <div class="container mx-auto pl-10 pr-8 sm:pl-14 sm:pr-12 lg:pl-24 lg:pr-20 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-7 lg:gap-14">
+            <div class="w-full lg:w-1/2 relative lg:-ml-12 order-2 lg:order-1 mt-6 lg:mt-0">
+                <div
+                    class="relative w-full h-[212px] md:h-[297px] lg:h-[340px] flex items-center justify-center lg:justify-start group/image">
+                    <!-- Animated border glow -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-[#002B5B] via-[#B3E5FF] to-[#FF6F61] rounded-2xl opacity-0 group-hover/image:opacity-20 blur-xl transition-opacity duration-700">
+                    </div>
+                    <img src="assets/imgs/features/fondo.webp" alt="Premium Silver Car"
+                        class="w-full h-full object-cover object-bottom pointer-events-none drop-shadow-2xl rounded-xl transition-all duration-500 group-hover/image:drop-shadow-[0_20px_40px_rgba(0,43,91,0.3)] group-hover/image:scale-[1.02]">
+                </div>
+            </div>
+            <div class="w-full lg:w-1/2 order-1 lg:order-2">
+                <div class="mb-8">
+                    <h2 class="text-4xl lg:text-5xl font-normal text-[#002B5B] mb-4 leading-[1.1] tracking-tight animate-fade-in-up"
+                        style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em;">
+                        {{ lang.t('features.title') }}<br>
+                        <span class="text-[#FF6F61] relative inline-block group/title">
+                            {{ lang.t('features.titleHighlight') }}
+                            <svg class="absolute w-full h-3 bottom-0.5 left-0 text-[#B3E5FF] -z-10 transition-all duration-500 group-hover/title:scale-x-110"
+                                viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 12 100 5" stroke="currentColor" stroke-width="8" fill="none"
+                                    opacity="0.6" class="animate-draw-line" />
+                            </svg>
+                        </span>
+                    </h2>
+                    <p class="text-base text-gray-600 leading-relaxed font-light max-w-lg animate-fade-in-up animation-delay-200"
+                        style="font-family: 'Open Sans', sans-serif;">
+                        {{ lang.t('features.subtitle') }}
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
+                    @for(feature of features(); track feature.title; let i = $index) {
+                    <div class="group/item flex items-start gap-4 animate-fade-in-up cursor-pointer"
+                        [style.animation-delay]="(i * 100 + 300) + 'ms'">
+                        <div
+                            class="w-12 h-12 shrink-0 rounded-2xl bg-[#B3E5FF]/25 text-[#002B5B] flex items-center justify-center transition-all duration-500 group-hover/item:bg-[#FF6F61] group-hover/item:text-white group-hover/item:shadow-lg group-hover/item:shadow-[#FF6F61]/30 group-hover/item:-translate-y-1 group-hover/item:rotate-3 ease-apple border border-[#B3E5FF]/20 group-hover/item:border-[#FF6F61]/50 group-hover/item:scale-110">
+                            @if(feature.icon === 'plane') { <svg
+                                class="w-6 h-6 transition-transform duration-500 group-hover/item:scale-110 group-hover/item:rotate-6"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg> }
+                            @if(feature.icon === 'globe') { <svg
+                                class="w-6 h-6 transition-transform duration-500 group-hover/item:scale-110 group-hover/item:rotate-12"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg> }
+                            @if(feature.icon === 'briefcase') { <svg
+                                class="w-6 h-6 transition-transform duration-500 group-hover/item:scale-110" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg> }
+                            @if(feature.icon === 'sparkles') { <svg
+                                class="w-6 h-6 transition-transform duration-500 group-hover/item:scale-110 group-hover/item:rotate-45"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg> }
+                        </div>
+                        <div class="transition-transform duration-300 group-hover/item:translate-x-1">
+                            <h3 class="font-semibold text-lg text-[#002B5B] mb-1.5 group-hover/item:text-[#FF6F61] transition-all duration-300 relative inline-block"
+                                style="font-family: 'Rubik', sans-serif;">
+                                {{ feature.title }}
+                                <span
+                                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FF6F61] transition-all duration-500 group-hover/item:w-full"></span>
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed transition-colors duration-300 group-hover/item:text-gray-700"
+                                style="font-family: 'Open Sans', sans-serif;">{{
+                                feature.desc }}</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .ease-apple {
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: translateY(-50%) scale(1.05);
+            }
+        }
+
+        @keyframes pulse-slower {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes draw-line {
+            from {
+                stroke-dasharray: 100;
+                stroke-dashoffset: 100;
+            }
+
+            to {
+                stroke-dasharray: 100;
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 6s ease-in-out infinite;
+        }
+
+        .animate-pulse-slower {
+            animation: pulse-slower 8s ease-in-out infinite;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-draw-line {
+            animation: draw-line 1.5s ease-out forwards;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 200ms;
+        }
+    </style>
+</section>

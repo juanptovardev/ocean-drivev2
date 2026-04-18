@@ -1,0 +1,32 @@
+<app-header></app-header>
+<main class="overflow-x-hidden">
+    <app-hero></app-hero>
+    <div class="relative z-40 -mt-24">
+        <div class="px-6">
+            <app-reservation-form-final [enableDropoffCity]="false" [initialStep]="true"></app-reservation-form-final>
+        </div>
+    </div>
+    <div class="-mt-16 relative z-10">
+        <app-vehicles3></app-vehicles3>
+    </div>
+    <div>
+        <app-features></app-features>
+    </div>
+    <div>
+        <app-requisitos></app-requisitos>
+    </div>
+    <div>
+        <app-experience></app-experience>
+    </div>
+    <div>
+        <app-location-map></app-location-map>
+    </div>
+    <app-brand-slider></app-brand-slider>
+    <div class="mt-10">
+        <app-faq></app-faq>
+    </div>
+    <div>
+        <app-contact-promo></app-contact-promo>
+    </div>
+</main>
+<app-footer></app-footer>

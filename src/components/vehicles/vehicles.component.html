@@ -1,0 +1,355 @@
+<section class="relative" [ngClass]="theme === 'blue' ? '' : 'bg-[#F7F9FC]'">
+  <div class="container mx-auto pb-4 px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <h4 class="tracking-widest uppercase animate-enter"
+        [ngClass]="theme === 'blue' ? 'text-2xl md:text-3xl font-extrabold text-[#002B5B] italic' : 'font-bold text-[1.25rem] text-[#FF6F61]'">
+        {{ overlineText }}
+      </h4>
+      @if(titleText) {
+      <h2 class="text-[2.75rem] font-bold text-gray-900 animate-enter delay-100">{{ titleText }}</h2>
+      }
+      @if(descriptionText) {
+      <p class="text-gray-600 mt-2 font-light text-base md:text-lg animate-enter delay-100">{{ descriptionText }}</p>
+      }
+    </div>
+
+    <!-- Slider Container Wrapper -->
+    <div
+      class="relative w-full max-w-[1200px] mx-auto group transition-all duration-300 animate-enter delay-200 px-0 md:px-12 lg:px-16">
+
+      <!-- LEFT SIDE ARROW: Coral arrows even in blue theme -->
+      <button (click)="scroll('left')"
+        class="hidden md:flex absolute -left-2 md:left-0 top-1/2 -translate-y-1/2 z-30 bg-white/95 backdrop-blur-sm w-10 h-10 md:w-12 md:h-12 rounded-full items-center justify-center shadow-xl hover:text-white transition-all duration-300 ease-apple focus:outline-none border border-white/50 hover:scale-110 active:scale-95 text-[#FF6F61] hover:bg-[#FF6F61]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Scrollable Track -->
+      <div #scrollContainer (scroll)="onScroll()"
+        class="flex overflow-x-auto gap-4 md:gap-4 lg:gap-5 pb-4 pt-6 snap-x snap-mandatory hide-scrollbar scroll-smooth items-stretch px-8 md:px-0">
+        @for(service of services(); track service.title; let i = $index) {
+        <div
+          class="w-[310px] sm:w-[320px] md:w-[260px] lg:w-[270px] xl:w-[280px] shrink-0 snap-center bg-white rounded-3xl overflow-hidden flex flex-col border group/card transition-all duration-500 ease-apple"
+          [style.border-width.px]="1" [ngClass]="{
+             'border-[#B3E5FF]': i === activeIndex() && theme === 'blue',
+             'border-[#FFB3AD]': i === activeIndex() && theme !== 'blue',
+             'border-gray-100/50': i !== activeIndex(),
+             'shadow-[0_20px_50px_-12px_rgba(0,43,91,0.25)] scale-[1.02]': i === activeIndex() && theme === 'blue',
+             'shadow-[0_20px_50px_-12px_rgba(255,111,97,0.25)] scale-[1.02]': i === activeIndex() && theme !== 'blue',
+             'shadow-lg shadow-gray-200/50 scale-95 opacity-80': i !== activeIndex(),
+             'z-20': i === activeIndex(),
+             'z-0 hover:-translate-y-1 hover:shadow-xl hover:opacity-100 hover:scale-100': i !== activeIndex()
+          }">
+
+          <!-- Image Area -->
+          <div class="relative h-56 sm:h-56 md:h-40 w-full overflow-hidden bg-gray-50">
+            <img [src]="service.imageUrl" [alt]="service.title" class="object-cover object-bottom w-full h-full">
+            <!-- Overlay gradient -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"
+              [ngClass]="theme === 'blue' ? 'from-[#002B5B]/40' : 'from-[#FF6F61]/40'">
+            </div>
+            <!-- Price Tag: Keep Blue for Primary -->
+            <div
+              class="absolute bottom-0 left-0 text-white py-2 px-5 md:py-1.5 md:px-4 rounded-tr-2xl font-bold text-lg md:text-base shadow-sm z-10 transition-transform duration-300 group-hover/card:translate-x-1 flex items-center gap-1.5 md:gap-1"
+              [ngClass]="theme === 'blue' ? 'bg-[#002B5B]' : 'bg-[#FF6F61]'">
+              <span class="font-normal opacity-90 text-[11px] uppercase tracking-wide">{{ lang.t('vehicles.from')
+                }}</span>
+              {{ formatPrice(getCurrentPrice(service)) }}
+            </div>
+          </div>
+
+          <!-- Content Area -->
+          <div class="p-5 md:p-2.5 flex flex-col flex-grow relative">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <h3
+                  class="text-2xl md:text-lg font-black md:font-bold tracking-wide md:tracking-[0.05em] text-gray-800 leading-none md:leading-tight transition-colors uppercase italic md:normal-case md:not-italic"
+                  [ngClass]="theme === 'blue' ? 'group-hover/card:text-[#002B5B]' : 'group-hover/card:text-[#FF6F61]'">
+                  {{ service.title }}</h3>
+                <p class="text-xs sm:text-sm md:text-xs text-gray-500 font-medium mt-1 leading-snug">{{
+                  service.description
+                  }}</p>
+              </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-gray-100 my-4 md:my-2.5 transition-colors"
+              [ngClass]="theme === 'blue' ? 'group-hover/card:bg-[#B3E5FF]' : 'group-hover/card:bg-[#FFB3AD]'">
+            </div>
+
+            <!-- Specs: Keep tertiary (light blue/greenish) for icons in blue theme -->
+            <div class="grid grid-cols-2 gap-x-2 md:gap-x-1 gap-y-3 md:gap-y-1 mb-3 md:mb-2">
+              @for(spec of service.specs; track spec.text) {
+              <div class="flex items-center text-xs sm:text-sm md:text-[10px] md:sm:text-xs text-gray-600 font-medium">
+                <span class="mr-2 p-2 md:p-1.5 rounded-full shrink-0 transition-colors"
+                  [ngClass]="theme === 'blue' ? 'text-[#002B5B] bg-[#F7F9FC] group-hover/card:bg-[#B3E5FF]' : 'text-[#FF6F61] bg-[#FFF0F0] group-hover/card:bg-[#FFDAD6]'">
+                  <!-- Icons -->
+                  @if(spec.icon === 'users') { <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                  </svg> }
+                  @if(spec.icon === 'case') { <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                    </path>
+                  </svg> }
+                  @if(spec.icon === 'traction') { <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg> }
+                  @if(spec.icon === 'gear') { <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg> }
+                  @if(spec.icon === 'doors') { <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                  </svg> }
+                </span>
+                <span class="truncate">{{ spec.text }}</span>
+              </div>
+              }
+            </div>
+
+            <!-- Button: Use Coral Secondary for Blue Theme -->
+            <div class="mt-auto pt-2 md:pt-1.5">
+              <button (click)="onSelectService(service)"
+                class="group/btn w-full py-3.5 md:py-2.5 rounded-xl md:rounded-lg bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-sm md:text-xs flex items-center justify-center gap-2">
+                <span class="relative z-10 flex items-center justify-center gap-2">
+                  {{ lang.t('vehicles.select') }}
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 md:h-3.5 md:w-3.5 transition-transform duration-300 group-hover/btn:translate-x-1"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+                <div
+                  class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 ease-in-out">
+                </div>
+              </button>
+            </div>
+
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- RIGHT SIDE ARROW: Coral arrows even in blue theme -->
+      <button (click)="scroll('right')"
+        class="hidden md:flex absolute -right-2 md:right-0 top-1/2 -translate-y-1/2 z-30 bg-white/95 backdrop-blur-sm w-10 h-10 md:w-12 md:h-12 rounded-full items-center justify-center shadow-xl hover:text-white transition-all duration-300 ease-apple focus:outline-none border border-white/50 hover:scale-110 active:scale-95 text-[#FF6F61] hover:bg-[#FF6F61]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="flex justify-center items-center gap-2.5 mt-2 relative z-30 animate-enter delay-300">
+      @for(service of services(); track service.title; let i = $index) {
+      <button (click)="scrollToIndex(i)"
+        class="h-2 rounded-full transition-all duration-500 ease-apple focus:outline-none hover:scale-110"
+        [class.w-8]="i === activeIndex()" [ngClass]="{
+          'bg-white': i === activeIndex() && theme === 'blue',
+          'bg-[#FF6F61]': i === activeIndex() && theme !== 'blue',
+          'bg-white/40 hover:bg-white/60': i !== activeIndex() && theme === 'blue',
+          'bg-gray-300 hover:bg-gray-400': i !== activeIndex() && theme !== 'blue',
+           'w-2': i !== activeIndex()
+        }" aria-label="Ir a diapositiva">
+      </button>
+      }
+    </div>
+
+  </div>
+
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Animación suave estilo Apple, necesaria para la portabilidad */
+    .ease-apple {
+      transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-enter {
+      animation: enter 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+  </style>
+</section>
+
+<!-- AVAILABILITY NOTIFICATION MODAL -->
+@if (showAvailabilityModal()) {
+<div
+  class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md animate-scale-in"
+  (click)="closeModal()">
+  <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden animate-slide-up relative"
+    (click)="$event.stopPropagation()">
+
+    <!-- Decorative Background Element -->
+    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-[#FF6F61]/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 bg-[#002B5B]/5 rounded-full blur-3xl"></div>
+
+    <!-- Header Section -->
+    <div class="relative px-6 pt-5 pb-2 text-center">
+      <div
+        class="inline-flex items-center justify-center w-10 h-10 bg-orange-50 rounded-full mb-2 ring-2 ring-orange-50/50">
+        <svg class="w-4 h-4 text-[#FF6F61]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-black text-[#002B5B] uppercase tracking-[0.15em] italic leading-none mb-2">{{
+        lang.t('form.modal.avail.title') }}</h3>
+      <p class="text-slate-500 text-sm font-medium leading-relaxed px-4">
+        {{ lang.t('form.modal.avail.desc1') }} <span class="text-[#FF6F61] font-bold">{{ unavailableCategory()?.title
+          }}</span> {{ lang.t('form.modal.avail.desc2') }}
+        <br><span class="text-xs italic opacity-75 mt-1 block">{{ lang.t('form.modal.avail.alt') }}</span>
+      </p>
+    </div>
+
+    <!-- Suggested Alternatives -->
+    <div class="px-8 pb-4">
+      <div class="space-y-3 mt-2">
+        @for (suggested of suggestedCategories(); track suggested.id) {
+        <div (click)="selectAlternative(suggested)"
+          class="group flex items-center gap-4 p-3 bg-slate-50 hover:bg-[#002B5B] rounded-2xl border border-slate-100 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-900/10">
+          <div
+            class="w-16 h-16 rounded-xl overflow-hidden bg-white flex-shrink-0 border border-slate-200 group-hover:border-transparent transition-colors">
+            <img [src]="suggested.image_url" alt="" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <h4
+              class="font-black text-[#002B5B] group-hover:text-white uppercase italic tracking-wide text-base transition-colors">
+              {{ suggested.name }}</h4>
+            <p
+              class="text-[0.6rem] font-bold text-slate-400 group-hover:text-white/60 uppercase tracking-wide transition-colors">
+              {{ lang.t('form.modal.avail.now') }}</p>
+          </div>
+          <div
+            class="text-[#FF6F61] group-hover:text-white font-black text-sm px-4 py-2 bg-white group-hover:bg-white/10 rounded-full shadow-sm transition-all">
+            {{ lang.t('form.modal.avail.choose') }}
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Close Button -->
+      <button (click)="closeModal()"
+        class="w-full mt-4 py-3 text-xs font-black text-slate-400 hover:text-[#002B5B] uppercase tracking-[0.2em] transition-colors">
+        {{ lang.t('form.modal.avail.all') }}
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ERROR NOTIFICATION MODAL -->
+@if (showErrorModal()) {
+<div
+  class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-scale-in"
+  (click)="closeErrorModal()">
+  <div
+    class="bg-white rounded-[2rem] shadow-2xl w-full max-w-md overflow-hidden animate-slide-up relative p-8 text-center"
+    (click)="$event.stopPropagation()">
+    <!-- Icon -->
+    <div class="inline-flex items-center justify-center w-12 h-12 bg-red-50 rounded-full mb-5 ring-4 ring-red-50/50">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#FF6F61]" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    </div>
+
+    <h3 class="text-3xl font-black text-[#002B5B] uppercase tracking-widest italic leading-none mb-3">{{
+      lang.t('vehicles.modal.unavailable.title') }}
+    </h3>
+
+    <p class="text-slate-500 text-sm font-medium leading-relaxed mb-8">
+      {{ lang.t('vehicles.modal.unavailable.desc') }}
+    </p>
+
+    <button (click)="closeErrorModal()"
+      class="w-full py-3.5 rounded-xl bg-[#002B5B] text-white font-bold uppercase tracking-widest shadow-lg shadow-blue-900/20 hover:bg-[#003875] hover:scale-[1.02] active:scale-[0.98] transition-all">
+      {{ lang.t('general.understood') }}
+    </button>
+  </div>
+</div>
+}
+
+<!-- NO ALTERNATIVES MODAL - Redirect to change dates -->
+@if (showNoAlternativesModal()) {
+<div
+  class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md animate-scale-in"
+  (click)="closeNoAlternativesModal()">
+  <div
+    class="bg-white rounded-[2rem] shadow-2xl w-full max-w-md overflow-hidden animate-slide-up relative p-8 text-center"
+    (click)="$event.stopPropagation()">
+
+    <!-- Decorative Background -->
+    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-[#FF6F61]/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 bg-[#002B5B]/5 rounded-full blur-3xl"></div>
+
+    <!-- Icon -->
+    <div
+      class="relative inline-flex items-center justify-center w-14 h-14 bg-orange-50 rounded-full mb-5 ring-4 ring-orange-50/50">
+      <svg class="w-7 h-7 text-[#FF6F61]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    </div>
+
+    <h3 class="relative text-2xl font-black text-[#002B5B] uppercase tracking-widest italic leading-none mb-3">
+      {{ lang.t('vehicles.modal.noAvail.title') }}
+    </h3>
+
+    <p class="relative text-slate-500 text-sm font-medium leading-relaxed mb-8 px-4">
+      {{ lang.t('vehicles.modal.noAvail.desc') }}
+      <br><br>
+      <span class="text-[#FF6F61] font-bold">{{ lang.t('vehicles.modal.noAvail.action') }}</span> {{
+      lang.t('vehicles.modal.noAvail.suffix') }}
+    </p>
+
+    <button (click)="closeNoAlternativesModal()"
+      class="relative w-full py-3.5 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold uppercase tracking-widest shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+      </svg>
+      {{ lang.t('vehicles.modal.noAvail.button') }}
+    </button>
+  </div>
+</div>
+}

@@ -1,0 +1,972 @@
+/* Font Declarations */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/assets/fonts/BebasNeue/bebas-neue-v16-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('/assets/fonts/Rubik/rubik-v31-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('/assets/fonts/Rubik/rubik-v31-latin-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans/open-sans-v44-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans/open-sans-v44-latin-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans/open-sans-v44-latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans/open-sans-v44-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/montserrat-v31-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/montserrat-v31-latin-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/montserrat-v31-latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat/montserrat-v31-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global Interface Scaling */
+html {
+  font-size: 14px;
+  /* Default is 16px. 14px scales the UI down to ~87.5% */
+  scroll-behavior: smooth;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font Hierarchy */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Subtitles and secondary headings */
+.subtitle,
+.subheading {
+  font-family: 'Rubik', sans-serif;
+}
+
+/* Body text */
+p,
+span,
+div {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Accent text with Montserrat */
+.accent-text,
+button,
+.btn {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ============================================
+   PROFESSIONAL ANIMATION SYSTEM
+   ============================================ */
+
+/* Premium Easing Functions */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Animation durations */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+}
+
+/* Apple-like Ease: Very fast start, long smooth tail */
+.ease-apple {
+  transition-timing-function: var(--ease-out-expo);
+}
+
+/* Super Premium Spring Easing */
+.ease-spring {
+  transition-timing-function: var(--ease-spring);
+}
+
+/* ============================================
+   PAGE ENTRANCE ANIMATIONS
+   ============================================ */
+
+/* Fade In Up - Primary entrance animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Left */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade In Right */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In - For modals and popups */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scale In with blur - Premium effect */
+@keyframes scaleInBlur {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Slide In Up - For cards and sections */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Float animation - For decorative elements */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Ken Burns effect for images */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Text Shine Animation */
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bounce subtle */
+@keyframes bounceSubtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITY CLASSES
+   ============================================ */
+
+/* Fade animations */
+.animate-fade-up {
+  animation: fadeInUp var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-fade-down {
+  animation: fadeInDown var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-fade-left {
+  animation: fadeInLeft var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-fade-right {
+  animation: fadeInRight var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* Scale animations */
+.animate-scale-in {
+  animation: scaleIn var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-scale-blur {
+  animation: scaleInBlur var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* Slide animations */
+.animate-slide-up {
+  animation: slideInUp var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* Special effects */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-ken-burns {
+  animation: kenBurns 30s ease-out infinite alternate;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-shine {
+  background-size: 200% auto;
+  animation: shine 5s linear infinite;
+}
+
+.animate-rotate {
+  animation: rotate 1s linear infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s ease-in-out infinite;
+}
+
+/* Combined entrance animation */
+.animate-enter {
+  animation: fadeInUp var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* ============================================
+   STAGGER DELAYS
+   ============================================ */
+
+.delay-0 {
+  animation-delay: 0ms;
+}
+
+.delay-50 {
+  animation-delay: 50ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-250 {
+  animation-delay: 250ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-800 {
+  animation-delay: 800ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+/* ============================================
+   HOVER & INTERACTION ANIMATIONS
+   ============================================ */
+
+/* Scale on hover */
+.hover-scale {
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* Lift on hover (scale + shadow) */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Glow on hover */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 111, 97, 0.3);
+}
+
+/* Brighten on hover */
+.hover-brighten {
+  transition: filter var(--duration-fast) ease;
+}
+
+.hover-brighten:hover {
+  filter: brightness(1.1);
+}
+
+/* ============================================
+   BUTTON ANIMATIONS
+   ============================================ */
+
+button,
+.btn,
+[role="button"] {
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-2px);
+}
+
+button:active,
+.btn:active,
+[role="button"]:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ============================================
+   LINK ANIMATIONS
+   ============================================ */
+
+a {
+  transition: color var(--duration-fast) ease,
+    opacity var(--duration-fast) ease;
+}
+
+/* ============================================
+   CARD ANIMATIONS
+   ============================================ */
+
+.card,
+[class*="card"],
+.bg-white.rounded,
+.bg-white.shadow {
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+/* ============================================
+   IMAGE ANIMATIONS
+   ============================================ */
+
+img {
+  transition: transform var(--duration-slow) var(--ease-out-expo),
+    filter var(--duration-normal) ease;
+}
+
+/* Image hover zoom effect on parent hover */
+.group:hover img,
+.hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   FORM ELEMENT ANIMATIONS
+   ============================================ */
+
+input,
+textarea,
+select {
+  transition: border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 43, 91, 0.1);
+}
+
+/* ============================================
+   SCROLL-TRIGGERED ANIMATIONS (Intersection Observer)
+   ============================================ */
+
+/* Elements with these classes start invisible */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================
+   VIEW TRANSITIONS API (Native Browser Support)
+   ============================================ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 400ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+::view-transition-old(root) {
+  animation-name: fadeOutSlideUp;
+}
+
+::view-transition-new(root) {
+  animation-name: fadeInSlideUp;
+}
+
+@keyframes fadeOutSlideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+/* Reduced motion block removed to force premium animations */
+
+/* ============================================
+   SMOOTH SCROLLBAR (Optional)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 43, 91, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 43, 91, 0.4);
+}
+
+/* ============================================
+   PAGE-SPECIFIC ANIMATION HELPERS
+   ============================================ */
+
+/* Hero sections */
+.hero-content>* {
+  animation: fadeInUp var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.hero-content>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.hero-content>*:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.hero-content>*:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.hero-content>*:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+.hero-content>*:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+/* Staggered list items */
+.stagger-list>* {
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.stagger-list>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-list>*:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.stagger-list>*:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.stagger-list>*:nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.stagger-list>*:nth-child(5) {
+  animation-delay: 200ms;
+}
+
+.stagger-list>*:nth-child(6) {
+  animation-delay: 250ms;
+}
+
+.stagger-list>*:nth-child(7) {
+  animation-delay: 300ms;
+}
+
+.stagger-list>*:nth-child(8) {
+  animation-delay: 350ms;
+}
+
+.stagger-list>*:nth-child(9) {
+  animation-delay: 400ms;
+}
+
+.stagger-list>*:nth-child(10) {
+  animation-delay: 450ms;
+}
+
+/* Grid items stagger */
+.stagger-grid>* {
+  animation: scaleIn var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.stagger-grid>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-grid>*:nth-child(2) {
+  animation-delay: 75ms;
+}
+
+.stagger-grid>*:nth-child(3) {
+  animation-delay: 150ms;
+}
+
+.stagger-grid>*:nth-child(4) {
+  animation-delay: 225ms;
+}
+
+.stagger-grid>*:nth-child(5) {
+  animation-delay: 300ms;
+}
+
+.stagger-grid>*:nth-child(6) {
+  animation-delay: 375ms;
+}
+
+.stagger-grid>*:nth-child(7) {
+  animation-delay: 450ms;
+}
+
+.stagger-grid>*:nth-child(8) {
+  animation-delay: 525ms;
+}
+
+.stagger-grid>*:nth-child(9) {
+  animation-delay: 600ms;
+}
+
+/* ============================================
+   FOCUS STATES (Accessibility)
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid #FF6F61;
+  outline-offset: 2px;
+  transition: outline-offset var(--duration-fast) ease;
+}
+
+/* ============================================
+   INTERACTIVE ICONS
+   ============================================ */
+
+svg {
+  transition: transform var(--duration-fast) var(--ease-out-expo),
+    fill var(--duration-fast) ease,
+    stroke var(--duration-fast) ease;
+}
+
+button:hover svg,
+a:hover svg {
+  transform: scale(1.1);
+}
+
+/* ============================================
+   RIPPLE EFFECT (Material-Like)
+   ============================================ */
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+}
+
+.ripple:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+  transition: 0s;
+}
+/* ============================================
+   ADDITIONAL ANIMATIONS (Added for Login/Register V2)
+   ============================================ */
+
+/* Fade In (Opacity only) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* Shake Animation for Errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Spin Slow */
+.animate-spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Dropdown Pop */
+@keyframes dropdownPop {
+    0% { opacity: 0; transform: scale(0.95) translateY(-10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-dropdown-pop {
+    animation: dropdownPop 0.2s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+/* Scrollbar Utility */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #E5E7EB;
+    border-radius: 10px;
+}
+

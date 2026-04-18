@@ -1,0 +1,101 @@
+<section class="bg-white pt-8 pb-20 px-4 font-sans relative">
+    <!-- Wrapper Principal -->
+    <div class="max-w-7xl mx-auto relative">
+
+        <!-- ========================================== -->
+        <!-- INTRODUCCIÓN (MINIMALISTA)                 -->
+        <!-- ========================================== -->
+        <div class="max-w-4xl mx-auto text-center relative animate-fade-up">
+
+            <!-- Gran Comilla (Estilo Referencia) -->
+            <div class="text-[#FF6F61] font-serif text-7xl leading-none select-none opacity-0 animate-scale-in"
+                style="animation-delay: 100ms;">
+                ”
+            </div>
+
+            <!-- Contenido del Texto -->
+            <h2 class="text-2xl md:text-3xl font-light text-gray-600 leading-relaxed tracking-wide">
+                {{ lang.t('mv.introPart1') }}
+
+                <!-- Resaltado 1: Servicio Humano (Negrita Azul) -->
+                <span
+                    class="font-bold text-[#002B5B] text-lg inline-block hover:scale-105 transition-transform duration-300 cursor-default uppercase">{{
+                    lang.t('mv.introHighlight1') }}</span>{{ lang.t('mv.introPart2') }}
+
+                <!-- Resaltado 2: Clara... (Negrita Azul + Itálica) -->
+                <span
+                    class="font-bold text-[#002B5B] italic text-lg inline-block hover:scale-105 transition-transform duration-300 cursor-default uppercase">{{
+                    lang.t('mv.introHighlight2') }}</span>."
+            </h2>
+
+            <!-- Puntos Decorativos Inferiores -->
+            <div class="mt-8 flex justify-center gap-2 opacity-40">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#002B5B]"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#FF6F61]"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#002B5B]"></div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 2. TARJETAS DE MISIÓN Y VISIÓN             -->
+        <!-- ========================================== -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto mt-16">
+
+            <!-- TARJETA MISIÓN -->
+            <div
+                class="relative bg-[#F7F9FC] p-8 md:p-12 rounded-3xl border border-transparent hover:border-[#002B5B]/10 hover:bg-white hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 cursor-default">
+
+                <!-- Icono de Fondo (Decorativo) -->
+                <div class="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                    <svg class="w-32 h-32 text-[#002B5B]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10">
+                    <!-- Línea acento animada -->
+                    <div class="w-16 h-1 bg-[#FF6F61] mb-6 transition-all duration-500 group-hover:w-24"></div>
+
+                    <h3 class="text-3xl font-bold text-[#002B5B] mb-6 tracking-tight">{{ lang.t('mv.missionTitle') }}
+                    </h3>
+
+                    <p
+                        class="text-gray-600 text-lg leading-relaxed font-light group-hover:text-gray-800 transition-colors text-justify">
+                        {{ lang.t('mv.missionText1') }} <span class="font-medium text-[#002B5B]">{{
+                            lang.t('mv.missionHighlight') }}</span> {{ lang.t('mv.missionText2') }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- TARJETA VISIÓN -->
+            <div
+                class="relative bg-[#F7F9FC] p-8 md:p-12 rounded-3xl border border-transparent hover:border-[#002B5B]/10 hover:bg-white hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 cursor-default">
+
+                <!-- Icono de Fondo (Decorativo) -->
+                <div class="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                    <svg class="w-32 h-32 text-[#002B5B]" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10">
+                    <!-- Línea acento animada -->
+                    <div class="w-16 h-1 bg-[#FF6F61] mb-6 transition-all duration-500 group-hover:w-24"></div>
+
+                    <h3 class="text-3xl font-bold text-[#002B5B] mb-6 tracking-tight">{{ lang.t('mv.visionTitle') }}
+                    </h3>
+
+                    <p
+                        class="text-gray-600 text-lg leading-relaxed font-light group-hover:text-gray-800 transition-colors text-justify">
+                        {{ lang.t('mv.visionText1') }} <span class="font-medium text-[#002B5B]">{{
+                            lang.t('mv.visionHighlight') }}</span> {{ lang.t('mv.visionText2') }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

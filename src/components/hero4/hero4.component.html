@@ -1,0 +1,48 @@
+<section class="relative w-full overflow-hidden h-[25vh] md:h-[55vh] flex items-center">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="assets/imgs/servicios/fondo.webp" alt="Servicios Background"
+            class="w-full h-full object-cover object-center">
+    </div>
+
+    <!-- Blue Overlay for dimming effect -->
+    <div class="absolute inset-0 bg-[#002B5B] opacity-85 z-[1]"></div>
+
+    <div
+        class="container mx-auto px-6 text-center text-white relative z-10 flex flex-col items-center justify-center h-full">
+
+        <!-- Title with decorative lines -->
+        <div class="flex flex-col items-center justify-center animate-fade-in opacity-0">
+            <!-- Top decorative line -->
+            <div class="w-[450px] max-w-[85vw] h-[2px] bg-white mb-5 rounded-full hidden md:block"></div>
+
+            <!-- Title -->
+            <h1 class="text-4xl md:text-7xl font-bold leading-tight mb-5 tracking-wider"
+                style="font-family: 'Bebas Neue', sans-serif;">
+                {{ lang.t('hero4.title1') }}<br>{{ lang.t('hero4.title2') }}
+            </h1>
+
+            <!-- Bottom decorative line -->
+            <div class="w-[450px] max-w-[85vw] h-[2px] bg-white rounded-full"></div>
+        </div>
+
+    </div>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+        }
+    </style>
+</section>

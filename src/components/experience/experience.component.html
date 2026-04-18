@@ -1,0 +1,133 @@
+<section class="bg-[#002B5B] text-white py-20 relative overflow-hidden">
+  <!-- Mobile Background with Parallax & Blue Fade -->
+  <div class="absolute inset-0 z-0 lg:hidden">
+    <div class="absolute inset-0 bg-fixed bg-cover bg-center"
+      style="background-image: url('assets/imgs/nosotros/fondo.webp');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#002B5B]/95 via-[#002B5B]/85 to-[#002B5B]/95"></div>
+  </div>
+
+  <!-- Decorative Background Elements (Deep Depth) -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+    <div
+      class="absolute -top-24 -left-24 w-96 h-96 bg-[#B3E5FF] rounded-full mix-blend-overlay filter blur-[100px] opacity-10 animate-pulse duration-[5s]">
+    </div>
+    <div
+      class="absolute top-1/2 right-0 w-72 h-72 bg-[#FF6F61] rounded-full mix-blend-overlay filter blur-[80px] opacity-10 animate-pulse duration-[7s]">
+    </div>
+    <!-- New Subtle Noise Texture for realism -->
+    <div class="absolute inset-0 opacity-[0.03]"
+      style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');">
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+
+    <!-- Main Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-10 items-center">
+
+      <!-- Column 1: Image (Left on desktop) - HIDDEN ON MOBILE -->
+      <div class="hidden lg:block lg:col-span-5 relative group perspective-1000 order-2 lg:order-1">
+        <div
+          class="relative h-[300px] rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 transform transition-transform duration-[1.5s] ease-apple group-hover:rotate-y-2 group-hover:scale-[1.02]">
+          <img src="assets/imgs/nosotros/fondo.webp" alt="Experience Car"
+            class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110">
+          <!-- Glass sheen effect -->
+          <div
+            class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+          </div>
+        </div>
+        <!-- Floating Badge (Coral Accent) -->
+        <div
+          class="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] hidden md:block animate-fade-up delay-500 hover:scale-105 transition-transform duration-300 ease-spring cursor-default">
+          <p class="text-3xl font-bold text-[#002B5B] leading-none">3+</p>
+          <p class="text-[10px] text-[#FF6F61] uppercase tracking-wider font-bold mt-1">{{ lang.currentLang() === 'ES' ?
+            'Años de' : 'Years of' }}<br>{{ lang.currentLang() === 'ES' ? 'Experiencia' : 'Experience' }}</p>
+        </div>
+      </div>
+
+      <!-- Column 2: Content (Middle) -->
+      <div class="lg:col-span-4 text-center lg:text-left order-1 lg:order-2">
+        <!-- Coral Tag -->
+        <h4
+          class="text-[#FF6F61] font-bold tracking-widest text-sm uppercase mb-4 bg-white/5 inline-block px-3 py-1 rounded-full border border-white/5 backdrop-blur-md shadow-inner">
+          {{ lang.t('footer.aboutUs') }}</h4>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+          {{ lang.currentLang() === 'ES' ? 'Experiencia y Calidad' : 'Experience and Quality' }} <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#B3E5FF] to-white drop-shadow-sm">{{
+            lang.currentLang() === 'ES' ? 'en cada kilómetro.' : 'in every mile.' }}</span>
+        </h2>
+        <p class="text-[#B3E5FF] text-sm md:text-base mb-8 leading-relaxed opacity-90 font-light">
+          {{ lang.currentLang() === 'ES' ? 'Nuestro compromiso es entregarte una experiencia de alquiler impecable:
+          vehículos confiables, asesoría experta y un servicio enfocado en tu comodidad. Viaja con la seguridad de
+          contar con un equipo que cuida cada detalle.' : 'Our commitment is to deliver a flawless rental experience:
+          reliable vehicles, expert advice and a service focused on your comfort. Travel with the peace of mind of a
+          team that takes care of every detail.' }}
+        </p>
+
+        <!-- CTA Button (CORAL) -->
+        <button (click)="goToPaso1()"
+          class="group hidden lg:flex py-3 px-6 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-sm items-center gap-2 mx-auto lg:mx-0">
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            {{ lang.t('exp.cta') }}
+            <svg xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
+          <div
+            class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out">
+          </div>
+        </button>
+      </div>
+
+      <!-- Column 3: Stats (Right) -->
+      <div class="lg:col-span-3 order-3 text-center" #statsSection>
+        <div class="grid grid-cols-2 gap-4 h-[255px] w-[75%] mx-auto lg:w-full lg:mx-0 mb-8 lg:mb-0">
+          @for (stat of translatedStats(); track stat.id) {
+          <div class="group relative rounded-2xl p-0.5 transition-all duration-300 ease-out h-full">
+            <!-- Gradient background that creates the border. It's hidden by default and appears on hover. -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-[#FF6F61] via-[#B3E5FF] to-[#002B5B] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-spring">
+            </div>
+
+            <!-- The content container with a solid background. When the parent is hovered, the gradient shows through the padding. -->
+            <div
+              class="relative bg-white/5 backdrop-blur-md group-hover:bg-white/10 p-4 rounded-[15px] text-center h-full transition-colors duration-300 cursor-pointer flex flex-col justify-center border border-white/10 group-hover:border-transparent">
+              <!-- Number: Thinner and smaller -->
+              <div
+                class="text-xl md:text-2xl font-bold text-white mb-1 transition-transform duration-300 group-hover:scale-105 font-mono">
+                <span
+                  class="text-base bg-clip-text text-transparent bg-gradient-to-r from-[#FF6F61] to-[#FF8F85] align-top mr-0.5">+</span>{{
+                stat.currentValue }}{{ stat.suffix }}
+              </div>
+              <!-- Label with accent line -->
+              <div
+                class="text-[9px] text-[#B3E5FF] uppercase tracking-widest font-bold relative pb-2 opacity-70 group-hover:opacity-100">
+                {{ stat.label }}
+                <span
+                  class="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white/20 w-8 group-hover:bg-[#FF6F61] group-hover:w-full transition-all duration-300 ease-out"></span>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        <!-- CTA Button (CORAL) - MOBILE ONLY (Below Stats) -->
+        <button (click)="goToPaso1()"
+          class="group flex lg:hidden py-3 px-6 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-sm items-center gap-2 mx-auto">
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            {{ lang.t('exp.cta') }}
+            <svg xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
+          <div
+            class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out">
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

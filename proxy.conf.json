@@ -1,0 +1,17 @@
+{
+    "/api": {
+        "target": "https://oceandrivecarental.com/server/public",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "logLevel": "debug"
+    },
+    "/server": {
+        "target": "https://oceandrivecarental.com",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,871 @@
+<div
+    class="flex flex-col h-full bg-white font-sans relative z-0 rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+
+    <!-- Header & Filters -->
+    <div class="px-6 py-4 border-b border-slate-100 space-y-4 shrink-0 bg-white z-20 relative">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-3">
+
+                <!-- Status Filter -->
+                <div class="relative group">
+                    <select [(ngModel)]="selectedStatus"
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[140px]">
+                        <option value="all">Estado</option>
+                        <option value="active">En Curso</option>
+                        <option value="pending">Pendiente</option>
+                        <option value="completed">Terminada</option>
+                        <option value="cancelled">Cancelada</option>
+                    </select>
+                    <div
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-600 transition-colors">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="relative group">
+                    <select [(ngModel)]="selectedCategory"
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[160px]">
+                        <option value="all">Categorías</option>
+                        <option *ngFor="let cat of categories()" [value]="cat.id">{{ cat.name }}</option>
+                    </select>
+                    <div
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-600 transition-colors">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Date Range (Custom Calendar Popovers) -->
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-inner">
+
+                    <!-- Start Date -->
+                    <div class="relative">
+                        <button (click)="isStartDateOpen.set(!isStartDateOpen()); isEndDateOpen.set(false)"
+                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
+                            <span [class.text-slate-400]="!dateStart()">{{ dateStart() ? (dateStart() |
+                                date:'dd/MM/yyyy') : 'Desde' }}</span>
+                            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </button>
+
+                        <!-- Calendar Popover -->
+                        <div *ngIf="isStartDateOpen()" class="fixed inset-0 z-40" (click)="isStartDateOpen.set(false)">
+                        </div>
+                        <div *ngIf="isStartDateOpen()"
+                            class="absolute top-full mt-2 left-0 z-50 shadow-2xl rounded-2xl overflow-hidden bg-white border border-slate-100 w-[280px] animate-fade-in-down">
+                            <app-calendar [date]="startDateObj()"
+                                (dateSelected)="onStartDateSelect($event)"></app-calendar>
+                        </div>
+                    </div>
+
+                    <span class="text-slate-300 font-bold">-</span>
+
+                    <!-- End Date -->
+                    <div class="relative">
+                        <button (click)="isEndDateOpen.set(!isEndDateOpen()); isStartDateOpen.set(false)"
+                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
+                            <span [class.text-slate-400]="!dateEnd()">{{ dateEnd() ? (dateEnd() | date:'dd/MM/yyyy') :
+                                'Hasta' }}</span>
+                            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </button>
+
+                        <!-- Calendar Popover -->
+                        <div *ngIf="isEndDateOpen()" class="fixed inset-0 z-40" (click)="isEndDateOpen.set(false)">
+                        </div>
+                        <div *ngIf="isEndDateOpen()"
+                            class="absolute top-full mt-2 left-0 z-50 shadow-2xl rounded-2xl overflow-hidden bg-white border border-slate-100 w-[280px] animate-fade-in-down">
+                            <app-calendar [date]="endDateObj()" (dateSelected)="onEndDateSelect($event)"></app-calendar>
+                        </div>
+                    </div>
+
+                    <!-- Clear Dates -->
+                    <button *ngIf="dateStart() || dateEnd()" (click)="dateStart.set(''); dateEnd.set('')"
+                        class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Limpiar fechas">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Export Button -->
+            <button (click)="exportData()"
+                class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-slate-900/20 active:scale-95 hover:-translate-y-0.5">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Exportar</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="flex-1 overflow-auto custom-scrollbar relative bg-white z-0">
+        <div *ngIf="isLoading()" class="absolute inset-0 flex items-center justify-center bg-white/80 z-50">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        </div>
+
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-white sticky top-0 z-30 shadow-sm border-b border-slate-100">
+                <tr>
+                    <!-- # Column (Sticky Left + Top) -->
+                    <th
+                        class="p-3 text-[10px] font-black text-slate-400 uppercase tracking-wider whitespace-nowrap sticky left-0 top-0 z-40 bg-slate-50 border-r border-slate-100 border-b border-slate-100 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)] w-10 text-center">
+                        #
+                    </th>
+
+                    <!-- Created At -->
+                    <th (click)="onSort('created_at')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap border-b border-slate-100">
+                        Creación
+                    </th>
+
+                    <!-- Code -->
+                    <th (click)="onSort('code')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap border-b border-slate-100">
+                        Código
+                    </th>
+
+                    <th (click)="onSort('customer.name')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap border-b border-slate-100">
+                        Cliente
+                    </th>
+                    <th
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap border-b border-slate-100">
+                        Contacto
+                    </th>
+                    <th (click)="onSort('category_name')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap border-b border-slate-100">
+                        Vehículo
+                    </th>
+                    <th (click)="onSort('start_date')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap w-28 border-b border-slate-100">
+                        Inicio
+                    </th>
+                    <th (click)="onSort('end_date')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap w-28 border-b border-slate-100">
+                        Fin
+                    </th>
+
+                    <!-- Status -->
+                    <th (click)="onSort('status')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap text-center border-b border-slate-100">
+                        Estado
+                    </th>
+
+                    <!-- Total -->
+                    <th (click)="onSort('total_price')"
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap w-24 text-right border-b border-slate-100">
+                        Total
+                    </th>
+
+                    <!-- Options (Sticky Right + Top) -->
+                    <th
+                        class="p-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-right sticky right-0 top-0 z-40 bg-slate-50 shadow-[-4px_0_8px_-4px_rgba(0,0,0,0.05)] w-[60px] border-l border-slate-100 border-b border-slate-100">
+                        Op.
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50">
+                <tr *ngFor="let booking of paginatedBookings(); let i = index"
+                    class="hover:bg-slate-50/50 transition-colors group">
+                    <!-- # Index (Sticky Left) -->
+                    <td
+                        class="p-3 text-[10px] font-bold text-slate-400 font-mono text-center sticky left-0 z-20 bg-white group-hover:bg-slate-50 transition-colors border-r border-slate-50 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.02)]">
+                        {{ (currentPage() - 1) * pageSize + i + 1 }}
+                    </td>
+
+                    <!-- Created At -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[11px] font-bold text-slate-700">{{ booking.created_at | date:'dd/MM/yyyy'
+                                }}</span>
+                            <span class="text-[9px] text-slate-400 font-mono mt-0.5">{{ booking.created_at |
+                                date:'HH:mm' }}</span>
+                        </div>
+                    </td>
+
+                    <!-- Code -->
+                    <td class="p-3 text-[11px] font-bold text-slate-900 font-mono whitespace-nowrap">{{ booking.code }}
+                    </td>
+
+                    <!-- Client -->
+                    <td class="p-3 max-w-[150px] whitespace-nowrap">
+                        <div class="flex flex-col gap-0.5">
+                            <div class="font-bold text-slate-800 truncate text-[12px]"
+                                title="{{ booking.customer?.name || booking.customer_name }}">
+                                {{ formatClientName(booking.customer?.name || booking.customer_name) }}
+                            </div>
+                            <div class="text-[10px] text-slate-500 font-mono">{{ booking.customer?.doc_number ||
+                                booking.customer_doc_number }}</div>
+                            <div class="text-[9px] text-slate-400 uppercase tracking-wider">{{
+                                booking.customer?.nationality || booking.customer_nationality }}</div>
+                        </div>
+                    </td>
+
+                    <!-- Contact -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex flex-col gap-0.5">
+                            <div class="text-[11px] font-bold text-slate-700 font-mono">{{ booking.customer?.phone ||
+                                booking.customer_phone }}</div>
+                            <div class="text-[10px] text-slate-400 truncate max-w-[140px]"
+                                title="{{ booking.customer?.email || booking.customer_email }}">{{
+                                booking.customer?.email || booking.customer_email }}</div>
+                        </div>
+                    </td>
+
+                    <!-- Vehicle -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex flex-col items-start gap-1">
+                            <div class="font-bold text-[11px] text-slate-800">{{ booking.category_name ||
+                                booking.vehicle?.name }}</div>
+                            <div
+                                class="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-px rounded border border-slate-200 font-mono">
+                                {{ booking.plate || booking.vehicle?.license_plate ||
+                                booking.items?.[0]?.vehicle?.license_plate }}
+                            </div>
+                        </div>
+                    </td>
+
+                    <!-- Start Date -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[11px] font-bold text-slate-700">{{ booking.start_date | date:'dd/MM/yyyy'
+                                }}</span>
+                            <span class="text-[9px] text-slate-500 font-bold mt-0.5">{{ booking.pickup_time || '10:00'
+                                }}</span>
+                            <span class="text-[9px] text-slate-400 uppercase tracking-wide truncate max-w-[100px]">{{
+                                booking.pickup_location }}</span>
+                        </div>
+                    </td>
+
+                    <!-- End Date -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[11px] font-bold text-slate-700">{{ booking.end_date | date:'dd/MM/yyyy'
+                                }}</span>
+                            <span class="text-[9px] text-slate-500 font-bold mt-0.5">{{ booking.dropoff_time || '10:00'
+                                }}</span>
+                            <span class="text-[9px] text-slate-400 uppercase tracking-wide truncate max-w-[100px]">{{
+                                booking.dropoff_location }}</span>
+                        </div>
+                    </td>
+
+                    <!-- Status -->
+                    <td class="p-3 whitespace-nowrap">
+                        <div class="flex justify-center">
+                            <ng-container [ngSwitch]="getBookingStatus(booking)">
+                                <!-- Active (En Curso) -->
+                                <span *ngSwitchCase="'active'"
+                                    class="w-24 block text-center bg-green-50 text-green-700 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-green-100">
+                                    En Curso
+                                </span>
+                                <!-- Completed (Terminada) -->
+                                <span *ngSwitchCase="'completed'"
+                                    class="w-24 block text-center bg-slate-100 text-slate-600 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-slate-200">
+                                    Terminada
+                                </span>
+                                <!-- Maintenance (Mantenimiento) - Removed from here generally as user asked to filter them out, but good to keep logic just in case -->
+                                <span *ngSwitchCase="'maintenance'"
+                                    class="w-24 block text-center bg-orange-50 text-orange-700 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-orange-100">
+                                    Mantenimiento
+                                </span>
+                                <!-- Cancelled (Cancelada) -->
+                                <span *ngSwitchCase="'cancelled'"
+                                    class="w-24 block text-center bg-red-50 text-red-700 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-red-100">
+                                    Cancelada
+                                </span>
+                                <!-- Fallback for pure Pending/Future (not started yet) -->
+                                <span *ngSwitchCase="'pending'"
+                                    class="w-24 block text-center bg-blue-50 text-blue-700 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-blue-100">
+                                    Pendiente
+                                </span>
+                                <!-- Confirmed (treated as pending in logic but just in case) -->
+                                <span *ngSwitchCase="'confirmed'"
+                                    class="w-24 block text-center bg-blue-50 text-blue-700 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-blue-100">
+                                    Confirmada
+                                </span>
+                                <!-- Default -->
+                                <span *ngSwitchDefault
+                                    class="w-24 block text-center bg-gray-50 text-gray-600 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-gray-100">
+                                    {{ booking.status }}
+                                </span>
+                            </ng-container>
+                        </div>
+                    </td>
+
+                    <!-- Total -->
+                    <td class="p-3 text-[11px] font-bold text-slate-900 whitespace-nowrap text-right">
+                        <ng-container *ngIf="booking.total_price > 0">
+                            {{ booking.total_price | currency:'USD':'symbol':'1.0-0' }}
+                        </ng-container>
+                    </td>
+
+                    <!-- Options (Sticky, Solid Background) -->
+                    <td
+                        class="p-3 sticky right-0 z-20 bg-white group-hover:bg-slate-50 transition-colors shadow-[-4px_0_8px_-4px_rgba(0,0,0,0.05)] border-l border-slate-50 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <!-- View (Blue) -->
+                            <button (click)="viewBooking(booking)" title="Ver Reserva"
+                                class="p-1.5 text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                            <!-- Edit (Gray) -->
+                            <button (click)="editBooking(booking)" title="Editar Reserva"
+                                class="p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 rounded transition-colors">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <!-- Delete (Red) -->
+                            <button (click)="deleteBooking(booking.id)" title="Eliminar Reserva"
+                                class="p-1.5 text-red-400 hover:bg-red-50 hover:text-red-500 rounded transition-colors">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="paginatedBookings().length === 0 && !isLoading()">
+                    <td colspan="11" class="p-10 text-center text-slate-400 text-sm">
+                        No se encontraron reservas con los filtros seleccionados.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer Pagination -->
+    <div class="px-6 py-4 border-t border-slate-100 flex items-center justify-between shrink-0 bg-white">
+        <span class="text-xs font-medium text-slate-500">
+            Página <span class="font-bold text-slate-800">{{ currentPage() }}</span> de <span
+                class="font-bold text-slate-800">{{ totalPages() }}</span>
+        </span>
+        <div class="flex items-center gap-2">
+            <button (click)="prevPage()" [disabled]="currentPage() === 1"
+                class="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button (click)="nextPage()" [disabled]="currentPage() === totalPages()"
+                class="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING DETAIL MODAL -->
+<!-- BOOKING DETAIL / EDIT MODAL -->
+<!-- BOOKING DETAIL / EDIT MODAL -->
+@if (selectedBooking()) {
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-[2px]"
+    (click)="closeModal()">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh] animate-scale-in"
+        (click)="$event.stopPropagation()">
+
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 shrink-0">
+            <div>
+                <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">
+                    @if(isEditing()) { EDITAR RESERVA } @else { {{ selectedBooking().category_name }} }
+                </h2>
+                @if(isEditing()) {
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Editando información de reserva</p>
+                }
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <span
+                        class="text-[11px] font-bold text-white bg-slate-900 px-2 py-1 rounded shadow-sm tracking-widest uppercase font-mono leading-none">
+                        {{ selectedBooking().code || selectedBooking().plate || 'ID: ' + selectedBooking().id }}
+                    </span>
+
+                    @if(isEditing()) {
+                    <div class="relative group">
+                        <select [(ngModel)]="manualBookingForm.status"
+                            class="appearance-none bg-slate-100 border border-slate-200 text-slate-700 text-[10px] font-black uppercase tracking-wider rounded py-1 pl-2 pr-6 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                            <option value="pending">Pendiente</option>
+                            <option value="confirmed">Confirmado</option>
+                            <option value="active">En Curso</option>
+                            <option value="completed">Completada</option>
+                            <option value="cancelled">Cancelada</option>
+                            <option value="maintenance">Mantenimiento</option>
+                        </select>
+                        <div class="absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    } @else {
+                    <span class="text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider leading-none"
+                        [ngClass]="{
+                                'bg-blue-100 text-blue-700': getBookingStatus(selectedBooking()) === 'pending',
+                                'bg-green-100 text-green-700': getBookingStatus(selectedBooking()) === 'active',
+                                'bg-slate-200 text-slate-600': getBookingStatus(selectedBooking()) === 'completed',
+                                'bg-red-100 text-red-700': getBookingStatus(selectedBooking()) === 'cancelled',
+                                'bg-orange-100 text-orange-700': getBookingStatus(selectedBooking()) === 'maintenance'
+                            }">
+                        {{ getBookingStatus(selectedBooking()) }}
+                    </span>
+                    }
+                </div>
+                <button (click)="closeModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="p-6 overflow-y-auto custom-scrollbar bg-white">
+
+            <!-- EDIT MODE -->
+            @if(isEditing()) {
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- LEFT COLUMN: Client & Notes -->
+                <div class="space-y-6">
+
+                    <!-- Client Info Section -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4">
+                        <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-1 h-4 bg-blue-500 rounded-full"></span>
+                            Información del Cliente
+                        </h3>
+
+                        <!-- Name & Email -->
+                        <div class="grid grid-cols-1 gap-3">
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nombre
+                                    Completo</label>
+                                <input type="text" [(ngModel)]="manualBookingForm.fullName"
+                                    class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email</label>
+                                <input type="email" [(ngModel)]="manualBookingForm.email"
+                                    class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Teléfono</label>
+                            <div class="flex gap-2">
+                                <!-- DDI Dropdown -->
+                                <div class="relative w-24">
+                                    <button (click)="showManualDDI.set(!showManualDDI())"
+                                        class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex justify-between items-center">
+                                        <span>{{ manualBookingForm.ddi }}</span>
+                                        <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    @if(showManualDDI()) {
+                                    <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-40 overflow-y-auto"
+                                        (click)="showManualDDI.set(false)">
+                                        <div (click)="manualBookingForm.ddi = '+57'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            🇨🇴 +57</div>
+                                        <div (click)="manualBookingForm.ddi = '+1'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            🇺🇸 +1</div>
+                                        <div (click)="manualBookingForm.ddi = '+34'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            🇪🇸 +34</div>
+                                        <div (click)="manualBookingForm.ddi = '+52'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            🇲🇽 +52</div>
+                                    </div>
+                                    }
+                                </div>
+                                <input type="text" [(ngModel)]="manualBookingForm.phone"
+                                    class="flex-1 px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            </div>
+                        </div>
+
+                        <!-- Document -->
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label
+                                    class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tipo</label>
+                                <div class="relative">
+                                    <button (click)="showManualDocType.set(!showManualDocType())"
+                                        class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex justify-between items-center">
+                                        <span>{{ manualBookingForm.docType }}</span>
+                                        <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    @if(showManualDocType()) {
+                                    <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20"
+                                        (click)="showManualDocType.set(false)">
+                                        <div (click)="manualBookingForm.docType = 'CC'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            CC</div>
+                                        <div (click)="manualBookingForm.docType = 'CE'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            CE</div>
+                                        <div (click)="manualBookingForm.docType = 'PASSPORT'"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            PASS</div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <label
+                                    class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Número</label>
+                                <input type="text" [(ngModel)]="manualBookingForm.docNumber"
+                                    class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nacionalidad</label>
+                            <input type="text" [(ngModel)]="manualBookingForm.nationality"
+                                class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                        </div>
+                    </div>
+
+                    <!-- Notes & Extras -->
+                    <div class="bg-amber-50 p-5 rounded-2xl border border-amber-100 space-y-3">
+                        <h3 class="text-xs font-black text-amber-800 uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-1 h-4 bg-amber-500 rounded-full"></span>
+                            Notas
+                        </h3>
+                        <textarea [(ngModel)]="manualBookingForm.notes" rows="3"
+                            class="w-full px-3 py-2 bg-white border border-amber-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500/20 resize-none"></textarea>
+                    </div>
+                </div>
+
+
+                <!-- RIGHT COLUMN: Trip & Payment -->
+                <div class="space-y-6">
+
+                    <!-- Trip Details -->
+                    <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 space-y-4">
+                        <h3
+                            class="text-xs font-black text-indigo-800 uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-1 h-4 bg-indigo-500 rounded-full"></span>
+                            Logística
+                        </h3>
+
+                        <!-- Pickup -->
+                        <div class="flex gap-3 items-start">
+                            <div
+                                class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 mt-1">
+                                <span class="font-black text-xs">A</span>
+                            </div>
+                            <div class="flex-1 grid grid-cols-2 gap-3">
+                                <div class="col-span-2">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Lugar
+                                        de Retiro</label>
+                                    <input type="text" [(ngModel)]="manualBookingForm.pickupLocation"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 focus:outline-none text-sm">
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Fecha
+                                        Retiro</label>
+                                    <button (click)="showBookingPickupDate.set(!showBookingPickupDate())"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 text-left flex justify-between">
+                                        <span>{{ formatDisplayDate(manualBookingForm.startDate) }}</span>
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </button>
+                                    @if(showBookingPickupDate()) {
+                                    <div class="absolute top-full mt-2 left-0 z-50 bg-white rounded-2xl shadow-xl overflow-hidden min-w-[300px] border border-slate-100 p-2 transform -translate-x-10"
+                                        (click)="$event.stopPropagation()">
+                                        <app-calendar [date]="getBookingPickupDate()"
+                                            (dateSelected)="onBookingPickupDateSelected($event)"></app-calendar>
+                                    </div>
+                                    }
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Hora</label>
+                                    <button (click)="showBookingPickupTime.set(!showBookingPickupTime())"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 text-left flex justify-between">
+                                        <span>{{ manualBookingForm.pickupTime || '10:00' }}</span>
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
+                                    @if(showBookingPickupTime()) {
+                                    <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-40 overflow-y-auto"
+                                        (click)="showBookingPickupTime.set(false)">
+                                        @for(time of timeOptions; track time) {
+                                        <div (click)="selectBookingTime('pickup', time)"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-indigo-50 cursor-pointer">
+                                            {{ time }}</div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dropoff -->
+                        <div class="flex gap-3 items-start border-t border-indigo-200/30 pt-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 shrink-0 mt-1">
+                                <span class="font-black text-xs">B</span>
+                            </div>
+                            <div class="flex-1 grid grid-cols-2 gap-3">
+                                <div class="col-span-2">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Lugar
+                                        de Entrega</label>
+                                    <input type="text" [(ngModel)]="manualBookingForm.dropoffLocation"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 focus:outline-none text-sm">
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Fecha
+                                        Entrega</label>
+                                    <button (click)="showBookingDropoffDate.set(!showBookingDropoffDate())"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 text-left flex justify-between">
+                                        <span>{{ formatDisplayDate(manualBookingForm.endDate) }}</span>
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </button>
+                                    @if(showBookingDropoffDate()) {
+                                    <div class="absolute top-full mt-2 left-0 z-50 bg-white rounded-2xl shadow-xl overflow-hidden min-w-[300px] border border-slate-100 p-2 transform -translate-x-10"
+                                        (click)="$event.stopPropagation()">
+                                        <app-calendar [date]="getBookingDropoffDate()"
+                                            (dateSelected)="onBookingDropoffDateSelected($event)"></app-calendar>
+                                    </div>
+                                    }
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Hora</label>
+                                    <button (click)="showBookingDropoffTime.set(!showBookingDropoffTime())"
+                                        class="w-full px-3 py-2 bg-white border border-indigo-200/50 rounded-xl text-xs font-bold text-indigo-900 text-left flex justify-between">
+                                        <span>{{ manualBookingForm.dropoffTime || '10:00' }}</span>
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
+                                    @if(showBookingDropoffTime()) {
+                                    <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-40 overflow-y-auto"
+                                        (click)="showBookingDropoffTime.set(false)">
+                                        @for(time of timeOptions; track time) {
+                                        <div (click)="selectBookingTime('dropoff', time)"
+                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-indigo-50 cursor-pointer">
+                                            {{ time }}</div>
+                                        }
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Payments & Amounts -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3
+                                class="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+                                <span class="w-1 h-4 bg-emerald-500 rounded-full"></span>
+                                Costo
+                            </h3>
+                            <div
+                                class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                                {{ manualBookingForm.pricePerDay | currency:'COP':'symbol':'1.0-0' }} / Día
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- Daily Rate Input -->
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-500">
+                                <span>Tarifa Base</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-slate-400">$</span>
+                                    <input type="number" [(ngModel)]="manualBookingForm.pricePerDay"
+                                        (ngModelChange)="calculateManualPrice('price')"
+                                        class="w-24 text-right bg-transparent border-b border-slate-300 focus:border-blue-500 font-mono text-slate-800 outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Wash Fee -->
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-500">
+                                <span>Lavado</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-slate-400">$</span>
+                                    <input type="number" [(ngModel)]="manualBookingForm.washFee"
+                                        (ngModelChange)="calculateManualPrice('price')"
+                                        class="w-24 text-right bg-transparent border-b border-slate-300 focus:border-blue-500 font-mono text-slate-800 outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Additional Costs List -->
+                            @for(cost of manualBookingForm.additionalCosts; track $index) {
+                            <div class="flex justify-between items-center text-xs font-bold text-emerald-600">
+                                <span>+ {{ cost.name }}</span>
+                                <span>{{ cost.price | currency:'COP':'symbol':'1.0-0' }}</span>
+                            </div>
+                            }
+
+                            <div class="border-t border-slate-200 pt-3 mt-3 flex justify-between items-end">
+                                <span class="text-xs font-black text-slate-400 uppercase tracking-wider">Total</span>
+                                <div class="text-right">
+                                    <p class="text-3xl font-black text-slate-900 tracking-tighter leading-none">
+                                        {{ manualBookingForm.totalPrice | currency:'COP':'symbol':'1.0-0' }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            } @else {
+            <!-- VIEW MODE (Preserved but styled) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Customer Info -->
+                <div class="space-y-4">
+                    <h3
+                        class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+                        Información del Cliente</h3>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-lg font-bold text-slate-500 shrink-0">
+                            {{ getInitials(selectedBooking().customer_name || selectedBooking().user_name) }}
+                        </div>
+                        <div class="space-y-1">
+                            <div>
+                                <p class="text-xs text-slate-400 font-bold uppercase">Nombre Completo</p>
+                                <p class="text-sm font-bold text-slate-800">{{ selectedBooking().customer_name ||
+                                    selectedBooking().user_name }}</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+                                <div>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase">Documento</p>
+                                    <p class="text-xs text-slate-700">{{ selectedBooking().customer_doc_type || 'ID' }}
+                                        {{ selectedBooking().customer_doc_number || '---' }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase">Nacionalidad</p>
+                                    <p class="text-xs text-slate-700">{{ selectedBooking().customer_nationality || '---'
+                                        }}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">Contacto</p>
+                                <p class="text-xs text-slate-700">{{ selectedBooking().customer_email }}</p>
+                                <p class="text-xs text-slate-700">{{ selectedBooking().customer_phone }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics -->
+                <div class="space-y-4">
+                    <h3
+                        class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+                        Detalles del Viaje</h3>
+                    <div class="flex gap-4">
+                        <div class="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Retiro</p>
+                            <p class="text-xs font-bold text-slate-800">{{ formatDateFull(selectedBooking().start_date)
+                                }}</p>
+                            <p class="text-[10px] text-slate-500">{{ selectedBooking().pickup_time || '10:00' }}</p>
+                            <p class="text-[10px] text-slate-500 mt-1">{{ selectedBooking().pickup_location }}</p>
+                        </div>
+                        <div class="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Entrega</p>
+                            <p class="text-xs font-bold text-slate-800">{{ formatDateFull(selectedBooking().end_date) }}
+                            </p>
+                            <p class="text-[10px] text-slate-500">{{ selectedBooking().dropoff_time || '10:00' }}</p>
+                            <p class="text-[10px] text-slate-500 mt-1">{{ selectedBooking().dropoff_location }}</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-slate-900 p-4 rounded-xl text-white flex justify-between items-center shadow-lg shadow-slate-200">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Total Pagado</span>
+                        <span class="text-2xl font-black">{{ selectedBooking().total_price |
+                            currency:'COP':'symbol':'1.0-0' }}</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 shrink-0">
+            <button (click)="closeModal()"
+                class="px-6 py-2.5 rounded-xl text-slate-500 hover:text-slate-800 text-xs font-bold transition-colors uppercase tracking-wider">
+                {{ isEditing() ? 'Cancelar' : 'Cerrar' }}
+            </button>
+
+            @if(isEditing()) {
+            <button (click)="saveBooking()" [disabled]="manualBookingLoading()"
+                class="px-8 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-black hover:bg-blue-700 transition-colors uppercase tracking-widest shadow-lg shadow-blue-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                @if(manualBookingLoading()) {
+                <div class="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                Guardando...
+                } @else {
+                GUARDAR CAMBIOS
+                }
+            </button>
+            }
+        </div>
+    </div>
+</div>
+}

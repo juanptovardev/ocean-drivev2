@@ -1,0 +1,112 @@
+<section class="pt-12 pb-36 bg-[#F7F9FC] relative border-b-0 shadow-none outline-none">
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
+    <div class="absolute top-1/4 -left-24 w-96 h-96 bg-[#B3E5FF] rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-0 w-64 h-64 bg-[#B3E5FF]/50 rounded-full blur-3xl"></div>
+  </div>
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-10 max-w-3xl mx-auto">
+      <span class="text-[#002B5B] font-semibold tracking-widest text-sm uppercase block mb-3"
+        style="font-family: 'Rubik', sans-serif;">{{ faqSubtitle() }}</span>
+      <h2 class="text-4xl md:text-5xl font-normal text-gray-900 mb-4"
+        style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em;">{{ faqTitle() }}</h2>
+      <p class="text-base text-gray-600 leading-relaxed" style="font-family: 'Open Sans', sans-serif;">
+        {{ faqDescription() }}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 max-w-6xl mx-auto items-start">
+      <!-- 
+           Mobile View: Only show visibleCount items.
+           Desktop View: Show all items always (md:block overrides?). 
+           Actually, the grid is responsive. If we limit 'faqs()' iteration, it limits for desktop too.
+           We want this behavior only on mobile. 
+           Solution: Use 'slice' in loop, but condition the limit on screen size? 
+           CSS hiding is better for SSR/SEO, but 'ngIf' is requested. 
+           Let's use the 'visibleCount' approach which increases. 
+           On Desktop we want ALL visible immediately. 
+           We can initialize visibleCount to length on desktop or just ignore it in template for desktop.
+      -->
+      @for (item of faqs(); track $index) {
+      <div class="group" #faqItem
+        [class.hidden]="!isClient() ? false : ($index >= visibleCount() && (windowWidth < 768))" [class.block]="true"
+        (mouseenter)="onMouseEnter($index)" (mouseleave)="onMouseLeave()">
+        <!-- Note: The above logic is pseudo-code. Complex conditionals in template are messy.
+                Better: Use a computed signal or standard structural directive.
+                For simplicity in this step, let's assume 'visibleCount' works for everyone, 
+                but we set it to MAX on desktop init? No, user wants scroll effect on mobile.
+                
+                Simpler approach: Always render. Use CSS classes to hide > 3 on mobile.
+           -->
+        <div
+          class="bg-white w-full rounded-xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,43,91,0.05)] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden"
+          [class.ring-1]="isOpen($index)" [class.ring-[#002B5B]]="isOpen($index)" [class.md:block]="true"
+          [class.hidden]="$index >= visibleCount()"> <!-- Hides items beyond count -->
+
+          <button (click)="toggle($index)"
+            class="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none">
+            <span class=" text-lg text-gray-800 pr-4 transition-colors duration-300"
+              style="font-family: 'Rubik', sans-serif;" [class.text-[#002B5B]]="isOpen($index)">
+              {{ item.question }}
+            </span>
+            <span
+              class="shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              [class.bg-[#002B5B]]="isOpen($index)" [class.bg-[#F7F9FC]]="!isOpen($index)"
+              [class.group-hover:bg-[#B3E5FF]]="!isOpen($index)">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                [class.text-white]="isOpen($index)" [class.text-[#002B5B]]="!isOpen($index)"
+                [class.rotate-180]="isOpen($index)" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div class="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            [class.grid-rows-[1fr]]="isOpen($index)" [class.grid-rows-[0fr]]="!isOpen($index)">
+            <div class="overflow-hidden">
+              <div
+                class="px-6 pb-6 pt-0 text-gray-600 text-sm leading-relaxed border-t border-transparent transition-all duration-500 ease-out"
+                style="font-family: 'Open Sans', sans-serif;" [class.border-gray-100]="isOpen($index)"
+                [class.opacity-100]="isOpen($index)" [class.translate-y-0]="isOpen($index)"
+                [class.opacity-0]="!isOpen($index)" [class.-translate-y-2]="!isOpen($index)"
+                [class.delay-150]="isOpen($index)">
+                <div class="h-3"></div>
+                {{ item.answer }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Scroll Trigger Element for IntersectionObserver -->
+    <div id="faq-scroll-trigger" class="h-4 w-full bg-transparent mt-4 md:hidden"></div>
+
+    <div class="mt-12 text-center">
+      <p class="text-gray-600 mb-5 text-base" style="font-family: 'Open Sans', sans-serif;">{{ lang.currentLang() ===
+        'ES' ? '¿No encuentras lo que buscas?' : 'Can\'t find what you\'re looking for?' }}</p>
+      <a [href]="ctaLink" target="_blank" rel="noopener noreferrer"
+        class="group inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-sm"
+        style="font-family: 'Montserrat', sans-serif;" [class.from-[#4285F4]]="ctaLink.includes('maps')"
+        [class.to-[#3B82F6]]="ctaLink.includes('maps')"
+        [class.shadow-[0_0_20px_rgba(66,133,244,0.3)]]="ctaLink.includes('maps')">
+        <span class="relative z-10 flex items-center justify-center gap-2">
+          {{ faqCtaText() }}
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </span>
+        <div
+          class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out">
+        </div>
+      </a>
+    </div>
+  </div>
+  <style>
+    .ease-apple {
+      transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+  </style>
+</section>

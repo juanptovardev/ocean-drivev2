@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente Académico - University of Houston</title>
+    <style>
+        :root {
+            --uh-red: #ff0000;
+            --text-dark: #333333;
+            --border-light: #dddddd;
+            --bg-white: #ffffff;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-dark);
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 10mm auto;
+            background: var(--bg-white);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            page-break-after: always;
+            position: relative;
+        }
+
+        /* Utilidades */
+        .header-logo {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .line {
+            border-bottom: 2px solid var(--uh-red);
+            margin: 10px 0;
+        }
+
+        /* --- CREDENCIAL --- */
+        .id-card {
+            width: 350px;
+            height: 220px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            background: linear-gradient(145deg, #ffffff, #f9f9f9);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        .id-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--uh-red);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .photo-placeholder {
+            width: 90px;
+            height: 110px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            float: left;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 10px;
+            color: #777;
+        }
+
+        .id-details {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .id-details strong {
+            display: block;
+            color: var(--uh-red);
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .barcode {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 150px;
+            height: 30px;
+            background: repeating-linear-gradient(90deg, #333, #333 2px, transparent 2px, transparent 4px);
+        }
+
+        /* --- TABLAS Y CONTENIDO --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th {
+            background-color: var(--uh-red);
+            color: white;
+            text-align: left;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 12px;
+        }
+
+        .document-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .financial-summary {
+            float: right;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .total-row {
+            border-top: 2px solid var(--uh-red);
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .signature-area {
+            margin-top: 100px;
+            width: 250px;
+            text-align: center;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            padding-top: 5px;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="document-title">University ID Card</div>
+        <div style="height: 100px;"></div>
+        <div class="id-card">
+            <div class="id-header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/University_of_Houston_logo.svg/1200px-University_of_Houston_logo.svg.png"
+                    alt="UH Logo" style="height: 30px;">
+                <span style="font-weight: bold; font-size: 12px;">STUDENT</span>
+            </div>
+            <div class="photo-placeholder">PHOTO ID REQUIRED</div>
+            <div class="id-details">
+                <strong>Juan Pablo Tovar Hernandez</strong>
+                ID: 1143202342<br>
+                Program: Marketing<br>
+                Level: Undergraduate<br>
+                Campus: Main Campus<br>
+                Issued: 01/2023 | Exp: 05/2027
+            </div>
+            <div class="barcode"></div>
+        </div>
+    </div>
+
+    <div class="page">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/University_of_Houston_logo.svg/1200px-University_of_Houston_logo.svg.png"
+            class="header-logo" alt="Logo">
+        <div class="document-title">Official Class Schedule</div>
+        <div class="line"></div>
+        <p><strong>Student Name:</strong> Juan Pablo Tovar Hernandez <br>
+            <strong>Student ID:</strong> 1143202342 <br>
+            <strong>Term:</strong> Primavera 2023 (Spring 2023)
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>CRN</th>
+                    <th>Course</th>
+                    <th>Title</th>
+                    <th>Days/Time</th>
+                    <th>Credits</th>
+                    <th>Instructor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>21045</td>
+                    <td>MARK 3336</td>
+                    <td>Introduction to Marketing</td>
+                    <td>T/TH 10:00AM - 11:30AM</td>
+                    <td>3.0</td>
+                    <td>Dr. A. Richards</td>
+                </tr>
+                <tr>
+                    <td>21890</td>
+                    <td>MARK 3337</td>
+                    <td>Professional Selling</td>
+                    <td>M/W 1:00PM - 2:30PM</td>
+                    <td>3.0</td>
+                    <td>Prof. J. Smith</td>
+                </tr>
+                <tr>
+                    <td>22102</td>
+                    <td>STAT 3331</td>
+                    <td>Statistical Analysis</td>
+                    <td>Online / Asynchronous</td>
+                    <td>3.0</td>
+                    <td>Dr. L. Miller</td>
+                </tr>
+                <tr>
+                    <td>20544</td>
+                    <td>ECON 2301</td>
+                    <td>Principles of Macroeconomics</td>
+                    <td>F 09:00AM - 12:00PM</td>
+                    <td>3.0</td>
+                    <td>Dr. K. Thompson</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 11px; margin-top: 30px;">
+            * Important: Class locations are subject to change. Please verify in the student portal before the first day
+            of classes.
+            All labs require separate registration.
+        </p>
+    </div>
+
+    <div class="page">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/University_of_Houston_logo.svg/1200px-University_of_Houston_logo.svg.png"
+            class="header-logo" alt="Logo">
+        <div class="document-title">Tuition & Fees Statement</div>
+        <div class="line"></div>
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                <strong>Office of the Bursar</strong><br>
+                4434 University Drive<br>
+                Houston, TX 77204-6032
+            </div>
+            <div style="text-align: right;">
+                <strong>Date Issued:</strong> Jan 15, 2023<br>
+                <strong>Account No:</strong> 1143202342
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Statutory Tuition - Undergraduate</td>
+                    <td>$4,850.00</td>
+                </tr>
+                <tr>
+                    <td>Student Service Fee</td>
+                    <td>$260.00</td>
+                </tr>
+                <tr>
+                    <td>Technology Fee</td>
+                    <td>$115.00</td>
+                </tr>
+                <tr>
+                    <td>University Center Fee</td>
+                    <td>$135.00</td>
+                </tr>
+                <tr>
+                    <td>Health Center Fee</td>
+                    <td>$85.00</td>
+                </tr>
+                <tr>
+                    <td style="color: green;">Financial Aid: Pell Grant</td>
+                    <td style="color: green;">-$3,445.00</td>
+                </tr>
+                <tr>
+                    <td style="color: green;">UH General Scholarship</td>
+                    <td style="color: green;">-$2,000.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="financial-summary">
+            <div class="summary-row">
+                <span>Subtotal Fees:</span>
+                <span>$5,445.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Total Credits:</span>
+                <span>-$5,445.00</span>
+            </div>
+            <div class="summary-row total-row">
+                <span>Current Balance:</span>
+                <span>$0.00</span>
+            </div>
+        </div>
+
+        <div style="clear: both; height: 50px;"></div>
+        <p style="font-size: 12px;">Status: <strong>ACCOUNT PAID IN FULL</strong></p>
+
+        <div class="signature-area">
+            University Registrar<br>
+            Authorized Electronic Signature
+        </div>
+    </div>
+
+</body>
+
+</html>

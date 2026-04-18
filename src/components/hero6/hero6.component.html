@@ -1,0 +1,111 @@
+<section class="relative w-full overflow-hidden h-full flex items-center">
+    <!-- Background Image with ken burns effect -->
+    <div class="absolute inset-0 z-0 animate-hero-ken-burns">
+        <img src="assets/imgs/servicios/fondo.webp" alt="Reservas Background"
+            class="w-full h-full object-cover object-center">
+    </div>
+
+    <!-- Animated Blue Overlay with gradient pulse -->
+    <div
+        class="absolute inset-0 bg-gradient-to-br from-[#002B5B] via-[#003366] to-[#001f3f] opacity-85 z-[1] animate-overlay-pulse">
+    </div>
+
+    <!-- Subtle floating particles effect -->
+    <div class="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+    </div>
+
+    <!-- Content (Title hidden on small screens if form covers it, or adjusted) -->
+    <div
+        class="container mx-auto px-6 text-center text-white relative z-10 flex flex-col items-center justify-start pt-10 md:pt-0 md:justify-center h-full">
+    </div>
+
+    <style>
+        /* Ken Burns effect on background */
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.08) translate(-1%, -1%);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
+        .animate-hero-ken-burns {
+            animation: kenBurns 25s ease-in-out infinite;
+        }
+
+        /* Subtle overlay pulse */
+        @keyframes overlayPulse {
+
+            0%,
+            100% {
+                opacity: 0.85;
+            }
+
+            50% {
+                opacity: 0.88;
+            }
+        }
+
+        .animate-overlay-pulse {
+            animation: overlayPulse 8s ease-in-out infinite;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: floatUp 15s linear infinite;
+        }
+
+        .particle-1 {
+            left: 20%;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .particle-2 {
+            left: 60%;
+            animation-delay: 5s;
+            animation-duration: 22s;
+        }
+
+        .particle-3 {
+            left: 85%;
+            animation-delay: 10s;
+            animation-duration: 16s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.4;
+                transform: translateY(90vh) scale(1);
+            }
+
+            90% {
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</section>
