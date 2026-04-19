@@ -1,0 +1,19 @@
+Ocean Drive Car Rental
+======================
+
+Descripción del Programa:
+Ocean Drive Car Rental es una aplicación Full-Stack de alquiler de vehículos diseñada en Angular 19+ (arquitectura Zoneless) y respaldada por una API en PHP vanilla con conexión a bases de datos MySQL mediante PDO. 
+
+Características principales:
+- Frontend responsivo utilizando Tailwind CSS para estilos modernos y adaptables.
+- Gestión de estado optimizada mediante Angular Signals.
+- Backend monolítico en PHP que actúa como API RESTful.
+- Panel de administración para gestión de reservas, flotilla e inventario de vehículos.
+- Entorno fortificado para resistir vulnerabilidades OWASP Top 10, diseñado simultáneamente como plataforma de pruebas en laboratorios de ciberseguridad.
+
+Arquitectura:
+- Frontend: src/ (Componentes, servicios, directivas, páginas)
+- Backend: server/src/ (Modelos, Auth, Controladores) y server/public/ (Router index.php)
+- Base de datos: MySQL (Esquemas estructurados y protegidos con prepared statements)
+
+Este proyecto promueve buenas prácticas de programación defensiva y rendimiento del lado del cliente.
