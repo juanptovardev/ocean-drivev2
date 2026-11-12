@@ -23,12 +23,13 @@ class Vehicle
 
     public function create($data)
     {
-        $sql = "INSERT INTO vehicles (category_id, plate, wash_price) VALUES (:cid, :plate, :wash_price)";
+        $sql = "INSERT INTO vehicles (category_id, plate, wash_price, status) VALUES (:cid, :plate, :wash_price, :status)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             ':cid' => $data['category_id'],
             ':plate' => $data['plate'],
-            ':wash_price' => $data['wash_price'] ?? 35000
+            ':wash_price' => $data['wash_price'] ?? 35000,
+            ':status' => $data['status'] ?? 'available'
         ]);
         $id = $this->conn->lastInsertId();
 
