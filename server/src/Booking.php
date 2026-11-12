@@ -326,12 +326,14 @@ class Booking
 
     public function getByCode($code)
     {
+        // LEFT JOIN on purpose: the public ticket validator must still find a
+        // booking whose user or category row was deleted later.
         $sql = "SELECT b.*, c.name as category_name, c.description as car_description, c.image_url, v.plate, c.name as car_model, c.transmission as car_class, 
                        u.name as customer_name, u.email as customer_email, u.phone as customer_phone 
                 FROM bookings b 
-                JOIN categories c ON b.category_id = c.id
+                LEFT JOIN categories c ON b.category_id = c.id
                 LEFT JOIN vehicles v ON b.vehicle_id = v.id
-                JOIN users u ON b.user_id = u.id
+                LEFT JOIN users u ON b.user_id = u.id
                 WHERE b.code = :code 
                 LIMIT 1";
         $stmt = $this->conn->prepare($sql);
