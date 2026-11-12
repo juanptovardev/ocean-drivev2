@@ -267,7 +267,7 @@ class Booking
         return $stmt->fetch();
     }
 
-    private function isVehicleAvailable($vehicleId, $startDate, $pickupTime, $endDate, $dropoffTime)
+    private function isVehicleAvailable($vehicleId, $startDate, $pickupTime, $endDate, $dropoffTime, $excludeBookingId = null)
     {
         // Calculate Requested Range with 2 Hour Buffer
         // We verify allowing a 2 hour gap between bookings.
@@ -284,14 +284,23 @@ class Booking
                     TIMESTAMP(end_date, IF(dropoff_time = '' OR dropoff_time IS NULL, '23:59:59', dropoff_time)) > (TIMESTAMP(:start_dt, :start_tm) - INTERVAL 2 HOUR)
                 )";
 
+        // When editing an existing booking, that same row must not count as a clash.
+        if ($excludeBookingId) {
+            $sql .= " AND id <> :exclude_id";
+        }
+
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([
+        $params = [
             ':vid' => $vehicleId,
             ':start_dt' => $startDate,
             ':start_tm' => $pickupTime,
             ':end_dt' => $endDate,
             ':end_tm' => $dropoffTime
-        ]);
+        ];
+        if ($excludeBookingId) {
+            $params[':exclude_id'] = $excludeBookingId;
+        }
+        $stmt->execute($params);
         return $stmt->fetchColumn() == 0;
     }
 
@@ -349,6 +358,59 @@ class Booking
     }
 
     public function update($id, $data)
+    {
+        $booking = $this->getById($id);
+        if (!$booking) {
+            return false;
+        }
+
+        // Editing the dates or times was never re-checked against the other
+        // bookings of the same vehicle, so an edit could create a double
+        // booking. Reuse the create() lock + overlap check.
+        $touchesSchedule = false;
+        foreach (['start_date', 'end_date', 'pickup_time', 'dropoff_time'] as $key) {
+            if (array_key_exists($key, $data)) {
+                $touchesSchedule = true;
+                break;
+            }
+        }
+
+        $startDate = $data['start_date'] ?? $booking['start_date'] ?? '';
+        $endDate = $data['end_date'] ?? $booking['end_date'] ?? '';
+        $pickupTime = $data['pickup_time'] ?? $booking['pickup_time'] ?? '';
+        $dropoffTime = $data['dropoff_time'] ?? $booking['dropoff_time'] ?? '';
+        if ($pickupTime === '') {
+            $pickupTime = '10:00';
+        }
+        if ($dropoffTime === '') {
+            $dropoffTime = '10:00';
+        }
+
+        if (!$touchesSchedule || empty($booking['vehicle_id']) || $startDate === '' || $endDate === '') {
+            return $this->applyUpdate($id, $data);
+        }
+
+        try {
+            $this->conn->beginTransaction();
+
+            // Same lock as create(): serialize the check against new bookings.
+            $lockStmt = $this->conn->prepare("SELECT id FROM vehicles WHERE id = :vid FOR UPDATE");
+            $lockStmt->execute([':vid' => $booking['vehicle_id']]);
+
+            if (!$this->isVehicleAvailable($booking['vehicle_id'], $startDate, $pickupTime, $endDate, $dropoffTime, $id)) {
+                throw new Exception("Las nuevas fechas se cruzan con otra reserva del mismo vehiculo.");
+            }
+
+            $result = $this->applyUpdate($id, $data);
+            $this->conn->commit();
+            return $result;
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw $e;
+        }
+    }
+
+    private function applyUpdate($id, $data)
     {
         $fields = [];
         $params = [':id' => $id];
