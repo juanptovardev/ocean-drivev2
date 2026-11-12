@@ -36,16 +36,9 @@ class RateLimiter
         )";
         $this->db->exec($sql);
 
-        // Mantener compatibilidad: si la tabla vieja login_attempts existe, migrar
-        try {
-            $check = $this->db->query("SHOW TABLES LIKE 'login_attempts'");
-            if ($check->rowCount() > 0) {
-                $this->db->exec("INSERT IGNORE INTO {$this->table} (ip_address, action, attempts, last_attempt) 
-                                 SELECT ip_address, 'login', attempts, last_attempt FROM login_attempts");
-            }
-        } catch (Exception $e) {
-            // Silenciar — tabla vieja podría no existir
-        }
+        // The one-time migration from the legacy login_attempts table used to run
+        // here on every request (SHOW TABLES + INSERT IGNORE). It has already run
+        // in production; keeping it cost two extra statements per request.
     }
 
     /**

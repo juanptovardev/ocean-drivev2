@@ -139,6 +139,7 @@ try {
         if ($rateLimiter->isLimitReached($ip, 'register', 10, 1800)) {
             jsonResponse(['error' => 'Demasiados intentos de registro. Intenta de nuevo en 30 minutos.'], 429);
         }
+        $rateLimiter->registerAttempt($ip, 'register');
 
         $input = getJsonInput();
         // MED-06 FIX: No loguear passwords — se sanitiza el input antes de escribir al log

@@ -273,9 +273,16 @@ class Mailer
         return $this->send($email, "Recuperación de Acceso - Ocean Drive", $html);
     }
 
+    // Strip CR/LF and control chars so user text cannot inject mail headers.
+    private function headerSafe($value)
+    {
+        return trim(preg_replace('/[\r\n\t\x00]+/', ' ', (string) $value));
+    }
+
     public function sendMarketingNotification($name, $email, $phone)
     {
         $date = date('d/m/Y - h:i A');
+        $name = $this->headerSafe($name);
         $subject = "💎 Nuevo Lead: Interesado en Descuentos - $name";
 
         // Clean phone for whatsapp link (remove non-digits ideally, but ltrim + helps)
@@ -392,7 +399,7 @@ class Mailer
     public function sendContactRequestNotification($data)
     {
         $date = date('d/m/Y - h:i A');
-        $name = $data['name'];
+        $name = $this->headerSafe($data['name']);
         $subject = "🚀 Solicitud de Acompañamiento - $name";
         $waPhone = preg_replace('/[^0-9]/', '', $data['phone'] ?? '');
 

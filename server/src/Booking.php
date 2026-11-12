@@ -16,6 +16,11 @@ class Booking
         try {
             $this->conn->beginTransaction();
 
+            // Serialize bookings of the same category so two requests cannot take the
+            // same vehicle (isVehicleAvailable reads without locking).
+            $lockStmt = $this->conn->prepare("SELECT id FROM categories WHERE id = :cid FOR UPDATE");
+            $lockStmt->execute([':cid' => $data['category_id']]);
+
             // Defaults for time
             $pickupTime = $data['pickup_time'] ?? '10:00';
             $dropoffTime = $data['dropoff_time'] ?? '10:00';
@@ -82,7 +87,13 @@ class Booking
             $stmtV->execute([':vid' => $assignedVehicleId]);
             $washRate = $stmtV->fetchColumn() ?: 0;
 
-            // 4. Create Booking
+            // 4. Server-side pricing: total_price/daily_rate from the request are ignored
+            $pricing = $this->calculatePrice($data, $washRate);
+            $data['total_price'] = $pricing['total'];
+            $data['daily_rate'] = $pricing['daily_rate'];
+            $data['wash_rate'] = $pricing['wash'];
+
+            // 5. Create Booking
             if (empty($data['code'])) {
                 $data['code'] = strtoupper(substr(bin2hex(random_bytes(4)), 0, 8));
             }
@@ -155,6 +166,95 @@ class Booking
         }
     }
 
+    /**
+     * Single source of truth for money. Same rules as the browser
+     * (src/services/booking.service.ts: calculateDays + calculateTotalValue) but
+     * computed from the category row in the database, so a client cannot set the price.
+     */
+    public function calculatePrice($data, $washRate = null)
+    {
+        $start = new DateTime($data['start_date'] . ' ' . ($data['pickup_time'] ?? '10:00'));
+        $end = new DateTime($data['end_date'] . ' ' . ($data['dropoff_time'] ?? '10:00'));
+
+        $seconds = $end->getTimestamp() - $start->getTimestamp();
+        $days = $seconds > 0 ? (int) ceil($seconds / 86400) : 1;
+        if ($days < 1) {
+            $days = 1;
+        }
+
+        $stmt = $this->conn->prepare("SELECT base_price, special_periods FROM categories WHERE id = :id");
+        $stmt->execute([':id' => $data['category_id']]);
+        $category = $stmt->fetch();
+        if (!$category) {
+            throw new Exception("Category not found.");
+        }
+
+        $basePrice = (float) ($category['base_price'] ?? 0);
+        $periods = json_decode($category['special_periods'] ?? '[]', true);
+        if (!is_array($periods)) {
+            $periods = [];
+        }
+
+        // Special-season price per calendar day, like the browser does.
+        $carTotal = 0.0;
+        for ($i = 0; $i < $days; $i++) {
+            $day = (clone $start)->modify("+$i day")->format('Y-m-d');
+            $rate = $basePrice;
+
+            foreach ($periods as $period) {
+                if (!isset($period['price'])) {
+                    continue;
+                }
+                if (!empty($period['dates']) && strpos($period['dates'], ' to ') !== false) {
+                    list($from, $to) = explode(' to ', $period['dates'], 2);
+                    if ($day >= trim($from) && $day <= trim($to)) {
+                        $rate = (float) $period['price'];
+                        break;
+                    }
+                } elseif (!empty($period['start']) && !empty($period['end'])) {
+                    if ($day >= $period['start'] && $day <= $period['end']) {
+                        $rate = (float) $period['price'];
+                        break;
+                    }
+                }
+            }
+
+            $carTotal += $rate;
+        }
+
+        $total = $carTotal;
+
+        // Full insurance is a flat 77.000 per day (same constant as the browser).
+        if (($data['insurance_type'] ?? 'basic') === 'total') {
+            $total += $days * 77000;
+        }
+
+        $wash = $washRate === null ? 0 : (float) $washRate;
+        $total += $wash;
+
+        // Dropoff in a different city.
+        $pickupCity = $data['pickup_location'] ?? '';
+        $dropCity = $data['dropoff_location'] ?? '';
+        if ($pickupCity && $dropCity && $pickupCity !== $dropCity) {
+            $cityFees = [
+                'Cartagena' => 0,
+                'Barranquilla' => 250000,
+                'Santa Marta' => 350000,
+                'Bogota' => 0,
+                'Medellin' => 0,
+                'Cali' => 0,
+            ];
+            $total += $cityFees[$dropCity] ?? 0;
+        }
+
+        return [
+            'total' => round($total, 2),
+            'daily_rate' => round($carTotal / $days, 2),
+            'wash' => $wash,
+            'days' => $days,
+        ];
+    }
+
     public function getById($id)
     {
         $sql = "SELECT b.*, c.name as category_name, v.plate 
@@ -207,13 +307,15 @@ class Booking
         return $stmt->fetchAll();
     }
 
-    public function getAll($filters = [])
+    public function getAll()
     {
+        // LEFT JOIN on purpose: an INNER JOIN hid every booking whose user or
+        // category row no longer exists, so the admin panel silently lost rows.
         $sql = "SELECT b.*, c.name as category_name, v.plate, u.email as user_email, u.name as user_name
                 FROM bookings b
-                JOIN categories c ON b.category_id = c.id
+                LEFT JOIN categories c ON b.category_id = c.id
                 LEFT JOIN vehicles v ON b.vehicle_id = v.id
-                JOIN users u ON b.user_id = u.id";
+                LEFT JOIN users u ON b.user_id = u.id";
 
         $sql .= " ORDER BY b.created_at DESC";
 
@@ -224,12 +326,14 @@ class Booking
 
     public function getByCode($code)
     {
+        // LEFT JOIN on purpose: the public ticket validator must still find a
+        // booking whose user or category row was deleted later.
         $sql = "SELECT b.*, c.name as category_name, c.description as car_description, c.image_url, v.plate, c.name as car_model, c.transmission as car_class, 
                        u.name as customer_name, u.email as customer_email, u.phone as customer_phone 
                 FROM bookings b 
-                JOIN categories c ON b.category_id = c.id
+                LEFT JOIN categories c ON b.category_id = c.id
                 LEFT JOIN vehicles v ON b.vehicle_id = v.id
-                JOIN users u ON b.user_id = u.id
+                LEFT JOIN users u ON b.user_id = u.id
                 WHERE b.code = :code 
                 LIMIT 1";
         $stmt = $this->conn->prepare($sql);
@@ -308,6 +412,26 @@ class Booking
         try {
             $this->conn->beginTransaction();
 
+            // Lock the vehicle: the overlap check below must not race a new booking.
+            $lockVehicle = $this->conn->prepare("SELECT id FROM vehicles WHERE id = :vid FOR UPDATE");
+            $lockVehicle->execute([':vid' => $vehicleId]);
+
+            // Refuse to block days that a customer already paid for.
+            $stmtClash = $this->conn->prepare(
+                "SELECT id, code
+                 FROM bookings
+                 WHERE vehicle_id = :vid
+                   AND status IN ('confirmed', 'pending', 'active')
+                   AND start_date <= :end
+                   AND end_date >= :start
+                 LIMIT 1"
+            );
+            $stmtClash->execute([':vid' => $vehicleId, ':start' => $startDate, ':end' => $endDate]);
+            $clash = $stmtClash->fetch();
+            if ($clash) {
+                throw new Exception("No se puede bloquear: el vehiculo ya tiene la reserva {$clash['code']} en esas fechas.");
+            }
+
             // Get category_id from vehicle (CRIT-04 FIX: prepared statement)
             $stmtCat = $this->conn->prepare("SELECT category_id FROM vehicles WHERE id = :vid");
             $stmtCat->execute([':vid' => $vehicleId]);
@@ -371,10 +495,15 @@ class Booking
 
             // SPECIAL HANDLING: Setting vehicle to "available"
             if ($status === 'available') {
-                // 1. Check if there's currently a maintenance block - just delete it
-                $sqlDeleteMaint = "DELETE FROM bookings WHERE vehicle_id = :vid AND status = 'maintenance'";
+                // 1. Release only the maintenance block that covers today.
+                //    Deleting every maintenance row wiped the vehicle's history.
+                $sqlDeleteMaint = "DELETE FROM bookings
+                                   WHERE vehicle_id = :vid
+                                   AND status = 'maintenance'
+                                   AND start_date <= :today
+                                   AND end_date >= :today";
                 $stmtDelMaint = $this->conn->prepare($sqlDeleteMaint);
-                $stmtDelMaint->execute([':vid' => $vehicleId]);
+                $stmtDelMaint->execute([':vid' => $vehicleId, ':today' => $now]);
 
                 // 2. Check if there's an active/confirmed booking that needs to be "interrupted"
                 $sqlActiveBooking = "SELECT id, end_date, dropoff_time, notes 
@@ -389,16 +518,12 @@ class Booking
                 $activeBooking = $stmtActive->fetch();
 
                 if ($activeBooking) {
-                    // Interrupt this booking: update end_date and dropoff_time
+                    // Interrupt this booking: keep the contracted dates and record the
+                    // early return in the note. Rewriting end_date used to destroy the
+                    // only copy of the agreed drop-off (it survived as free text).
                     $originalEndDate = $activeBooking['end_date'];
                     $originalDropoffTime = $activeBooking['dropoff_time'] ?: '10:00:00';
                     $existingNotes = $activeBooking['notes'] ?? '';
-
-                    // Calculate adjusted time: 3 hours before current time
-                    // This accounts for the 2h buffer between reservations
-                    $threeHoursAgo = strtotime('-3 hours');
-                    $adjustedDate = date('Y-m-d', $threeHoursAgo);
-                    $adjustedTime = date('H:i:s', $threeHoursAgo);
 
                     // Format original dropoff time for display
                     $origTimeFormatted = date('h:i A', strtotime($originalDropoffTime));
@@ -406,27 +531,26 @@ class Booking
 
                     $interruptNote = "\n\n--- RESERVA INTERRUMPIDA ---\n";
                     $interruptNote .= "Entrega anticipada registrada: " . $nowForNote . " a las " . $nowTimeForNote . "\n";
-                    $interruptNote .= "Fecha/hora original de devolución: " . $origDateFormatted . " a las " . $origTimeFormatted;
+                    $interruptNote .= "Fecha/hora contratada de devolución: " . $origDateFormatted . " a las " . $origTimeFormatted;
 
                     $newNotes = $existingNotes . $interruptNote;
 
-                    $sqlUpdateBooking = "UPDATE bookings 
-                                         SET status = 'cancelled', end_date = :new_end, dropoff_time = :new_time, notes = :notes 
+                    // Cancelled rows do not occupy availability, so keeping the dates
+                    // releases the vehicle without losing the contract data.
+                    $sqlUpdateBooking = "UPDATE bookings
+                                         SET status = 'cancelled', notes = :notes
                                          WHERE id = :bid";
                     $stmtUpdate = $this->conn->prepare($sqlUpdateBooking);
-                    $todayDate = date('Y-m-d'); // Use current date
-                    $todayTime = date('H:i:s'); // Use current time
 
                     $stmtUpdate->execute([
-                        ':new_end' => $todayDate,
-                        ':new_time' => $todayTime,
                         ':notes' => $newNotes,
                         ':bid' => $activeBooking['id']
                     ]);
                 }
 
-                // Update vehicle status to available
-
+                // Release the vehicle flag so the fleet view stops showing "taller".
+                $updAvailable = $this->conn->prepare("UPDATE vehicles SET status = 'available' WHERE id = :vid");
+                $updAvailable->execute([':vid' => $vehicleId]);
 
                 $this->conn->commit();
                 return 0; // No new booking created, just updated existing
@@ -434,9 +558,20 @@ class Booking
             } else {
                 // MAINTENANCE or other status: Original logic
                 // Delete only non-customer bookings (maintenance, offline, available)
-                $sqlDelete = "DELETE FROM bookings WHERE vehicle_id = :vid AND category_id = :cid AND status IN ('maintenance', 'offline', 'available')";
+                // Replace the ones overlapping the new range; keep the rest of the history.
+                $sqlDelete = "DELETE FROM bookings
+                              WHERE vehicle_id = :vid
+                              AND category_id = :cid
+                              AND status IN ('maintenance', 'offline', 'available')
+                              AND start_date <= :new_end
+                              AND end_date >= :new_start";
                 $stmtDel = $this->conn->prepare($sqlDelete);
-                $stmtDel->execute([':vid' => $vehicleId, ':cid' => $categoryId]);
+                $stmtDel->execute([
+                    ':vid' => $vehicleId,
+                    ':cid' => $categoryId,
+                    ':new_start' => $data['start_date'],
+                    ':new_end' => $data['end_date']
+                ]);
 
                 // Get Admin Name
                 $stmtAdmin = $this->conn->prepare("SELECT name FROM users WHERE id = :uid LIMIT 1");
