@@ -13,7 +13,7 @@ class Vehicle
     }
 
     // Get all vehicles for a specific category
-    public function getByCategoryId($categoryId, $adminMode = false)
+    public function getByCategoryId($categoryId)
     {
         $sql = "SELECT * FROM vehicles WHERE category_id = :cid ORDER BY plate ASC";
         $stmt = $this->conn->prepare($sql);

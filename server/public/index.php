@@ -929,7 +929,7 @@ try {
     if ($method === 'GET' && preg_match('#^/admin/vehicles/(\d+)/instances$#', $requestUri, $matches)) {
         requireAdmin();
         $vehModel = new Vehicle();
-        $vehicles = $vehModel->getByCategoryId($matches[1], true);
+        $vehicles = $vehModel->getByCategoryId($matches[1]);
 
         // Enhance each vehicle with calculated status and stats
         $today = date('Y-m-d');
