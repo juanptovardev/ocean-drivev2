@@ -91,8 +91,17 @@ class Category
 
     public function delete($id)
     {
-        // For safety, we should probably check if there are vehicles attached,
-        // but for now we follow simple delete.
+        // Deleting a category that still has vehicles leaves them orphaned:
+        // they keep a category_id that no longer exists, so they never show
+        // up in availability and cannot be booked or edited again.
+        $stmtUnits = $this->conn->prepare("SELECT COUNT(*) FROM vehicles WHERE category_id = :id");
+        $stmtUnits->execute([':id' => $id]);
+        $units = (int) $stmtUnits->fetchColumn();
+
+        if ($units > 0) {
+            throw new Exception("No se puede eliminar la categoria: tiene $units vehiculo(s) asociado(s). Reasignalos o eliminalos primero.");
+        }
+
         $sql = "DELETE FROM categories WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':id' => $id]);
