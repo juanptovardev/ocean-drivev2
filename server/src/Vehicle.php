@@ -53,7 +53,7 @@ class Vehicle
         $params = [':id' => $id];
 
         foreach ($data as $key => $value) {
-            if (in_array($key, ['plate', 'category_id', 'wash_price'])) {
+            if (in_array($key, ['plate', 'category_id', 'wash_price', 'status'])) {
                 $fields[] = "$key = :$key";
                 $params[":$key"] = $value === '' ? null : $value;
             }
