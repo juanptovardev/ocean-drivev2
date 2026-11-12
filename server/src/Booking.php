@@ -16,6 +16,11 @@ class Booking
         try {
             $this->conn->beginTransaction();
 
+            // Serialize bookings of the same category so two requests cannot take the
+            // same vehicle (isVehicleAvailable reads without locking).
+            $lockStmt = $this->conn->prepare("SELECT id FROM categories WHERE id = :cid FOR UPDATE");
+            $lockStmt->execute([':cid' => $data['category_id']]);
+
             // Defaults for time
             $pickupTime = $data['pickup_time'] ?? '10:00';
             $dropoffTime = $data['dropoff_time'] ?? '10:00';
