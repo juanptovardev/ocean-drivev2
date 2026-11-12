@@ -1,151 +1,64 @@
-# AGENTS.md - Ocean Drive Car Rental
+# AGENTS.md — Ocean Drive v2
 
-## Descripción del Proyecto
-Aplicación SPA Angular 19+ (Zoneless) con Tailwind CSS para alquiler de vehículos en el Caribe Colombiano.
+Alquiler de vehículos (Caribe colombiano): SPA **Angular 19** (`src/`) + API **PHP 8.2** monolítica (`server/`) sobre MySQL. Sin monorepo: un solo `package.json` en la raíz.
 
-## Comandos Esenciales
+## Comandos (verificados localmente)
 
-### Instalación y Desarrollo
 ```bash
-# Instalar dependencias y verificar
-npm install
-ng version
-
-# Servidores de desarrollo
-npm start              # localhost:4200
-npm run network        # red accesible (0.0.0.0)
-
-# Build
-npm run build         # producción
-npm run watch         # desarrollo continuo
+npm install                # local (ver nota de lockfile abajo)
+npm start                  # ng serve :4200 con proxy (ver Gotchas)
+npm run typecheck          # tsc --noEmit
+npm run build:prod         # ng build --configuration production → dist/ocean-drive-rent
+npm run server:dev         # php -S 0.0.0.0:8000 -t server/public (backend local)
+php -l server/src/Database.php   # lint PHP manual (CI hace find sobre todo server/)
 ```
 
-### Testing y Verificación
-```bash
-# Tests
-npm test              # todos los tests
-ng test --watch       # modo watch
-ng test --include=src/app/pages/home/home.component.spec.ts  # test específico
-ng test --code-coverage  # con cobertura
+**Orden de verificación (lo que exige CI, `.github/workflows/ci.yml`):**
+1. `npm run typecheck`
+2. `npm run build:prod` (falla si se pasa de presupuestos de bundle)
+3. PHP: `find server -name "*.php" -exec php -l {} \;`
 
-# Type checking y builds
-npx tsc --noEmit      # verificar tipos
-ng build --dry-run    # verificar builds sin ejecutar
-```
+**No hay test runner.** `npm test` es un stub (`echo ... && exit 0`) — no confíes en que "los tests pasaron".
 
-### Angular CLI
-```bash
-ng generate component componentes/nombre-componente
-ng generate service servicios/nuevo-servicio
-ng generate page pages/nueva-pagina
-```
+## Gotchas (leer antes de tocar nada)
 
-## Arquitectura
-```
-src/
-├── app/              # Componentes reutilizables
-├── pages/            # Páginas (home, admin, booking, etc.)
-├── components/       # Componentes standalone
-├── services/         # Servicios inyectables
-├── guards/           # Guards de rutas
-├── interceptors/     # HTTP interceptors
-└── data/             # Datos estáticos
-```
+- **El dev server habla con la API de PRODUCCIÓN.** `proxy.conf.json` manda `/api` y `/server` a `https://oceandrivecarental.com`, y `ApiService.getApiUrl()` (src/services/api.service.ts) devuelve `/api` solo si el puerto es 4200. `npm start` NO usa `server:dev`. Para probar el backend local hay que cambiar el `target` del proxy.
+- **Modo demo silencioso.** Login `admin` (o `admin@oceandrive.com`, `demo`, `administrador`) con pass `1234` fija `DEMO_TOKEN` y TODOS los métodos de `ApiService` devuelven mocks (sin tocar la BD). Además muchos métodos hacen `catchError(() => of([]))`: un endpoint roto puede parecer "vacío, sin errores". Si algo "no guarda/no carga", descarta demo mode y el `catchError` antes de culpar al backend.
+- **Sesión de 2 h.** El token caduca por `loginTime` en localStorage (`TOKEN_EXPIRATION_MS`); logout forzado con redirección a `/login`.
+- **`server/src/config.php` NO está en el repo** (gitignorado por credenciales) pero `Database.php` y `Mailer.php` lo hacen `require` directo: sin él, el backend muere con fatal. Clone limpio → `cp server/src/config.example.php server/src/config.php` (plantilla trackeada; lee `['host','dbname','charset','user','password','admin_email','from_email']` de `<repo>/.env`). Plantilla de variables: `.env.example` → `.env`.
+- **`package-lock.json` está en `.gitignore` y sin trackear, pero CI ejecuta `npm ci`** (que exige lockfile). Si tocas dependencias, considera commitear el lockfile o el CI fallará.
+- **Router PHP = un solo `server/public/index.php`** con cadenas de `if` en orden. El orden importa (p. ej. `/bookings/availability` debe ir ANTES de `/bookings/:code`, si no, se traga como código). Respuestas vía `jsonResponse()` (hace `exit`).
+- **Z horaria fija**: `date_default_timezone_set('America/Bogota')` en `index.php` y `SET time_zone = '-05:00'` en PDO — la lógica de fechas de reservas la asume.
+- **`tsc --noEmit` no valida templates Angular**; eso lo hace `build:prod` (`strictTemplates: true`). Corre ambos.
+- **Presupuestos de build prod**: estilos por componente máx 4 KB (warn) / 8 KB (error) — CSS de componentes grandes rompe el build.
+- **Tailwind es v3.4** (`tailwind.config.js` + `package.json`); el README dice "v4" — miente. El CSS global está en `src/styles.css`.
+- **`_no_publicar/` está gitignorado**: material privado (pentest, scanners, datos de clientes). Jamás commitear ni copiar de ahí al código del producto. Igual `.env`, `server/src/config.php` y `debug_log.txt`.
 
-## Convenciones de Código
+## Convenciones del repo (CONTRIBUTING.md, verificadas)
 
-### Componentes Angular
-- **SIEMPRE** usar `standalone: true` con `ChangeDetectionStrategy.OnPush`
-- Usar `inject()` en lugar de constructor para dependencias
-- Imports explícitos en `imports: []` siguiendo orden:
-  1. Angular core (`@angular/core`)
-  2. Angular common (`@angular/common`, `@angular/router`, `@angular/forms`)
-  3. Bibliotecas de terceros (`rxjs`)
-  4. Imports del proyecto (`services/`, `components/`, `pages/`)
+- Componentes **standalone + `ChangeDetectionStrategy.OnPush`** (default del scaffolder en `angular.json`); estado de UI con **Signals** antes que suscripciones RxJS.
+- **TypeScript estricto** (`strict`, `strictTemplates`, `noPropertyAccessFromIndexSignature`) — castear/safe-access con cuidado.
+- Commits **Conventional Commits** (`feat:`/`fix:`/`docs:`/...). Ramas: `feat/<nombre>`, `fix/<nombre>`, `refactor/<nombre>`.
+- Ramas: `main` = producción protegida; integración en `develop`/`ocean` (CI dispara en `main, master, develop, ocean`).
+- Backend: PDO con prepared statements obligatorio; sanitizar inputs en capa de servicio.
+- Subida de imágenes de vehículos: **solo `.webp`** (validado en `index.php`).
 
-### Signals
-- Preferir `signal()` para estado mutable, `computed()` para valores derivados
-- Evitar mutaciones directas sobre `.value`, usar `.set()`, `.update()`
+## Mandatory AI Stack (GLOBAL, no exceptions)
 
-### Nomenclatura
-| Tipo | Convención | Ejemplo |
-|------|------------|---------|
-| Archivos componente | kebab-case | `header.component.ts` |
-| Clases componente | PascalCase | `HeaderComponent` |
-| Servicios | PascalCase + suffix | `ApiService`, `BookingService` |
-| Interfaces/Tipos | PascalCase | `NavItem`, `UserData` |
-| Variables/Métodos | camelCase | `isActive`, `userName`, `getData()` |
-| Constantes | UPPER_SNAKE_CASE | `API_BASE_URL` |
-| Selectores | kebab-case | `app-header`, `app-vehicles` |
+4 capas obligatorias EN TODA SESIÓN, activas en `~/.config/opencode/opencode.json`
+(`plugin: ["context-mode"]` + `mcp.headroom`); regla completa en
+`~/.config/opencode/AGENTS.md` → "Mandatory AI Stack — GLOBAL":
 
-### Imports y TypeScript
-- Orden: Angular core → Angular common → terceros → proyecto
-- `strict: true` habilitado: tipos explícitos, evitar `any`
-- Usar `?.` y `??` para null safety
+1. **Ponytail** — escalera YAGNI antes de escribir código (repo → stdlib → plataforma →
+   dependencia instalada → 1 línea → mínimo que funcione + 1 test si hay bucle/parseo/dinero).
+   Revisiones: `/ponytail-review`, `/ponytail-audit`. Regla del 80%: reutilizar > reescribir.
+2. **anti-slop** — modo `during` global (`%APPDATA%\antislop\settings.json`); al cerrar trabajo
+   UI/copy, reportar su Delivery Gate PASS/FAIL. Él filtra; la dirección visual la dan
+   `DESIGN.md` / `CONSISTENCIA_VISUAL.md` — nunca compiten.
+3. **context-mode** — Think-in-Code MANDATORIO: `ctx_execute` / `ctx_batch_execute` / `ctx_search`
+   para análisis. `curl`/fetch inline BLOQUEADO (`ctx_fetch_and_index`). Artefactos → ARCHIVOS.
+4. **headroom** — MCP `headroom_retrieve`. `headroom wrap` PROHIBIDO (reescribe base URL → 401
+   con providers custom kiosapi/nusa/unorouter/nectere/nvidia).
 
-### Templates
-- Nueva sintaxis Angular 17+: `@if`, `@for`, `@switch`
-- Tailwind CSS para estilos (clases utilitarias)
-- Preferir `[routerLink]` sobre `(click)` + router.navigate()
-
-### Servicios
-- `@Injectable({ providedIn: 'root' })` para servicios globales
-- Métodos tipados con valores de retorno explícitos
-- Manejo de errores con try/catch y logging
-
-### Rutas
-- Lazy loading para páginas pesadas
-- Guards para rutas protegidas (auth, admin)
-- Proxy para desarrollo: `proxy.conf.json`
-
-## Workflow para Agentes
-
-### Antes de Comenzar
-1. **SIEMPRE** ejecutar `npm install` si `node_modules` no existe o si `package.json` cambió
-2. Verificar tests actuales con `npm test`
-3. Revisar lint de tipos con `npx tsc --noEmit`
-
-### Durante Desarrollo
-1. Usar `npm run watch` para builds incrementales
-2. Mantener servidor local con `npm start` para preview
-3. Ejecutar tests específicos durante desarrollo
-
-### Antes de Finalizar
-1. Ejecutar todos los tests: `npm test`
-2. Verificar build de producción: `npm run build`
-3. Correr type checking: `npx tsc --noEmit`
-
-## Configuración Crítica
-
-### angular.json
-- Prefijo de componente: `app`
-- Cambio de detección: OnPush (auto-configurado)
-- Budgets: 4kb warning, 8kb error para estilos de componente
-
-### tsconfig.json
-- Target: ES2022, Module: ES2022
-- Strict mode habilitado
-- Strict templates habilitado
-
-### Proxy
-- `proxy.conf.json` para desarrollo (evita CORS)
-- Variables de entorno para URLs de API
-
-## Documentación y Planes
-
-### Reglas de Planes
-- **SIEMPRE** redactar planes en **ESPAÑOL**
-- **SIEMPRE** exportar a carpeta `/planes`
-- Formato: `XXX-nombre-descriptivo.md` (ej: `001-fix-login.md`)
-- Contenido:
-  1. Descripción del problema/objetivo
-  2. Cambios propuestos (Frontend y Backend)
-  3. Plan de verificación manual y automatizada
-
-## Errores Comunes que Evitar
-1. No usar `standalone: true` en componentes
-2. Usar constructor en lugar de `inject()`
-3. Mutar directamente `.value` en signals
-4. Usar sintaxis antigua `*ngIf`, `*ngFor`
-5. No ejecutar tests antes de finalizar
-6. No verificar tipos con `npx tsc --noEmit`
+Salud: `context-mode doctor` (PASS) · `headroom --version` (0.41.0+) ·
+`%APPDATA%\antislop\settings.json` = `during`. Incumplir cualquiera de las 4 = STOP y escalar.
