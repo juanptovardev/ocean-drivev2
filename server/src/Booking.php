@@ -307,13 +307,15 @@ class Booking
         return $stmt->fetchAll();
     }
 
-    public function getAll($filters = [])
+    public function getAll()
     {
+        // LEFT JOIN on purpose: an INNER JOIN hid every booking whose user or
+        // category row no longer exists, so the admin panel silently lost rows.
         $sql = "SELECT b.*, c.name as category_name, v.plate, u.email as user_email, u.name as user_name
                 FROM bookings b
-                JOIN categories c ON b.category_id = c.id
+                LEFT JOIN categories c ON b.category_id = c.id
                 LEFT JOIN vehicles v ON b.vehicle_id = v.id
-                JOIN users u ON b.user_id = u.id";
+                LEFT JOIN users u ON b.user_id = u.id";
 
         $sql .= " ORDER BY b.created_at DESC";
 
