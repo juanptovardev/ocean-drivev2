@@ -471,10 +471,15 @@ class Booking
 
             // SPECIAL HANDLING: Setting vehicle to "available"
             if ($status === 'available') {
-                // 1. Check if there's currently a maintenance block - just delete it
-                $sqlDeleteMaint = "DELETE FROM bookings WHERE vehicle_id = :vid AND status = 'maintenance'";
+                // 1. Release only the maintenance block that covers today.
+                //    Deleting every maintenance row wiped the vehicle's history.
+                $sqlDeleteMaint = "DELETE FROM bookings
+                                   WHERE vehicle_id = :vid
+                                   AND status = 'maintenance'
+                                   AND start_date <= :today
+                                   AND end_date >= :today";
                 $stmtDelMaint = $this->conn->prepare($sqlDeleteMaint);
-                $stmtDelMaint->execute([':vid' => $vehicleId]);
+                $stmtDelMaint->execute([':vid' => $vehicleId, ':today' => $now]);
 
                 // 2. Check if there's an active/confirmed booking that needs to be "interrupted"
                 $sqlActiveBooking = "SELECT id, end_date, dropoff_time, notes 
@@ -489,16 +494,12 @@ class Booking
                 $activeBooking = $stmtActive->fetch();
 
                 if ($activeBooking) {
-                    // Interrupt this booking: update end_date and dropoff_time
+                    // Interrupt this booking: keep the contracted dates and record the
+                    // early return in the note. Rewriting end_date used to destroy the
+                    // only copy of the agreed drop-off (it survived as free text).
                     $originalEndDate = $activeBooking['end_date'];
                     $originalDropoffTime = $activeBooking['dropoff_time'] ?: '10:00:00';
                     $existingNotes = $activeBooking['notes'] ?? '';
-
-                    // Calculate adjusted time: 3 hours before current time
-                    // This accounts for the 2h buffer between reservations
-                    $threeHoursAgo = strtotime('-3 hours');
-                    $adjustedDate = date('Y-m-d', $threeHoursAgo);
-                    $adjustedTime = date('H:i:s', $threeHoursAgo);
 
                     // Format original dropoff time for display
                     $origTimeFormatted = date('h:i A', strtotime($originalDropoffTime));
@@ -506,27 +507,26 @@ class Booking
 
                     $interruptNote = "\n\n--- RESERVA INTERRUMPIDA ---\n";
                     $interruptNote .= "Entrega anticipada registrada: " . $nowForNote . " a las " . $nowTimeForNote . "\n";
-                    $interruptNote .= "Fecha/hora original de devolución: " . $origDateFormatted . " a las " . $origTimeFormatted;
+                    $interruptNote .= "Fecha/hora contratada de devolución: " . $origDateFormatted . " a las " . $origTimeFormatted;
 
                     $newNotes = $existingNotes . $interruptNote;
 
-                    $sqlUpdateBooking = "UPDATE bookings 
-                                         SET status = 'cancelled', end_date = :new_end, dropoff_time = :new_time, notes = :notes 
+                    // Cancelled rows do not occupy availability, so keeping the dates
+                    // releases the vehicle without losing the contract data.
+                    $sqlUpdateBooking = "UPDATE bookings
+                                         SET status = 'cancelled', notes = :notes
                                          WHERE id = :bid";
                     $stmtUpdate = $this->conn->prepare($sqlUpdateBooking);
-                    $todayDate = date('Y-m-d'); // Use current date
-                    $todayTime = date('H:i:s'); // Use current time
 
                     $stmtUpdate->execute([
-                        ':new_end' => $todayDate,
-                        ':new_time' => $todayTime,
                         ':notes' => $newNotes,
                         ':bid' => $activeBooking['id']
                     ]);
                 }
 
-                // Update vehicle status to available
-
+                // Release the vehicle flag so the fleet view stops showing "taller".
+                $updAvailable = $this->conn->prepare("UPDATE vehicles SET status = 'available' WHERE id = :vid");
+                $updAvailable->execute([':vid' => $vehicleId]);
 
                 $this->conn->commit();
                 return 0; // No new booking created, just updated existing
@@ -534,9 +534,20 @@ class Booking
             } else {
                 // MAINTENANCE or other status: Original logic
                 // Delete only non-customer bookings (maintenance, offline, available)
-                $sqlDelete = "DELETE FROM bookings WHERE vehicle_id = :vid AND category_id = :cid AND status IN ('maintenance', 'offline', 'available')";
+                // Replace the ones overlapping the new range; keep the rest of the history.
+                $sqlDelete = "DELETE FROM bookings
+                              WHERE vehicle_id = :vid
+                              AND category_id = :cid
+                              AND status IN ('maintenance', 'offline', 'available')
+                              AND start_date <= :new_end
+                              AND end_date >= :new_start";
                 $stmtDel = $this->conn->prepare($sqlDelete);
-                $stmtDel->execute([':vid' => $vehicleId, ':cid' => $categoryId]);
+                $stmtDel->execute([
+                    ':vid' => $vehicleId,
+                    ':cid' => $categoryId,
+                    ':new_start' => $data['start_date'],
+                    ':new_end' => $data['end_date']
+                ]);
 
                 // Get Admin Name
                 $stmtAdmin = $this->conn->prepare("SELECT name FROM users WHERE id = :uid LIMIT 1");
