@@ -408,6 +408,26 @@ class Booking
         try {
             $this->conn->beginTransaction();
 
+            // Lock the vehicle: the overlap check below must not race a new booking.
+            $lockVehicle = $this->conn->prepare("SELECT id FROM vehicles WHERE id = :vid FOR UPDATE");
+            $lockVehicle->execute([':vid' => $vehicleId]);
+
+            // Refuse to block days that a customer already paid for.
+            $stmtClash = $this->conn->prepare(
+                "SELECT id, code
+                 FROM bookings
+                 WHERE vehicle_id = :vid
+                   AND status IN ('confirmed', 'pending', 'active')
+                   AND start_date <= :end
+                   AND end_date >= :start
+                 LIMIT 1"
+            );
+            $stmtClash->execute([':vid' => $vehicleId, ':start' => $startDate, ':end' => $endDate]);
+            $clash = $stmtClash->fetch();
+            if ($clash) {
+                throw new Exception("No se puede bloquear: el vehiculo ya tiene la reserva {$clash['code']} en esas fechas.");
+            }
+
             // Get category_id from vehicle (CRIT-04 FIX: prepared statement)
             $stmtCat = $this->conn->prepare("SELECT category_id FROM vehicles WHERE id = :vid");
             $stmtCat->execute([':vid' => $vehicleId]);
