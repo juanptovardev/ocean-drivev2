@@ -24,6 +24,11 @@ class Mailer
 
     private function send($to, $subject, $htmlMessage, $attachments = [])
     {
+        // Strip CR/LF from recipient and subject: both end up inside the mail()
+        // headers, so a newline there would inject extra headers.
+        $to = $this->headerSafe($to);
+        $subject = $this->headerSafe($subject);
+
         $boundary = md5(time());
         $headers = "From: Ocean Drive <" . $this->fromEmail . ">\r\n";
         $headers .= "Reply-To: " . $this->fromEmail . "\r\n";
@@ -76,6 +81,17 @@ class Mailer
 
         $status = strtoupper($booking['status'] ?? 'PENDIENTE');
         $reportTime = date('Y-m-d H:i:s');
+
+        // HTML-safe copies for the email bodies. These values come from what the
+        // customer or the admin typed, and they are interpolated into HTML.
+        $hName = htmlspecialchars($customerName, ENT_QUOTES, 'UTF-8');
+        $hVehicle = htmlspecialchars($vehicle, ENT_QUOTES, 'UTF-8');
+        $hPlate = htmlspecialchars($plate, ENT_QUOTES, 'UTF-8');
+        $hDoc = htmlspecialchars($doc, ENT_QUOTES, 'UTF-8');
+        $hPhone = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+        $hEmail = htmlspecialchars($userEmail, ENT_QUOTES, 'UTF-8');
+        $hPickup = htmlspecialchars($pickupLoc, ENT_QUOTES, 'UTF-8');
+        $hDropoff = htmlspecialchars($dropoffLoc, ENT_QUOTES, 'UTF-8');
 
         // --- 1. PLANTILLA PARA EL CLIENTE (PREMIUM / AMABLE) ---
         $htmlClient = "
@@ -136,7 +152,7 @@ class Mailer
                                 <img src='https://oceandrivecarental.com/assets/imgs/logo/correo/LogotipoPositivo.png' width='180' alt='Ocean Drive'>
                             </div>
                             <h1 class='header-title'>¡Tu aventura comienza aquí!</h1>
-                            <p class='header-subtitle'>Hola $customerName, tu reserva está confirmada</p>
+                            <p class='header-subtitle'>Hola $hName, tu reserva está confirmada</p>
                         </td>
                     </tr>
                     
@@ -153,7 +169,7 @@ class Mailer
                                 </div>
                                 
                                 <div class='vehicle-info'>
-                                    <p class='vehicle-name'>$vehicle</p>
+                                    <p class='vehicle-name'>$hVehicle</p>
                                     <span class='vehicle-tag'>Confirmado</span>
                                 </div>
 
@@ -163,13 +179,13 @@ class Mailer
                                         <td class='logistics-td logistics-col-left'>
                                             <span class='logistics-label' style='color:#059669;'>● RECOGIDA</span>
                                             <p class='logistics-date'>$startStr</p>
-                                            <p class='logistics-loc'>📍 $pickupLoc</p>
+                                            <p class='logistics-loc'>📍 $hPickup</p>
                                         </td>
                                         <!-- Dropoff -->
                                         <td class='logistics-td'>
                                             <span class='logistics-label' style='color:#EF4444;'>● DEVOLUCIÓN</span>
                                             <p class='logistics-date'>$endStr</p>
-                                            <p class='logistics-loc'>📍 $dropoffLoc</p>
+                                            <p class='logistics-loc'>📍 $hDropoff</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -222,24 +238,24 @@ class Mailer
                     
                     <h3 style='font-size:11px;color:#64748B;text-transform:uppercase;margin-bottom:10px;letter-spacing:1px;'>SECCIÓN 1: DATOS DEL CLIENTE</h3>
                     <table width='100%' style='background:#f8fafc;padding:15px;margin-bottom:25px;'>
-                        <tr><td width='35%' style='font-size:12px;color:#64748B;'>Nombre:</td><td style='font-size:13px;font-weight:bold;'>$customerName</td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Documento:</td><td style='font-size:13px;font-weight:bold;'>$doc</td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Teléfono:</td><td style='font-size:13px;font-weight:bold;'><a href='tel:$phone' style='color:#002B5B;text-decoration:none;'>$phone</a></td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Email:</td><td style='font-size:13px;font-weight:bold;'>$userEmail</td></tr>
+                        <tr><td width='35%' style='font-size:12px;color:#64748B;'>Nombre:</td><td style='font-size:13px;font-weight:bold;'>$hName</td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Documento:</td><td style='font-size:13px;font-weight:bold;'>$hDoc</td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Teléfono:</td><td style='font-size:13px;font-weight:bold;'><a href='tel:$hPhone' style='color:#002B5B;text-decoration:none;'>$hPhone</a></td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Email:</td><td style='font-size:13px;font-weight:bold;'>$hEmail</td></tr>
                     </table>
 
                     <h3 style='font-size:11px;color:#64748B;text-transform:uppercase;margin-bottom:10px;letter-spacing:1px;'>SECCIÓN 2: LOGÍSTICA</h3>
                     <table width='100%' style='background:#f8fafc;padding:15px;margin-bottom:25px;'>
                         <tr><td width='35%' style='font-size:12px;color:#64748B;'>Recogida:</td><td style='font-size:13px;font-weight:bold;'>$startStr</td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Lugar:</td><td style='font-size:13px;'>$pickupLoc</td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Lugar:</td><td style='font-size:13px;'>$hPickup</td></tr>
                         <tr><td style='font-size:12px;color:#64748B;padding-top:10px;'>Entrega:</td><td style='font-size:13px;font-weight:bold;padding-top:10px;'>$endStr</td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Lugar:</td><td style='font-size:13px;'>$dropoffLoc</td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Lugar:</td><td style='font-size:13px;'>$hDropoff</td></tr>
                     </table>
 
                     <h3 style='font-size:11px;color:#64748B;text-transform:uppercase;margin-bottom:10px;letter-spacing:1px;'>SECCIÓN 3: UNIDAD Y FINANZAS</h3>
                     <table width='100%' style='background:#f8fafc;padding:15px;margin-bottom:30px;'>
-                        <tr><td width='35%' style='font-size:12px;color:#64748B;'>Vehículo/Cat:</td><td style='font-size:13px;font-weight:bold;'>$vehicle</td></tr>
-                        <tr><td style='font-size:12px;color:#64748B;'>Placa Asignada:</td><td style='font-size:13px;color:#FF6F61;font-weight:bold;'>$plate</td></tr>
+                        <tr><td width='35%' style='font-size:12px;color:#64748B;'>Vehículo/Cat:</td><td style='font-size:13px;font-weight:bold;'>$hVehicle</td></tr>
+                        <tr><td style='font-size:12px;color:#64748B;'>Placa Asignada:</td><td style='font-size:13px;color:#FF6F61;font-weight:bold;'>$hPlate</td></tr>
                         <tr><td style='font-size:12px;color:#64748B;'>VALOR TOTAL:</td><td style='font-size:16px;color:#002B5B;font-weight:900;'>COP \$$total</td></tr>
                         <tr><td style='font-size:12px;color:#64748B;'>Estado Sistema:</td><td style='font-size:11px;'><span style='background:#e2e8f0;padding:2px 6px;border-radius:4px;'>$status</span></td></tr>
                     </table>
@@ -287,6 +303,9 @@ class Mailer
 
         // Clean phone for whatsapp link (remove non-digits ideally, but ltrim + helps)
         $waPhone = preg_replace('/[^0-9]/', '', $phone);
+
+        $hName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $hEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
         $html = "
         <!DOCTYPE html>
@@ -356,14 +375,14 @@ class Mailer
                                     <div class='data-icon'>👤</div>
                                     <div class='data-content'>
                                         <span class='data-label'>Nombre del Interesado</span>
-                                        <span class='data-value'>$name</span>
+                                        <span class='data-value'>$hName</span>
                                     </div>
                                 </div>
                                 <div class='data-row'>
                                     <div class='data-icon'>aaa</div>
                                     <div class='data-content'>
                                         <span class='data-label'>Correo Electrónico</span>
-                                        <a href='mailto:$email' class='data-value highlight'>$email</a>
+                                        <a href='mailto:$hEmail' class='data-value highlight'>$hEmail</a>
                                     </div>
                                 </div>
                                 <div class='data-row'>
@@ -402,6 +421,13 @@ class Mailer
         $name = $this->headerSafe($data['name']);
         $subject = "🚀 Solicitud de Acompañamiento - $name";
         $waPhone = preg_replace('/[^0-9]/', '', $data['phone'] ?? '');
+
+        $hName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $hCity = htmlspecialchars($data['city'] ?? '', ENT_QUOTES, 'UTF-8');
+        $hDate = htmlspecialchars($data['date'] ?? '', ENT_QUOTES, 'UTF-8');
+        $hTime = htmlspecialchars($data['time'] ?? '', ENT_QUOTES, 'UTF-8');
+        $hEmail = htmlspecialchars($data['email'] ?? '', ENT_QUOTES, 'UTF-8');
+        $hPhone = htmlspecialchars($data['phone'] ?? '', ENT_QUOTES, 'UTF-8');
 
         // Concept Idea Design for Accompaniment
         $html = "
@@ -446,30 +472,30 @@ class Mailer
                         <div class='profile-pic'>🚀</div>
                         <div class='content'>
                             <span class='tag'>Prioridad Alta</span>
-                            <h2 class='title'>$name necesita acompañamiento</h2>
-                            <p class='subtitle'>El cliente ha solicitado asistencia personalizada para su viaje en <strong>{$data['city']}</strong>.</p>
+                            <h2 class='title'>$hName necesita acompañamiento</h2>
+                            <p class='subtitle'>El cliente ha solicitado asistencia personalizada para su viaje en <strong>$hCity</strong>.</p>
                             
                             <div class='info-grid'>
                                 <div class='info-cell'>
                                     <span class='info-label'>Fecha Estimada</span>
-                                    <div class='info-val'>📅 {$data['date']}</div>
-                                    <div class='info-val' style='font-size: 12px; color: #64748B; margin-top:2px;'>⏰ {$data['time']}</div>
+                                    <div class='info-val'>📅 $hDate</div>
+                                    <div class='info-val' style='font-size: 12px; color: #64748B; margin-top:2px;'>⏰ $hTime</div>
                                 </div>
                                 <div class='info-cell'>
                                     <span class='info-label'>Destino</span>
-                                    <div class='info-val'>📍 {$data['city']}</div>
+                                    <div class='info-val'>📍 $hCity</div>
                                 </div>
                             </div>
 
                             <div class='info-grid' style='margin-top: -20px;'>
                                 <div class='info-cell' style='width: 100%;'>
                                     <span class='info-label'>Contacto</span>
-                                    <div class='info-val' style='margin-bottom: 5px;'>📧 {$data['email']}</div>
-                                    <div class='info-val'>📱 <a href='https://wa.me/$waPhone' style='color:#FF6F61;text-decoration:none;'>{$data['phone']}</a></div>
+                                    <div class='info-val' style='margin-bottom: 5px;'>📧 $hEmail</div>
+                                    <div class='info-val'>📱 <a href='https://wa.me/$waPhone' style='color:#FF6F61;text-decoration:none;'>$hPhone</a></div>
                                 </div>
                             </div>
 
-                            <a href='https://wa.me/$waPhone?text=Hola $name, recibimos tu solicitud de acompañamiento en Ocean Drive. ¿Cómo podemos ayudarte?' class='cta-btn'>INICIAR ASESORÍA POR WHATSAPP</a>
+                            <a href='https://wa.me/$waPhone?text=Hola $hName, recibimos tu solicitud de acompañamiento en Ocean Drive. ¿Cómo podemos ayudarte?' class='cta-btn'>INICIAR ASESORÍA POR WHATSAPP</a>
                         </div>
                     </td>
                 </tr>
