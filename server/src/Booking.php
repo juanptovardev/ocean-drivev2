@@ -82,7 +82,13 @@ class Booking
             $stmtV->execute([':vid' => $assignedVehicleId]);
             $washRate = $stmtV->fetchColumn() ?: 0;
 
-            // 4. Create Booking
+            // 4. Server-side pricing: total_price/daily_rate from the request are ignored
+            $pricing = $this->calculatePrice($data, $washRate);
+            $data['total_price'] = $pricing['total'];
+            $data['daily_rate'] = $pricing['daily_rate'];
+            $data['wash_rate'] = $pricing['wash'];
+
+            // 5. Create Booking
             if (empty($data['code'])) {
                 $data['code'] = strtoupper(substr(bin2hex(random_bytes(4)), 0, 8));
             }
@@ -153,6 +159,95 @@ class Booking
             $this->conn->rollBack();
             throw $e;
         }
+    }
+
+    /**
+     * Single source of truth for money. Same rules as the browser
+     * (src/services/booking.service.ts: calculateDays + calculateTotalValue) but
+     * computed from the category row in the database, so a client cannot set the price.
+     */
+    public function calculatePrice($data, $washRate = null)
+    {
+        $start = new DateTime($data['start_date'] . ' ' . ($data['pickup_time'] ?? '10:00'));
+        $end = new DateTime($data['end_date'] . ' ' . ($data['dropoff_time'] ?? '10:00'));
+
+        $seconds = $end->getTimestamp() - $start->getTimestamp();
+        $days = $seconds > 0 ? (int) ceil($seconds / 86400) : 1;
+        if ($days < 1) {
+            $days = 1;
+        }
+
+        $stmt = $this->conn->prepare("SELECT base_price, special_periods FROM categories WHERE id = :id");
+        $stmt->execute([':id' => $data['category_id']]);
+        $category = $stmt->fetch();
+        if (!$category) {
+            throw new Exception("Category not found.");
+        }
+
+        $basePrice = (float) ($category['base_price'] ?? 0);
+        $periods = json_decode($category['special_periods'] ?? '[]', true);
+        if (!is_array($periods)) {
+            $periods = [];
+        }
+
+        // Special-season price per calendar day, like the browser does.
+        $carTotal = 0.0;
+        for ($i = 0; $i < $days; $i++) {
+            $day = (clone $start)->modify("+$i day")->format('Y-m-d');
+            $rate = $basePrice;
+
+            foreach ($periods as $period) {
+                if (!isset($period['price'])) {
+                    continue;
+                }
+                if (!empty($period['dates']) && strpos($period['dates'], ' to ') !== false) {
+                    list($from, $to) = explode(' to ', $period['dates'], 2);
+                    if ($day >= trim($from) && $day <= trim($to)) {
+                        $rate = (float) $period['price'];
+                        break;
+                    }
+                } elseif (!empty($period['start']) && !empty($period['end'])) {
+                    if ($day >= $period['start'] && $day <= $period['end']) {
+                        $rate = (float) $period['price'];
+                        break;
+                    }
+                }
+            }
+
+            $carTotal += $rate;
+        }
+
+        $total = $carTotal;
+
+        // Full insurance is a flat 77.000 per day (same constant as the browser).
+        if (($data['insurance_type'] ?? 'basic') === 'total') {
+            $total += $days * 77000;
+        }
+
+        $wash = $washRate === null ? 0 : (float) $washRate;
+        $total += $wash;
+
+        // Dropoff in a different city.
+        $pickupCity = $data['pickup_location'] ?? '';
+        $dropCity = $data['dropoff_location'] ?? '';
+        if ($pickupCity && $dropCity && $pickupCity !== $dropCity) {
+            $cityFees = [
+                'Cartagena' => 0,
+                'Barranquilla' => 250000,
+                'Santa Marta' => 350000,
+                'Bogota' => 0,
+                'Medellin' => 0,
+                'Cali' => 0,
+            ];
+            $total += $cityFees[$dropCity] ?? 0;
+        }
+
+        return [
+            'total' => round($total, 2),
+            'daily_rate' => round($carTotal / $days, 2),
+            'wash' => $wash,
+            'days' => $days,
+        ];
     }
 
     public function getById($id)
