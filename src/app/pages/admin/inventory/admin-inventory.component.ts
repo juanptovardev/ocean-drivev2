@@ -345,7 +345,7 @@ const COUNTRIES: Country[] = [
                             </div>
                             <h3 class="text-2xl font-black text-slate-800 uppercase tracking-widest">{{ isEditingCategory() ? 'EDITAR CATEGORÍA' : 'NUEVA CATEGORÍA' }}</h3>
                         </div>
-                        <button (click)="showCreateCategoryModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <button aria-label="Cerrar" (click)="showCreateCategoryModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -473,7 +473,7 @@ const COUNTRIES: Country[] = [
                                          }
                                          @for(period of specialPeriods(); track $index) {
                                              <div class="bg-white p-3 rounded-lg border border-blue-100 relative group hover:border-blue-300 transition-colors shadow-sm">
-                                                 <button (click)="removeSpecialPeriod($index)" class="absolute -top-2 -right-2 w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center hover:bg-red-200 shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10">
+                                                 <button aria-label="Eliminar período" (click)="removeSpecialPeriod($index)" class="absolute -top-2 -right-2 w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center hover:bg-red-200 shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10">
                                                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                                  </button>
 
@@ -596,7 +596,7 @@ const COUNTRIES: Country[] = [
                             <span class="hidden md:block text-sm font-bold text-slate-400 uppercase tracking-wider">Gestión de Unidades</span>
                             
                             <div class="relative">
-                                <button (click)="categoryMenuOpen.set(!categoryMenuOpen())" 
+                                <button aria-label="Menú de categoría" (click)="categoryMenuOpen.set(!categoryMenuOpen())" 
                                         class="p-2 hover:bg-white rounded-full transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
@@ -624,7 +624,7 @@ const COUNTRIES: Country[] = [
                                 }
                             </div>
 
-                            <button (click)="closeCategoryDetail()" class="p-2 hover:bg-white rounded-full transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+                            <button aria-label="Cerrar" (click)="closeCategoryDetail()" class="p-2 hover:bg-white rounded-full transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -672,7 +672,7 @@ const COUNTRIES: Country[] = [
 
                                                     <!-- Menu Dot Button -->
                                                     <div class="relative">
-                                                        <button (click)="toggleInstanceMenu(instance.id, $event, instance)" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors text-slate-400 hover:text-slate-600 focus:outline-none">
+                                                        <button aria-label="Menú de vehículo" (click)="toggleInstanceMenu(instance.id, $event, instance)" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors text-slate-400 hover:text-slate-600 focus:outline-none">
                                                              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
                                                         </button>
                                                         
@@ -727,10 +727,10 @@ const COUNTRIES: Country[] = [
                                                     </svg>
                                                 </button>
                                                 <div class="w-px h-4 bg-slate-200 mx-1"></div>
-                                                <button (click)="navigateView(-1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
+                                                <button aria-label="Vista anterior" (click)="navigateView(-1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                                                 </button>
-                                                <button (click)="navigateView(1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
+                                                <button aria-label="Vista siguiente" (click)="navigateView(1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                                 </button>
                                             </div>
@@ -760,7 +760,7 @@ const COUNTRIES: Country[] = [
                                             
                                             <!-- Filter -->
                                             <div class="relative ml-1 pl-1 border-l border-slate-200">
-                                                <button (click)="showCalendarFilters.set(!showCalendarFilters())" class="p-1.5 rounded-md text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-sm transition-all">
+                                                <button aria-label="Filtros de calendario" (click)="showCalendarFilters.set(!showCalendarFilters())" class="p-1.5 rounded-md text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-sm transition-all">
                                                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
                                                 </button>
 
@@ -768,7 +768,7 @@ const COUNTRIES: Country[] = [
                                                     <div class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-100 z-50 p-4 animate-scale-in" (click)="$event.stopPropagation()">
                                                         <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
                                                              <h4 class="text-xs font-black text-slate-800 uppercase tracking-wide">Filtros de Calendario</h4>
-                                                             <button (click)="showCalendarFilters.set(false)" class="text-slate-400 hover:text-slate-600"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                                                             <button aria-label="Cerrar filtros" (click)="showCalendarFilters.set(false)" class="text-slate-400 hover:text-slate-600"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                                                         </div>
                                                         
                                                         <div class="space-y-4">
@@ -1075,9 +1075,9 @@ const COUNTRIES: Country[] = [
                                                     <div class="fixed inset-0 z-40" (click)="closePicker()"></div>
                                                     <div class="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 p-4 w-72 animate-scale-in origin-top-left font-sans" (click)="$event.stopPropagation()">
                                                          <div class="flex justify-between items-center mb-4">
-                                                             <button (click)="changePickerMonth(-1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                                             <button aria-label="Mes anterior" (click)="changePickerMonth(-1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                                                              <span class="font-black text-sm text-slate-800 capitalize">{{ formatMonthYear(pickerViewDate()) }}</span>
-                                                             <button (click)="changePickerMonth(1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                                                             <button aria-label="Mes siguiente" (click)="changePickerMonth(1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
                                                          </div>
                                                          <div class="grid grid-cols-7 mb-2">
                                                              @for(d of weekDays; track d) {
@@ -1122,9 +1122,9 @@ const COUNTRIES: Country[] = [
                                                     <div class="fixed inset-0 z-40" (click)="closePicker()"></div>
                                                     <div class="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 p-4 w-72 animate-scale-in origin-top-right font-sans" (click)="$event.stopPropagation()">
                                                          <div class="flex justify-between items-center mb-4">
-                                                             <button (click)="changePickerMonth(-1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                                             <button aria-label="Mes anterior" (click)="changePickerMonth(-1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
                                                              <span class="font-black text-sm text-slate-800 capitalize">{{ formatMonthYear(pickerViewDate()) }}</span>
-                                                             <button (click)="changePickerMonth(1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                                                             <button aria-label="Mes siguiente" (click)="changePickerMonth(1, $event)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded-full text-slate-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
                                                          </div>
                                                          <div class="grid grid-cols-7 mb-2">
                                                              @for(d of weekDays; track d) {
@@ -1230,7 +1230,7 @@ const COUNTRIES: Country[] = [
                                     Eliminar Reserva
                                 </button>
                             }
-                            <button (click)="closeManualBookingModal()" class="text-slate-400 hover:text-slate-600 transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                            <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="text-slate-400 hover:text-slate-600 transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
                         </div>
                     </div>
                     <div class="max-h-[70vh] overflow-y-auto custom-scrollbar">
@@ -1562,7 +1562,7 @@ const COUNTRIES: Country[] = [
                                                                   [disabled]="isMaintenanceBooking()"
                                                                   class="w-20 px-1.5 py-0.5 text-[10px] font-black text-slate-800 bg-slate-50 border border-transparent hover:border-blue-200 focus:border-blue-400 rounded outline-none text-right transition-all">
                                                        </div>
-                                                      <button (click)="removeAdditionalCost($index)" class="text-red-400 hover:text-red-600 ml-1">
+                                                      <button aria-label="Eliminar costo" (click)="removeAdditionalCost($index)" class="text-red-400 hover:text-red-600 ml-1">
                                                           <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                                       </button>
                                                   </div>
@@ -1576,7 +1576,7 @@ const COUNTRIES: Country[] = [
                                            <div class="flex items-center gap-2">
                                                <input type="text" [(ngModel)]="newCostName" [disabled]="isMaintenanceBooking()" placeholder="Nombre (ej. Domicilio)" class="flex-[2] px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-400">
                                                <input type="number" [(ngModel)]="newCostPrice" [disabled]="isMaintenanceBooking()" placeholder="Valor" class="flex-1 px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-400">
-                                               <button (click)="addAdditionalCost()" [disabled]="!newCostName || newCostPrice === null || isMaintenanceBooking()" class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                                               <button aria-label="Agregar costo" (click)="addAdditionalCost()" [disabled]="!newCostName || newCostPrice === null || isMaintenanceBooking()" class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                                </button>
                                            </div>
@@ -1695,7 +1695,7 @@ const COUNTRIES: Country[] = [
                     <!-- Header -->
                     <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                         <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight">Costo Lavada</h3>
-                        <button (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>

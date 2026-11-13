@@ -366,7 +366,7 @@ const COUNTRIES: Country[] = [
                             <h2 class="text-xl md:text-2xl font-black text-[#002B5B] uppercase tracking-tight italic">{{ selectedBooking().category_name }}</h2>
                             <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{{ lang.t('reservas.ref') }} #{{ selectedBooking().code }}</p>
                         </div>
-                        <button (click)="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
+                        <button aria-label="Cerrar" (click)="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -496,7 +496,7 @@ const COUNTRIES: Country[] = [
                 <div class="bg-white rounded-[1.5rem] shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]" (click)="$event.stopPropagation()">
                     <div class="p-6 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white z-10 transition-all">
                         <h2 class="text-xl font-bold text-[#002B5B]">{{ lang.t('reservas.edit.title') }}</h2>
-                        <button (click)="closeEditModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 transition-colors">
+                        <button aria-label="Cerrar" (click)="closeEditModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 transition-colors">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -782,7 +782,7 @@ const COUNTRIES: Country[] = [
                             <span class="text-[0.6rem] font-bold text-[#FF6F61] uppercase tracking-widest hidden sm:block">
                                 {{ dropoffModalData().type === 'fee' ? 'COSTO ADICIONAL' : 'DÍAS MÍNIMOS' }}
                             </span>
-                            <button (click)="showDropoffModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                            <button aria-label="Cerrar" (click)="showDropoffModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>

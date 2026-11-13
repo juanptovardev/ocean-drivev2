@@ -34,13 +34,13 @@ import { ApiService } from '../../../../services/api.service';
                         </button>
                         <!-- Navigation Arrows -->
                         <div class="flex items-center gap-0.5 border-r border-slate-200 pr-1 mr-0.5">
-                            <button (click)="navigateView(-1)" 
+                            <button aria-label="Vista anterior" (click)="navigateView(-1)" 
                                     class="p-1 rounded-md hover:bg-white hover:shadow-sm text-slate-400 hover:text-blue-600 transition-all group">
                                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
-                            <button (click)="navigateView(1)" 
+                            <button aria-label="Vista siguiente" (click)="navigateView(1)" 
                                     class="p-1 rounded-md hover:bg-white hover:shadow-sm text-slate-400 hover:text-blue-600 transition-all group">
                                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
@@ -329,7 +329,7 @@ import { ApiService } from '../../../../services/api.service';
                                       @else { {{ selectedBooking().status }} }
                                 </span>
                             </div>
-                            <button (click)="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
+                            <button aria-label="Cerrar" (click)="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
@@ -480,7 +480,7 @@ import { ApiService } from '../../../../services/api.service';
                <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-scale-in flex flex-col max-h-[85vh]" (click)="$event.stopPropagation()">
                    <div class="px-5 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center shrink-0">
                        <h3 class="text-lg font-black text-slate-800 uppercase tracking-wide">{{ modal.title }}</h3>
-                       <button (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-600">
+                       <button aria-label="Cerrar" (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-600">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                        </button>
                    </div>

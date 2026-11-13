@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
     <div class="p-5 bg-white font-sans w-full relative overflow-hidden flex flex-col transition-all duration-300" [ngClass]="{'h-auto': viewMode() === 'days', 'h-[340px]': viewMode() !== 'days'}">
       <!-- Header -->
       <div class="flex items-center justify-between mb-4 w-full shrink-0 z-20 relative">
-        <button type="button" (click)="prevPage($event)" class="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500 hover:text-slate-800 focus:outline-none">
+        <button type="button" aria-label="Mes anterior" (click)="prevPage($event)" class="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500 hover:text-slate-800 focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
           }
         </button>
 
-        <button type="button" (click)="nextPage($event)" class="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500 hover:text-slate-800 focus:outline-none">
+        <button type="button" aria-label="Mes siguiente" (click)="nextPage($event)" class="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500 hover:text-slate-800 focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
           </svg>

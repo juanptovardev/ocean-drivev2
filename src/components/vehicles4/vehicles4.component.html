@@ -25,7 +25,7 @@
 
             <!-- Custom Navigation Buttons -->
             <div class="hidden lg:flex gap-3 pb-2">
-                <button (click)="scroll('left')"
+                <button aria-label="Anterior" (click)="scroll('left')"
                     class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all duration-300 active:scale-90 group">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
@@ -33,7 +33,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <button (click)="scroll('right')"
+                <button aria-label="Siguiente" (click)="scroll('right')"
                     class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] hover:bg-[#002B5B] hover:text-white transition-all duration-300 active:scale-90 group">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
@@ -156,14 +156,14 @@
 
         <!-- Mobile Controls -->
         <div class="flex lg:hidden justify-center gap-6 mt-2">
-            <button (click)="scroll('left')"
+            <button aria-label="Anterior" (click)="scroll('left')"
                 class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] active:bg-[#002B5B] active:text-white shadow-sm bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
-            <button (click)="scroll('right')"
+            <button aria-label="Siguiente" (click)="scroll('right')"
                 class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#002B5B] active:bg-[#002B5B] active:text-white shadow-sm bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">

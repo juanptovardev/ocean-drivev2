@@ -166,7 +166,7 @@ import { LanguageService } from '../../services/language.service';
            
            <!-- Modal Content -->
            <div class="relative bg-white/95 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-10 w-full max-w-md shadow-2xl border border-white/50 animate-scale-in overflow-visible">
-               <button (click)="closeEditModal()" class="absolute -top-3 -right-3 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-400 hover:text-[#FF6F61] transition-all hover:scale-110 active:scale-95 z-50">
+               <button aria-label="Cerrar" (click)="closeEditModal()" class="absolute -top-3 -right-3 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-400 hover:text-[#FF6F61] transition-all hover:scale-110 active:scale-95 z-50">
                   <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                </button>
 
@@ -307,7 +307,7 @@ import { LanguageService } from '../../services/language.service';
                     </div>
                     <div class="flex items-center gap-3">
                          <span class="text-[0.6rem] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">{{ lang.t('ticket.modal.fee') }}</span>
-                         <button (click)="cancelDropoffModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                         <button aria-label="Cancelar" (click)="cancelDropoffModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                          </button>
                     </div>

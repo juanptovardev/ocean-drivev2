@@ -96,7 +96,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                 <!-- Right: Week Navigation & Picker -->
                 <div class="relative z-20 min-w-[280px]">
                     <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-0.5 border border-slate-200 shadow-sm w-full" (click)="toggleDatePicker(); isCategoryOpen.set(false); isStatusOpen.set(false)">
-                          <button (click)="changeWeek(-1); $event.stopPropagation()" class="p-1 hover:bg-white hover:text-slate-800 rounded-md transition-all text-slate-500 hover:shadow-sm group shrink-0">
+                          <button aria-label="Semana anterior" (click)="changeWeek(-1); $event.stopPropagation()" class="p-1 hover:bg-white hover:text-slate-800 rounded-md transition-all text-slate-500 hover:shadow-sm group shrink-0">
                               <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
                           </button>
                           
@@ -108,7 +108,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                               </span>
                           </div>
 
-                          <button (click)="changeWeek(1); $event.stopPropagation()" class="p-1 hover:bg-white hover:text-slate-800 rounded-md transition-all text-slate-500 hover:shadow-sm group shrink-0">
+                          <button aria-label="Semana siguiente" (click)="changeWeek(1); $event.stopPropagation()" class="p-1 hover:bg-white hover:text-slate-800 rounded-md transition-all text-slate-500 hover:shadow-sm group shrink-0">
                               <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                           </button>
                     </div>
@@ -376,7 +376,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                            </div>
                            <h3 class="text-2xl font-black text-slate-800 uppercase tracking-widest">EDITAR TARIFAS: {{ editingCategory()?.name }}</h3>
                        </div>
-                       <button (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                       <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                        </button>
                    </div>
@@ -411,7 +411,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                    }
                                    @for(period of specialPeriods(); track $index) {
                                        <div class="bg-white p-3 rounded-lg border border-blue-100 relative group hover:border-blue-300 transition-colors shadow-sm">
-                                           <button (click)="removeSpecialPeriod($index)" class="absolute -top-2 -right-2 w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center hover:bg-red-200 shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10">
+                                           <button aria-label="Eliminar período" (click)="removeSpecialPeriod($index)" class="absolute -top-2 -right-2 w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center hover:bg-red-200 shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10">
                                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                            </button>
  
@@ -537,7 +537,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                       @else { {{ selectedFullBooking().status }} }
                                 </span>
                             </div>
-                            <button (click)="closeFullBookingModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
+                            <button aria-label="Cerrar" (click)="closeFullBookingModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-all">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
@@ -931,7 +931,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                </button>
                            }
-                           <button (click)="closeManualBookingModal()" class="p-2 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors">
+                           <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="p-2 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors">
                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                            </button>
                       </div>
@@ -1048,7 +1048,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                                    [disabled]="isMaintenanceBooking()"
                                                                    class="w-20 px-1.5 py-0.5 text-[10px] font-black text-slate-800 bg-slate-50 border border-transparent hover:border-blue-200 focus:border-blue-400 rounded outline-none text-right transition-all">
                                                         </div>
-                                                       <button (click)="removeAdditionalCost($index)" class="text-red-400 hover:text-red-600 ml-1">
+                                                       <button aria-label="Eliminar costo" (click)="removeAdditionalCost($index)" class="text-red-400 hover:text-red-600 ml-1">
                                                            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                                        </button>
                                                    </div>
@@ -1062,7 +1062,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                             <div class="flex items-center gap-2">
                                                 <input type="text" [(ngModel)]="newCostName" [disabled]="isMaintenanceBooking()" placeholder="Nombre" class="flex-[2] px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50">
                                                 <input type="number" [(ngModel)]="newCostPrice" [disabled]="isMaintenanceBooking()" placeholder="Valor" class="flex-1 px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50">
-                                                <button (click)="addAdditionalCost()" [disabled]="!newCostName || newCostPrice === null || isMaintenanceBooking()" class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
+                                                <button aria-label="Agregar costo" (click)="addAdditionalCost()" [disabled]="!newCostName || newCostPrice === null || isMaintenanceBooking()" class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
                                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                                 </button>
                                             </div>

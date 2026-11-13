@@ -126,7 +126,7 @@ interface NavItem {
     
     <!-- Hamburger Button with Animation -->
     <div class="lg:hidden">
-      <button (click)="toggleMobileMenu()" class="relative w-10 h-10 flex items-center justify-center focus:outline-none active:scale-95 transition-all duration-200 rounded-lg" [class]="displayScrolled() || mobileMenuOpen() ? 'text-gray-800' : 'text-white'">
+      <button aria-label="Abrir menú" (click)="toggleMobileMenu()" class="relative w-10 h-10 flex items-center justify-center focus:outline-none active:scale-95 transition-all duration-200 rounded-lg" [class]="displayScrolled() || mobileMenuOpen() ? 'text-gray-800' : 'text-white'">
         <div class="w-5 h-4 flex flex-col justify-between">
           <span class="h-0.5 w-full rounded-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 [ngClass]="mobileMenuOpen() ? 'rotate-45 translate-y-1.5 bg-gray-800' : (displayScrolled() ? 'bg-gray-800' : 'bg-white')">
@@ -163,7 +163,7 @@ interface NavItem {
     <div class="px-6 py-5 border-b border-gray-200/50 relative z-10">
       <div class="flex items-center justify-between">
         <img src="assets/imgs/header/logo-color.webp" alt="Ocean Drive" class="h-10 transition-transform duration-300 hover:scale-105 drop-shadow-sm">
-        <button (click)="toggleMobileMenu()"
+        <button aria-label="Cerrar menú" (click)="toggleMobileMenu()"
           class="p-2.5 hover:bg-gradient-to-br hover:from-gray-100 hover:to-gray-50 rounded-xl transition-all duration-300 active:scale-90 group relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-r from-[#FF6F61]/0 via-[#FF6F61]/5 to-[#FF6F61]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <svg class="w-6 h-6 text-gray-700 relative z-10 transition-transform duration-300 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,7 +267,7 @@ interface NavItem {
     </a>
 
     <!-- Main FAB (Toggles Menu) -->
-    <button (click)="socialFabOpen.set(!socialFabOpen())"
+    <button aria-label="Menú de contacto" (click)="socialFabOpen.set(!socialFabOpen())"
             class="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl backdrop-blur-md border-2 border-[#1A3F6F]/40 active:scale-95 group relative overflow-hidden bg-white/40 z-30"
             [ngClass]="socialFabOpen() ? 'border-[#1A3F6F] rotate-90 bg-white' : ''">
         <div class="absolute inset-0 bg-[#25D366]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
