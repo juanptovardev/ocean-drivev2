@@ -155,7 +155,7 @@ export class CalendarComponent {
                                   @if(showDeliveryDropdown()) { 
                                       <div class="absolute top-full left-0 w-full bg-[#0F1420] border border-gray-700 rounded-lg mt-2 overflow-hidden animate-enter z-[70] shadow-2xl ring-1 ring-white/10 max-h-56 overflow-y-auto custom-scrollbar">
                                           @for(o of deliveryOptions; track o.city){
-                                              <div (click)="o.enabled && selectDelivery(o.city)" 
+                                              <div role="button" tabindex="0" (click)="o.enabled && selectDelivery(o.city)" (keydown.enter)="o.enabled && selectDelivery(o.city)" (keydown.space)="o.enabled && selectDelivery(o.city); $event.preventDefault()" 
                                                    class="group/item relative p-4 transition-all duration-200 border-b border-white/5 last:border-0"
                                                    [ngClass]="{
                                                      'cursor-pointer hover:bg-white/5': o.enabled,

@@ -217,7 +217,7 @@ import { ApiService } from '../../../../services/api.service';
                         <!-- Toggles -->
                         <div class="space-y-2 pt-2 border-t border-slate-100/50">
                             <!-- Retiros Toggle -->
-                            <div (click)="showPickups.set(!showPickups())" class="flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all border border-transparent hover:bg-slate-50 group select-none" [class.bg-green-50]="showPickups()" [class.border-green-100]="showPickups()">
+                            <div role="button" tabindex="0" (click)="showPickups.set(!showPickups())" (keydown.enter)="showPickups.set(!showPickups())" (keydown.space)="showPickups.set(!showPickups()); $event.preventDefault()" class="flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all border border-transparent hover:bg-slate-50 group select-none" [class.bg-green-50]="showPickups()" [class.border-green-100]="showPickups()">
                                 <div class="flex items-center gap-2.5">
                                     <div class="w-6 h-6 rounded-md flex items-center justify-center transition-colors" [class.bg-green-500]="showPickups()" [class.bg-slate-200]="!showPickups()">
                                         <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>

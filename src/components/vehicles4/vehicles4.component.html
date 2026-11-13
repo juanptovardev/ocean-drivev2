@@ -219,7 +219,7 @@
         <div class="px-8 pb-6">
             <div class="space-y-3 mt-2">
                 @for (suggested of suggestedCategories(); track suggested.id) {
-                <div (click)="selectAlternative(suggested)"
+                <div role="button" tabindex="0" (click)="selectAlternative(suggested)" (keydown.enter)="selectAlternative(suggested)" (keydown.space)="selectAlternative(suggested); $event.preventDefault()"
                     class="group flex items-center gap-4 p-3 bg-slate-50 hover:bg-[#002B5B] rounded-2xl border border-slate-100 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-900/10">
                     <div
                         class="w-16 h-16 rounded-xl overflow-hidden bg-white flex-shrink-0 border border-slate-200 group-hover:border-transparent transition-colors">

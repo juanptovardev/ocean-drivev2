@@ -365,7 +365,7 @@ const COUNTRIES: Country[] = [
                                     <div class="relative">
                                         <input type="file" (change)="onCategoryFileSelected($event)" accept=".webp"
                                                class="hidden" #fileInput>
-                                        <div (click)="fileInput.click()" 
+                                        <div role="button" tabindex="0" (click)="fileInput.click()" (keydown.enter)="fileInput.click()" (keydown.space)="fileInput.click(); $event.preventDefault()" 
                                              class="w-full px-4 h-[46px] bg-slate-50 border border-slate-200 border-dashed rounded-xl flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-all">
                                             <span class="text-xs font-bold truncate pr-3" 
                                                   [class.text-slate-400]="!selectedCategoryFile && !newCategoryForm.image_url" 
@@ -427,7 +427,7 @@ const COUNTRIES: Country[] = [
                                             @if (transmissionDropdownOpen()) {
                                                 <div class="fixed inset-0 z-[100]" (click)="transmissionDropdownOpen.set(false)"></div>
                                                 <div class="absolute top-full mt-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-[101] overflow-hidden animate-scale-in origin-top">
-                                                    <div (click)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false)" 
+                                                    <div role="button" tabindex="0" (click)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false)" (keydown.enter)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false)" (keydown.space)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false); $event.preventDefault()" 
                                                          class="px-4 py-3 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer transition-all flex items-center justify-between"
                                                          [class.bg-blue-50]="newCategoryForm.transmission === 'Automático'"
                                                          [class.text-blue-700]="newCategoryForm.transmission === 'Automático'">

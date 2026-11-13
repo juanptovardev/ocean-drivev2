@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
         <section class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="px-6 py-5 border-b border-gray-100 bg-[#1A202E] transition-colors group">
                 <div class="flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-4 cursor-pointer" (click)="isAdminExpanded.set(!isAdminExpanded())">
+                    <div class="flex items-center gap-4 cursor-pointer" role="button" tabindex="0" (click)="isAdminExpanded.set(!isAdminExpanded())" (keydown.enter)="isAdminExpanded.set(!isAdminExpanded())" (keydown.space)="isAdminExpanded.set(!isAdminExpanded()); $event.preventDefault()">
                         <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center shadow-inner group-hover:bg-white/20 transition-colors">
                             <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />

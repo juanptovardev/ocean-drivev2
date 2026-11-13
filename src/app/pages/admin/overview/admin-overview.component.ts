@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
                     }
                     
                     @for (booking of activeReservations(); track booking.id) {
-                        <div (click)="openBookingModal(booking)" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-blue-400 hover:shadow-md transition-all duration-200 cursor-pointer group overflow-hidden">
+                        <div role="button" tabindex="0" (click)="openBookingModal(booking)" (keydown.enter)="openBookingModal(booking)" (keydown.space)="openBookingModal(booking); $event.preventDefault()" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-blue-400 hover:shadow-md transition-all duration-200 cursor-pointer group overflow-hidden">
                             <!-- Subtle left accent -->
                             <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             
@@ -338,7 +338,7 @@ import { FormsModule } from '@angular/forms';
                              <div class="flex justify-center py-6"><span class="text-xs text-slate-400">Sin retiros</span></div>
                         }
                         @for (booking of upcomingPickups().slice(0, 4); track booking.id) {
-                            <div (click)="openBookingModal(booking)" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-green-400 hover:shadow-md transition-all cursor-pointer group overflow-hidden">
+                            <div role="button" tabindex="0" (click)="openBookingModal(booking)" (keydown.enter)="openBookingModal(booking)" (keydown.space)="openBookingModal(booking); $event.preventDefault()" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-green-400 hover:shadow-md transition-all cursor-pointer group overflow-hidden">
                                 <!-- Green accent left -->
                                 <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-green-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 
@@ -386,7 +386,7 @@ import { FormsModule } from '@angular/forms';
                              <div class="flex justify-center py-6"><span class="text-xs text-slate-400">Sin entregas</span></div>
                         }
                         @for (booking of upcomingDropoffs().slice(0, 4); track booking.id) {
-                            <div (click)="openBookingModal(booking)" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-red-400 hover:shadow-md transition-all cursor-pointer group overflow-hidden">
+                            <div role="button" tabindex="0" (click)="openBookingModal(booking)" (keydown.enter)="openBookingModal(booking)" (keydown.space)="openBookingModal(booking); $event.preventDefault()" class="relative bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm hover:border-red-400 hover:shadow-md transition-all cursor-pointer group overflow-hidden">
                                 <!-- Red accent left -->
                                 <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-red-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 

@@ -503,7 +503,7 @@
                                     @if(showManualDDI()) {
                                     <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-40 overflow-y-auto"
                                         (click)="showManualDDI.set(false)">
-                                        <div (click)="manualBookingForm.ddi = '+57'"
+                                        <div role="button" tabindex="0" (click)="manualBookingForm.ddi = '+57'" (keydown.enter)="manualBookingForm.ddi = '+57'" (keydown.space)="manualBookingForm.ddi = '+57'; $event.preventDefault()"
                                             class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
                                             🇨🇴 +57</div>
                                         <div (click)="manualBookingForm.ddi = '+1'"

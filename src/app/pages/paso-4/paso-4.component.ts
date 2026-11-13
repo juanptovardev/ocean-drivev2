@@ -263,7 +263,7 @@ const COUNTRIES: Country[] = [
                             <!-- Nacionalidad Custom Dropdown -->
                             <div class="relative group" #nationalityRef>
                                 <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.nationality') }} *</label>
-                                <div (click)="!isEditing() && toggleNationality()" 
+                                <div role="button" tabindex="0" (click)="!isEditing() && toggleNationality()" (keydown.enter)="!isEditing() && toggleNationality()" (keydown.space)="!isEditing() && toggleNationality(); $event.preventDefault()" 
                                      class="w-full border-b-2 border-gray-100 py-3 cursor-pointer flex justify-between items-center group-focus-within:border-[#FF6F61]"
                                      [class.opacity-50]="isEditing()" [class.cursor-not-allowed]="isEditing()">
                                     <span class="font-bold text-lg flex items-center gap-2 transition-colors"
@@ -373,7 +373,7 @@ const COUNTRIES: Country[] = [
                             <div class="grid grid-cols-[160px_1fr] md:grid-cols-[200px_1fr] gap-6">
                                 <div class="relative group" #docTypeRef>
                                     <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_type') }} *</label>
-                                    <div (click)="!isEditing() && toggleDocType()" 
+                                    <div role="button" tabindex="0" (click)="!isEditing() && toggleDocType()" (keydown.enter)="!isEditing() && toggleDocType()" (keydown.space)="!isEditing() && toggleDocType(); $event.preventDefault()" 
                                          class="w-full border-b-2 border-gray-100 py-3 cursor-pointer flex justify-between items-center group-focus-within:border-[#FF6F61]"
                                          [class.opacity-50]="isEditing()" [class.cursor-not-allowed]="isEditing()">
                                         <span class="font-bold text-lg transition-colors"
