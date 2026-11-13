@@ -78,13 +78,25 @@ npm start
 
 | Comando | Descripción |
 |---------|-------------|
-| `npm start` | Inicia servidor de desarrollo (localhost:4200) |
-| `npm run network` | Servidor accesible desde red (0.0.0.0:4200) |
-| `npm run build` | Build de producción optimizado |
-| `npm run watch` | Build en modo watch (desarrollo) |
-| `npm test` | Ejecutar suite de tests |
-| `ng test --watch` | Tests en modo desarrollo |
-| `npx tsc --noEmit` | Verificación de tipos TypeScript |
+| `npm start` | Inicia servidor de desarrollo Angular (localhost:4200) |
+| `npm run network` | Servidor accesible desde red local (0.0.0.0:4200) |
+| `npm run build` | Build de desarrollo |
+| `npm run build:prod` | Build de producción optimizado en `dist/ocean-drive-rent` |
+| `npm run watch` | Build en modo watch continuo |
+| `npm run typecheck` | Verificación estricta de tipos TypeScript (`tsc --noEmit`) |
+| `npm run server:dev` | Inicia servidor PHP de desarrollo integrado en puerto 8000 |
+
+### Configuración del Entorno (.env)
+
+Copia el archivo de plantilla y ajusta tus variables de conexión de base de datos y correo:
+```bash
+cp .env.example .env
+```
+
+Para más detalles técnicos:
+- 🏛️ [Arquitectura y Flujo de Datos](ARCHITECTURE.md)
+- 🤝 [Guía de Contribución y Estándares Git](CONTRIBUTING.md)
+- 🔒 [Política de Seguridad y Divulgación](SECURITY.md)
 
 ## 🛠️ Tecnologías Clave
 

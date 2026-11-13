@@ -10,15 +10,18 @@ import { ApiService } from '../../services/api.service';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const apiService = inject(ApiService);
 
-    // Check token expiration before making the request
-    if (req.headers.has('Authorization') && apiService.isTokenExpired()) {
+    // Demo mode: bypass auth expiration / 401 handling
+    const isDemo = (apiService as any).isDemoMode?.() === true;
+
+    // Check token expiration before making the request (skip for demo)
+    if (!isDemo && req.headers.has('Authorization') && apiService.isTokenExpired()) {
         apiService.forceLogout('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
         return throwError(() => new Error('Token expired'));
     }
 
     return next(req).pipe(
         catchError((error: HttpErrorResponse) => {
-            if (error.status === 401) {
+            if (!isDemo && error.status === 401) {
                 // Unauthorized - token is invalid or expired
                 apiService.forceLogout('Sesión no autorizada. Por favor, inicia sesión nuevamente.');
             }

@@ -2,12 +2,11 @@ export interface Review {
     reviewerName: string;
     starRating: number;
     reviewText: string;
-    date: string; // ISO 8601 format (YYYY-MM-DDTHH:mm:ss)
+    date: string;
     avatarUrl?: string;
 }
 
-// Based on current reference time: 2025-12-27
-// Based on current reference time: 2025-12-27
+
 export const REVIEWS_ES: Review[] = [
     {
         reviewerName: "Juan Pablo Tovar Hernández",

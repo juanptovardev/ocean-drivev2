@@ -220,6 +220,9 @@ server/src/config.php
 server/public/debug_log.txt
 debug_log.txt
 
+# Carpeta de archivos no vitales (pentesting, temporales, datos)
+_no_publicar/
+
 # Archivos de prueba/pentesting
 test_db.php
 check_booking.php
@@ -233,4 +236,15 @@ comandos.md
 comandos2.md
 proxies.txt
 lab_audit_*.log
+ataque_asimetrico.sh
+ataque_windows_tor.sh
+diagnostico_abril_tor.sh
+diagnostico_waf.sh
+scanner_abril.sh
+scanner_mayo_junio.sh
+payload_tmp.json
+metadata.json
 
+# Herramientas locales de OpenCode (no publicar)
+.opencode/
+.playwright-mcp/
