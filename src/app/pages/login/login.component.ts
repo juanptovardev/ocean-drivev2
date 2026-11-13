@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
@@ -89,16 +89,34 @@ import { LanguageService } from '../../../services/language.service';
                     </div>
                 }
 
+                <!-- Demo credentials hint (dev-only; hidden in production builds) -->
+                @if (authMode === 'login' && isDev) {
+                    <div class="mb-6 p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3 animate-fade-in">
+                        <div class="shrink-0 w-8 h-8 rounded-lg bg-amber-400 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-[0.7rem] font-black text-amber-800 uppercase tracking-widest">Modo Demo — Sin base de datos</p>
+                            <p class="text-xs font-medium text-amber-900/80 mt-1 leading-relaxed">
+                                Usuario: <span class="font-mono font-bold bg-white px-1.5 py-0.5 rounded border border-amber-200">admin</span>
+                                &nbsp;·&nbsp;
+                                Contraseña: <span class="font-mono font-bold bg-white px-1.5 py-0.5 rounded border border-amber-200">1234</span>
+                                <button type="button" (click)="email='admin'; password='1234'" class="ml-2 text-[0.65rem] font-bold text-amber-700 hover:text-amber-900 underline underline-offset-2">Autocompletar</button>
+                            </p>
+                        </div>
+                    </div>
+                }
+
                 <!-- LOGIN FORM -->
                 @if (authMode === 'login') {
                     <form (ngSubmit)="onSubmit()" class="space-y-6 animate-fade-up delay-200">
-                        <!-- Email Input -->
+                        <!-- Email / Username Input (demo: admin) -->
                         <div class="group relative">
-                            <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-2 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.email') }}</label>
+                            <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-2 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.email') }} <span class="normal-case tracking-normal text-[#FF6F61]">(o usuario demo: admin)</span></label>
                             <div class="relative">
-                                <input name="email" type="email" required email [(ngModel)]="email" #emailModel="ngModel"
+                                <input name="email" type="text" required [(ngModel)]="email" #emailModel="ngModel"
                                     class="w-full pl-0 pr-4 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
-                                    [placeholder]="lang.t('auth.emailPh')">
+                                    [placeholder]="lang.t('auth.emailPh') + ' / admin'">
                                 <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
                             </div>
                             @if (emailModel.invalid && (emailModel.dirty || emailModel.touched)) {
@@ -106,7 +124,7 @@ import { LanguageService } from '../../../services/language.service';
                             }
                         </div>
 
-                        <!-- Password Input -->
+                        <!-- Password Input (demo: 1234) -->
                         <div class="group relative">
                             <div class="flex justify-between items-center mb-2">
                                 <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.password') }}</label>
@@ -115,7 +133,7 @@ import { LanguageService } from '../../../services/language.service';
                                 </button>
                             </div>
                             <div class="relative">
-                                <input name="password" [type]="showPassword ? 'text' : 'password'" required minlength="6" [(ngModel)]="password" #passwordModel="ngModel"
+                                <input name="password" [type]="showPassword ? 'text' : 'password'" required minlength="4" [(ngModel)]="password" #passwordModel="ngModel"
                                     class="w-full pl-0 pr-10 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
                                     placeholder="••••••••">
                                 <button type="button" (click)="showPassword = !showPassword"
@@ -285,6 +303,7 @@ export class LoginComponent {
     authMode: 'login' | 'forgot' | 'reset' = 'login';
     resetToken = '';
     successMessage = '';
+    isDev = isDevMode();
 
     private apiService = inject(ApiService);
     private router = inject(Router);
