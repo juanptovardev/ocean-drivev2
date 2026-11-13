@@ -536,7 +536,12 @@ button,
 button,
 .btn,
 [role="button"] {
-  transition: all var(--duration-normal) var(--ease-out-expo);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-normal) var(--ease-out-expo),
+    opacity var(--duration-fast) ease;
 }
 
 button:hover,
@@ -599,11 +604,12 @@ select {
     background-color var(--duration-fast) ease;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 43, 91, 0.1);
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #002B5B;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 43, 91, 0.12);
 }
 
 /* ============================================
@@ -716,7 +722,39 @@ select:focus {
    REDUCED MOTION SUPPORT
    ============================================ */
 
-/* Reduced motion block removed to force premium animations */
+/* Reduced motion: honor the OS setting. Entrance and scroll effects are
+   decorative, so collapse them to their final visible state instead of
+   leaving elements frozen at opacity: 0. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .animate-fade-up,
+  .animate-fade-down,
+  .animate-fade-left,
+  .animate-fade-right,
+  .animate-scale-in,
+  .animate-scale-blur,
+  .animate-slide-up,
+  .animate-enter,
+  .animate-fade-in,
+  .hero-content > *,
+  .stagger-list > *,
+  .stagger-grid > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 
 /* ============================================
    SMOOTH SCROLLBAR (Optional)
@@ -868,6 +906,31 @@ select:focus {
   transition: outline-offset var(--duration-fast) ease;
 }
 
+/* Skip link: visually hidden until focused, then jumps to main content. */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  z-index: 1001;
+  padding: 10px 18px;
+  background: #002B5B;
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: top var(--duration-fast) ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 16px;
+  outline: 2px solid #FF6F61;
+  outline-offset: 2px;
+  color: #ffffff;
+}
+
 /* ============================================
    INTERACTIVE ICONS
    ============================================ */
@@ -897,20 +960,20 @@ a:hover svg {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 0;
-  height: 0;
+  width: 200%;
+  height: 200%;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease, opacity 0.6s ease;
   opacity: 0;
+  pointer-events: none;
 }
 
 .ripple:active::after {
-  width: 200%;
-  height: 200%;
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
-  transition: 0s;
+  transition: transform 0s, opacity 0s;
 }
 /* ============================================
    ADDITIONAL ANIMATIONS (Added for Login/Register V2)

@@ -5,7 +5,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   template: `
     <div class="app-container">
-      <router-outlet #outlet="outlet"></router-outlet>
+      <main id="main-content" tabindex="-1">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </main>
     </div>
   `,
   styles: [`
