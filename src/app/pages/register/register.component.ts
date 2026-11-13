@@ -73,7 +73,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.6rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-1.5 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.fullName') }}</label>
                             <div class="relative">
-                                <input name="name" type="text" required [(ngModel)]="name" #nameModel="ngModel"
+                                <input name="name" type="text" autocomplete="name" required [(ngModel)]="name" #nameModel="ngModel"
                                     class="w-full pl-0 pr-4 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                     [placeholder]="lang.t('auth.fullNamePh')">
                                 <div class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -83,7 +83,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.6rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-1.5 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.email') }}</label>
                             <div class="relative">
-                                <input name="email" type="email" required email [(ngModel)]="email" #emailRegModel="ngModel"
+                                <input name="email" type="email" autocomplete="email" spellcheck="false" required email [(ngModel)]="email" #emailRegModel="ngModel"
                                     class="w-full pl-0 pr-4 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                     [placeholder]="lang.t('auth.emailPh')">
                                 <div class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -129,7 +129,7 @@ import { LanguageService } from '../../../services/language.service';
 
                                 <!-- Number Input -->
                                 <div class="relative flex-1">
-                                    <input name="phone" type="tel" required [(ngModel)]="phone" #phoneModel="ngModel"
+                                    <input name="phone" type="tel" autocomplete="tel" required [(ngModel)]="phone" #phoneModel="ngModel"
                                         class="w-full pl-0 pr-4 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                         placeholder="300 123 4567">
                                     <div class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -186,7 +186,7 @@ import { LanguageService } from '../../../services/language.service';
 
                             <!-- Number Input -->
                             <div class="relative flex-1">
-                                <input name="docNumber" type="text" required [(ngModel)]="docNumber" #docModel="ngModel"
+                                <input name="docNumber" type="text" spellcheck="false" required [(ngModel)]="docNumber" #docModel="ngModel"
                                     class="w-full pl-0 pr-4 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                     [placeholder]="lang.t('auth.docNumberPh')">
                                 <div class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -199,7 +199,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.6rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-1.5 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.password') }}</label>
                             <div class="relative">
-                                <input name="password" [type]="showPassword ? 'text' : 'password'" required minlength="6" [(ngModel)]="password" #passwordRegModel="ngModel"
+                                <input name="password" [type]="showPassword ? 'text' : 'password'" autocomplete="new-password" required minlength="6" [(ngModel)]="password" #passwordRegModel="ngModel"
                                     class="w-full pl-0 pr-8 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                     placeholder="••••••••">
                                 <button type="button" (click)="showPassword = !showPassword"
@@ -219,7 +219,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.6rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-1.5 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.confirmPassword') }}</label>
                             <div class="relative">
-                                <input name="confirmPassword" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="confirmPassword" #confirmPwdModel="ngModel"
+                                <input name="confirmPassword" [type]="showPassword ? 'text' : 'password'" autocomplete="new-password" required [(ngModel)]="confirmPassword" #confirmPwdModel="ngModel"
                                     class="w-full pl-0 pr-8 py-1.5 bg-transparent border-b border-gray-100/80 text-[#002B5B] font-bold text-sm placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all"
                                     placeholder="••••••••">
                                 <div class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>

@@ -114,7 +114,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-2 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.email') }} <span class="normal-case tracking-normal text-[#FF6F61]">(o usuario demo: admin)</span></label>
                             <div class="relative">
-                                <input name="email" type="text" required [(ngModel)]="email" #emailModel="ngModel"
+                                <input name="email" type="text" autocomplete="username" spellcheck="false" required [(ngModel)]="email" #emailModel="ngModel"
                                     class="w-full pl-0 pr-4 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
                                     [placeholder]="lang.t('auth.emailPh') + ' / admin'">
                                 <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -133,7 +133,7 @@ import { LanguageService } from '../../../services/language.service';
                                 </button>
                             </div>
                             <div class="relative">
-                                <input name="password" [type]="showPassword ? 'text' : 'password'" required minlength="4" [(ngModel)]="password" #passwordModel="ngModel"
+                                <input name="password" [type]="showPassword ? 'text' : 'password'" autocomplete="current-password" required minlength="4" [(ngModel)]="password" #passwordModel="ngModel"
                                     class="w-full pl-0 pr-10 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
                                     placeholder="••••••••">
                                 <button type="button" (click)="showPassword = !showPassword"
@@ -178,7 +178,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-2 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.forgotEmail') }}</label>
                             <div class="relative">
-                                <input name="forgotEmail" type="email" required email [(ngModel)]="email" #forgotModel="ngModel"
+                                <input name="forgotEmail" type="email" autocomplete="email" spellcheck="false" required email [(ngModel)]="email" #forgotModel="ngModel"
                                     class="w-full pl-0 pr-4 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
                                     [placeholder]="lang.t('auth.emailPh')">
                                 <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6F61] transition-all duration-500 group-focus-within:w-full"></div>
@@ -208,7 +208,7 @@ import { LanguageService } from '../../../services/language.service';
                         <div class="group relative">
                             <label class="block text-[0.65rem] font-bold text-[#002B5B]/40 uppercase tracking-[0.2em] mb-2 group-focus-within:text-[#002B5B] transition-colors">{{ lang.t('auth.newPassword') }}</label>
                             <div class="relative">
-                                <input name="newPassword" [type]="showPassword ? 'text' : 'password'" required minlength="8" [(ngModel)]="password" #newPwdModel="ngModel"
+                                <input name="newPassword" [type]="showPassword ? 'text' : 'password'" autocomplete="new-password" required minlength="8" [(ngModel)]="password" #newPwdModel="ngModel"
                                     class="w-full pl-0 pr-10 py-3 bg-transparent border-b-2 border-gray-100/80 text-[#002B5B] font-semibold text-base placeholder-gray-200 focus:outline-none focus:border-[#002B5B] transition-all duration-300 rounded-none"
                                     [placeholder]="lang.t('auth.newPasswordPh')">
                                 <button type="button" (click)="showPassword = !showPassword"

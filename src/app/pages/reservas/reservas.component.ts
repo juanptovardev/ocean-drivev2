@@ -552,14 +552,14 @@ const COUNTRIES: Country[] = [
                                                 }
                                             </div>
                                         </div>
-                                        <input type="tel" [ngModel]="editForm().customer_phone" (ngModelChange)="updateEditField('customer_phone', $event)" 
+                                        <input type="tel" autocomplete="tel" [ngModel]="editForm().customer_phone" (ngModelChange)="updateEditField('customer_phone', $event)" 
                                                placeholder="300 123 4567"
                                                class="flex-1 h-11 px-4 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-[#002B5B] mb-1.5 uppercase ml-1">{{ lang.t('reservas.edit.email') }}</label>
-                                    <input type="email" [ngModel]="editForm().customer_email" (ngModelChange)="updateEditField('customer_email', $event)" 
+                                    <input type="email" autocomplete="email" spellcheck="false" [ngModel]="editForm().customer_email" (ngModelChange)="updateEditField('customer_email', $event)" 
                                            class="w-full h-12 px-4 rounded-xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-[#002B5B] transition-all font-medium text-slate-700">
                                 </div>
                             </div>

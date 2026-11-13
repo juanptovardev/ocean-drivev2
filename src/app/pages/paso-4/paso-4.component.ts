@@ -253,7 +253,7 @@ const COUNTRIES: Country[] = [
                             <!-- Nombre -->
                             <div class="relative group">
                                 <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.full_name') }} *</label>
-                                <input type="text" [placeholder]="lang.t('paso4.full_name_ph')" 
+                                <input type="text" autocomplete="name" [placeholder]="lang.t('paso4.full_name_ph')" 
                                        [value]="fullName()"
                                        [disabled]="isEditing()"
                                        (input)="onFullNameInput($any($event.target).value)"
@@ -302,7 +302,7 @@ const COUNTRIES: Country[] = [
                                 <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors"
                                        [class.text-red-500]="emailTouched() && !emailValid()"
                                        [class.group-focus-within:text-[#FF6F61]="emailValid() || !emailTouched()">{{ lang.t('paso4.email') }} *</label>
-                                <input type="email" [placeholder]="lang.t('paso4.email_ph')" 
+                                <input type="email" autocomplete="email" spellcheck="false" [placeholder]="lang.t('paso4.email_ph')" 
                                        [value]="emailValue()"
                                        [disabled]="isEditing()"
                                        (input)="onEmailInput($any($event.target).value)"
@@ -357,7 +357,7 @@ const COUNTRIES: Country[] = [
                                 </div>
                                 <div class="relative group">
                                     <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.cellphone') }} *</label>
-                                    <input type="text" placeholder="300 000 0000" 
+                                    <input type="tel" autocomplete="tel" placeholder="300 000 0000" 
                                            [value]="phoneNumber()"
                                            [disabled]="isEditing()"
                                            (input)="onPhoneInput($any($event.target).value)"
@@ -399,7 +399,7 @@ const COUNTRIES: Country[] = [
                                 </div>
                                 <div class="relative group">
                                     <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_id') }} *</label>
-                                    <input type="text" [placeholder]="lang.t('paso4.doc_id_ph')" 
+                                    <input type="text" spellcheck="false" [placeholder]="lang.t('paso4.doc_id_ph')" 
                                            [value]="docNumber()"
                                            [disabled]="isEditing()"
                                            (input)="onDocNumberInput($any($event.target).value)"
