@@ -101,12 +101,7 @@ import { LanguageService } from '../../services/language.service';
       </div>
     </main>
   </div>
-  `,
-  styles: [`
-    .serif { 
-      font-family: 'Playfair Display', serif; 
-    }
-  `]
+  `
 })
 export class RequisitosComponent {
   lang = inject(LanguageService);

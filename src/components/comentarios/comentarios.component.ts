@@ -71,10 +71,10 @@ import { LanguageService } from '../../services/language.service';
   `,
   styles: [`
     .font-serif {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Rubik', sans-serif;
     }
     .font-sans {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Open Sans', sans-serif;
     }
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
