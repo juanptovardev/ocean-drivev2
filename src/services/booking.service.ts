@@ -1,5 +1,4 @@
-import { Injectable, signal, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, signal } from '@angular/core';
 
 export interface LocationDetails {
     city: string;
@@ -31,7 +30,6 @@ export interface ReservationState {
     providedIn: 'root'
 })
 export class BookingService {
-    private router = inject(Router);
     readonly reservation = signal<ReservationState>(this.loadState());
     readonly lastBookedCode = signal<string | null>(null);
 
@@ -66,12 +64,11 @@ export class BookingService {
                 // 2. Check Expiration
                 const age = Date.now() - payload.timestamp;
                 if (age > this.EXPIRATION_MS) {
-                    console.warn('Booking state expired. Redirecting to login to refresh session.');
-                    // Do NOT clear state, so we can resume after login
-                    setTimeout(() => {
-                        this.router.navigate(['/login'], { queryParams: { returnUrl: location.pathname } });
-                    }, 0);
-                    // Return the stale state so the app doesn't crash or redirect to home in the meantime
+                    // Do NOT clear state so the user can resume their draft if they
+                    // log in again. loadState() only reads: it runs on service
+                    // creation, so navigating from here would force a redirect to
+                    // /login on every page load, not just in the booking flow.
+                    console.warn('Booking state expired. Draft kept for resume.');
                     const state = payload.data;
                     if (state.pickup?.date) state.pickup.date = new Date(state.pickup.date);
                     if (state.dropoff?.date) state.dropoff.date = new Date(state.dropoff.date);
