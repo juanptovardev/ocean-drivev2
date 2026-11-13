@@ -15,6 +15,11 @@ export interface RevealOptions {
     start?: string;
 }
 
+/** Lets a component stop the animations it started. */
+export interface MotionHandle {
+    kill(): void;
+}
+
 const FROM: Record<RevealVariant, gsap.TweenVars> = {
     up: { y: 40 },
     down: { y: -40 },
@@ -79,6 +84,46 @@ export class MotionService {
                 scrollTrigger: { trigger: element, start, once: true }
             }
         );
+    }
+
+    /**
+     * Runs a callback the first time an element scrolls into view.
+     * Used by the "count up when visible" effects.
+     */
+    onEnter(element: HTMLElement, callback: () => void, options: { start?: string; once?: boolean } = {}): MotionHandle {
+        if (this.reduced()) {
+            callback();
+            return { kill: () => undefined };
+        }
+
+        const trigger = ScrollTrigger.create({
+            trigger: element,
+            start: options.start ?? 'top 85%',
+            once: options.once ?? true,
+            onEnter: () => callback()
+        });
+
+        return { kill: () => trigger.kill() };
+    }
+
+    /**
+     * Scroll spy: calls back with the element currently inside the reading band.
+     */
+    spy(elements: HTMLElement[], callback: (element: HTMLElement) => void): MotionHandle {
+        const triggers = elements.map((element) =>
+            ScrollTrigger.create({
+                trigger: element,
+                start: 'top 20%',
+                end: 'bottom 60%',
+                onToggle: (self) => {
+                    if (self.isActive) {
+                        callback(element);
+                    }
+                }
+            })
+        );
+
+        return { kill: () => triggers.forEach((trigger) => trigger.kill()) };
     }
 
     /** Kills a tween together with its scroll trigger. */

@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, signal, ElementRef, ViewChild, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, inject, computed } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, ChangeDetectionStrategy, signal, ElementRef, ViewChild, AfterViewInit, inject, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
+import { MotionService } from '../../app/core/motion/motion.service';
 
 interface Stat {
   id: string;
@@ -15,12 +17,11 @@ interface Stat {
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
 })
-export class ExperienceComponent implements AfterViewInit, OnDestroy {
+export class ExperienceComponent implements AfterViewInit {
   @ViewChild('statsSection') statsSection!: ElementRef;
-  private observer: IntersectionObserver | null = null;
-  private isBrowser: boolean;
+  private readonly motion = inject(MotionService);
   private router = inject(Router);
   lang = inject(LanguageService);
 
@@ -49,37 +50,14 @@ export class ExperienceComponent implements AfterViewInit, OnDestroy {
     { name: 'Porsche', opacity: 'opacity-60' },
   ];
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
-
   goToPaso1() {
     this.router.navigate(['/paso-1']);
   }
 
   ngAfterViewInit() {
-    if (this.isBrowser && this.statsSection) {
-      this.initObserver();
+    if (this.statsSection) {
+      this.motion.onEnter(this.statsSection.nativeElement, () => this.animateStats());
     }
-  }
-
-  ngOnDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  }
-
-  private initObserver() {
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.animateStats();
-          this.observer?.disconnect(); // Only run once
-        }
-      });
-    }, { threshold: 0.3 });
-
-    this.observer.observe(this.statsSection.nativeElement);
   }
 
   private animateStats() {

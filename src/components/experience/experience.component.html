@@ -1,4 +1,4 @@
-<section class="bg-[#002B5B] text-white py-20 relative overflow-hidden">
+<section appReveal class="bg-[#002B5B] text-white py-20 relative overflow-hidden">
   <!-- Mobile Background with Parallax & Blue Fade -->
   <div class="absolute inset-0 z-0 lg:hidden">
     <div class="absolute inset-0 bg-fixed bg-cover bg-center"
@@ -85,7 +85,7 @@
       <div class="lg:col-span-3 order-3 text-center" #statsSection>
         <div class="grid grid-cols-2 gap-4 h-[255px] w-[75%] mx-auto lg:w-full lg:mx-0 mb-8 lg:mb-0">
           @for (stat of translatedStats(); track stat.id) {
-          <div class="group relative rounded-2xl p-0.5 transition-all duration-300 ease-out h-full">
+          <div data-reveal-item class="group relative rounded-2xl p-0.5 transition-all duration-300 ease-out h-full">
             <!-- Gradient background that creates the border. It's hidden by default and appears on hover. -->
             <div
               class="absolute inset-0 bg-gradient-to-br from-[#FF6F61] via-[#B3E5FF] to-[#002B5B] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-spring">

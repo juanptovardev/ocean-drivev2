@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, signal, Inject, PLATFORM_ID, AfterViewInit, ViewChildren, QueryList, ElementRef, Input, inject, computed } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
+import { MotionService } from '../../app/core/motion/motion.service';
 
 interface FaqItem {
   question: string;
@@ -12,7 +14,7 @@ interface FaqItem {
   templateUrl: './faq.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
   providers: []
 })
 export class FaqComponent implements AfterViewInit {
@@ -21,6 +23,7 @@ export class FaqComponent implements AfterViewInit {
   isClient = signal(false);
   visibleCount = signal(3); // Default to showing only 3 on mobile initially
   windowWidth: number = 0;
+  private readonly motion = inject(MotionService);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     console.log('FaqComponent (Reviews) Initialized');
@@ -82,33 +85,20 @@ export class FaqComponent implements AfterViewInit {
   });
 
   ngAfterViewInit() {
-    if (this.isClient()) {
-      this.initObserver();
+    if (!this.isClient()) {
+      return;
     }
-  }
 
-  private initObserver() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // When the last visible item comes into view, show more!
-          // But 'visibleCount' controls rendering.
-          // If we render all but hide them with CSS, we can reveal them.
-          // Let's implement valid "infinite scroll" style load locally.
-          if (this.visibleCount() < this.faqs().length) {
-            // Simple logic: if user scrolls near bottom, reveal more.
-            this.visibleCount.update(c => Math.min(c + 3, this.faqs().length));
-          }
-        }
-      });
-    }, { threshold: 0.1 });
-
-    // Observe a sentinel element (we will add one in HTML)
-    // Or observe the last currently visible item?
-    // Let's rely on a 'load-trigger' element in HTML.
     const trigger = document.querySelector('#faq-scroll-trigger');
     if (trigger) {
-      observer.observe(trigger);
+      // Reveal three more answers each time the sentinel scrolls back into view.
+      this.motion.onEnter(
+        trigger as HTMLElement,
+        () => {
+          this.visibleCount.update(c => Math.min(c + 3, this.faqs().length));
+        },
+        { once: false }
+      );
     }
   }
 

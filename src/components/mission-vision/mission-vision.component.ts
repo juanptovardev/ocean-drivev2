@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 @Component({
     selector: 'app-mission-vision',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, MotionDirective],
     templateUrl: './mission-vision.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [`

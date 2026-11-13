@@ -1,6 +1,7 @@
 import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 interface Feature {
     icon: string;
@@ -11,7 +12,7 @@ interface Feature {
 @Component({
     selector: 'app-features',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, MotionDirective],
     templateUrl: './features.component.html'
 })
 export class FeaturesComponent {

@@ -1,13 +1,14 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 @Component({
   selector: 'app-brand-slider',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="w-full py-10 bg-white relative">
+    <section appReveal class="w-full py-10 bg-white relative">
       <!-- Scroll Container -->
       <div class="flex overflow-hidden relative w-full group hover-pause-trigger">
         

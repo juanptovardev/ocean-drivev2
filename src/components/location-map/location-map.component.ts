@@ -1,13 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 @Component({
   selector: 'app-location-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="bg-transparent w-full">
+    <section appReveal class="bg-transparent w-full">
       <!-- Map Wrapper 
            Heights adjusted: 320px mobile / 400px desktop (approx 15% increase) 
       -->

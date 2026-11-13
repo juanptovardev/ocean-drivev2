@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { Faq2Component } from '../../../components/faq2/faq2.component';
 import { LanguageService } from '../../../services/language.service';
+import { MotionService } from '../../core/motion/motion.service';
 
 interface Policy {
   id: string;
@@ -295,7 +296,8 @@ interface Faq {
 })
 export class PoliticasComponent implements AfterViewInit, OnDestroy {
   activeSection = signal('privacy');
-  private observer: IntersectionObserver | null = null;
+  private motion = inject(MotionService);
+  private spyHandle: { kill(): void } | null = null;
   lang = inject(LanguageService);
 
   policies = computed<Policy[]>(() => {
@@ -358,32 +360,20 @@ export class PoliticasComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+    this.spyHandle?.kill();
+    this.spyHandle = null;
   }
 
   private setupIntersectionObserver(): void {
-    const options = {
-      root: null,
-      rootMargin: '-20% 0px -60% 0px',
-      threshold: 0
-    };
-
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.activeSection.set(entry.target.id);
-        }
-      });
-    }, options);
-
-    // Observe all policy sections
+    // The sections are rendered by the template, so wait a tick before
+    // measuring them.
     setTimeout(() => {
-      document.querySelectorAll('.policy-section').forEach(el => {
-        if (el.id) {
-          this.observer?.observe(el);
-        }
+      const sections = Array.from(
+        document.querySelectorAll<HTMLElement>('.policy-section')
+      ).filter((element) => element.id);
+
+      this.spyHandle = this.motion.spy(sections, (element) => {
+        this.activeSection.set(element.id);
       });
     }, 100);
   }

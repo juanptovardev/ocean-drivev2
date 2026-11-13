@@ -1,4 +1,4 @@
-<section class="py-8 md:py-10 bg-gradient-to-br from-white via-[#B3E5FF]/10 to-white relative overflow-hidden">
+<section appReveal class="py-8 md:py-10 bg-gradient-to-br from-white via-[#B3E5FF]/10 to-white relative overflow-hidden">
     <!-- Animated background blobs -->
     <div
         class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#B3E5FF]/30 rounded-full blur-3xl pointer-events-none -mr-40 opacity-70 animate-pulse-slow">
@@ -39,9 +39,8 @@
                     </p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
-                    @for(feature of features(); track feature.title; let i = $index) {
-                    <div class="group/item flex items-start gap-4 animate-fade-in-up cursor-pointer"
-                        [style.animation-delay]="(i * 100 + 300) + 'ms'">
+                    @for(feature of features(); track feature.title) {
+                    <div data-reveal-item class="group/item flex items-start gap-4 cursor-pointer">
                         <div
                             class="w-12 h-12 shrink-0 rounded-2xl bg-[#B3E5FF]/25 text-[#002B5B] flex items-center justify-center transition-all duration-500 group-hover/item:bg-[#FF6F61] group-hover/item:text-white group-hover/item:shadow-lg group-hover/item:shadow-[#FF6F61]/30 group-hover/item:-translate-y-1 group-hover/item:rotate-3 ease-apple border border-[#B3E5FF]/20 group-hover/item:border-[#FF6F61]/50 group-hover/item:scale-110">
                             @if(feature.icon === 'plane') { <svg

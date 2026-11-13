@@ -1,14 +1,15 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 @Component({
   selector: 'app-requisitos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <div class="flex flex-col font-sans text-gray-900 bg-gray-50">
+  <div appReveal class="flex flex-col font-sans text-gray-900 bg-gray-50">
     <main class="flex-grow">
       <!-- Sección del Encabezado -->
       <section class="text-center pt-16 pb-4 px-4 bg-white">
@@ -27,7 +28,7 @@ import { LanguageService } from '../../services/language.service';
             <div class="space-y-10">
               
               <!-- Requisito 1 -->
-              <div class="relative group cursor-pointer">
+              <div data-reveal-item class="relative group cursor-pointer">
                 <div class="flex items-center gap-6">
                   <div class="relative z-10 w-12 h-12 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center transition-all duration-300 group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:scale-110">
                     <div class="text-gray-500 transition-colors duration-300 group-hover:text-white">
@@ -43,7 +44,7 @@ import { LanguageService } from '../../services/language.service';
               </div>
 
               <!-- Requisito 2 -->
-              <div class="relative group cursor-pointer">
+              <div data-reveal-item class="relative group cursor-pointer">
                 <div class="flex items-center gap-6">
                   <div class="relative z-10 w-12 h-12 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center transition-all duration-300 group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:scale-110">
                     <div class="text-gray-500 transition-colors duration-300 group-hover:text-white">
@@ -59,7 +60,7 @@ import { LanguageService } from '../../services/language.service';
               </div>
 
               <!-- Requisito 3 -->
-              <div class="relative group cursor-pointer">
+              <div data-reveal-item class="relative group cursor-pointer">
                 <div class="flex items-center gap-6">
                   <div class="relative z-10 w-12 h-12 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center transition-all duration-300 group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:scale-110">
                     <div class="text-gray-500 transition-colors duration-300 group-hover:text-white">
@@ -75,7 +76,7 @@ import { LanguageService } from '../../services/language.service';
               </div>
 
               <!-- Requisito 4 -->
-              <div class="relative group cursor-pointer">
+              <div data-reveal-item class="relative group cursor-pointer">
                 <div class="flex items-center gap-6">
                   <div class="relative z-10 w-12 h-12 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center transition-all duration-300 group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:scale-110">
                     <div class="text-gray-500 transition-colors duration-300 group-hover:text-white">

@@ -1,13 +1,14 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { MotionDirective } from '../../app/core/motion/motion.directive';
 
 @Component({
   selector: 'app-fortalezas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MotionDirective],
   template: `
-    <section class="bg-white py-16 px-4 font-sans">
+    <section appReveal class="bg-white py-16 px-4 font-sans">
       <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12">
@@ -34,7 +35,7 @@ import { LanguageService } from '../../services/language.service';
 
           <div class="space-y-12 md:space-y-0">
             @for (item of features(); track $index; let i = $index) {
-              <div class="relative md:flex items-center justify-between group">
+              <div data-reveal-item class="relative md:flex items-center justify-between group">
                 
                 <!-- Punto central (Decorativo) -->
                 <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-4 border-[#002B5B] z-10 group-hover:border-[#002B5B] group-hover:scale-125 transition-all duration-300"></div>

@@ -1,4 +1,4 @@
-<section class="pt-12 pb-36 bg-[#F7F9FC] relative border-b-0 shadow-none outline-none">
+<section appReveal class="pt-12 pb-36 bg-[#F7F9FC] relative border-b-0 shadow-none outline-none">
   <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
     <div class="absolute top-1/4 -left-24 w-96 h-96 bg-[#B3E5FF] rounded-full blur-3xl"></div>
     <div class="absolute top-1/2 right-0 w-64 h-64 bg-[#B3E5FF]/50 rounded-full blur-3xl"></div>
@@ -26,7 +26,7 @@
            We can initialize visibleCount to length on desktop or just ignore it in template for desktop.
       -->
       @for (item of faqs(); track $index) {
-      <div class="group" #faqItem
+      <div data-reveal-item class="group" #faqItem
         [class.hidden]="!isClient() ? false : ($index >= visibleCount() && (windowWidth < 768))" [class.block]="true"
         (mouseenter)="onMouseEnter($index)" (mouseleave)="onMouseLeave()">
         <!-- Note: The above logic is pseudo-code. Complex conditionals in template are messy.
