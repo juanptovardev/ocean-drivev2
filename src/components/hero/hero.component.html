@@ -1,7 +1,47 @@
-<section class="relative w-full overflow-hidden">
-  <!-- Banner Image Desktop -->
-  <img src="/assets/imgs/banners/banner1.webp" alt="Ocean Drive Banner" class="hidden md:block w-full h-auto" />
+<section #heroSection class="relative w-full overflow-hidden h-[86vh] min-h-[560px] flex items-center">
+  <!-- Background image with GSAP parallax -->
+  <div #heroBg class="absolute inset-x-0 -top-[12%] -bottom-[12%] z-0 will-change-transform">
+    <img src="/assets/imgs/banners/banner1.webp" alt="Ocean Drive Car Rental — flota premium en Cartagena de Indias"
+         class="hidden md:block w-full h-full object-cover" />
+    <img src="assets/imgs/banners/banner1mb.webp" alt="Ocean Drive Car Rental — flota premium en Cartagena de Indias"
+         class="block md:hidden w-full h-full object-cover" />
+  </div>
 
-  <!-- Banner Image Mobile -->
-  <img src="assets/imgs/banners/banner1mb.webp" alt="Ocean Drive Banner" class="block md:hidden w-full h-auto" />
+  <!-- Gradient overlay for legibility -->
+  <div class="absolute inset-0 z-[1] bg-gradient-to-b from-[#002B5B]/85 via-[#002B5B]/55 to-[#001f3f]/95"></div>
+
+  <!-- Content -->
+  <div class="container mx-auto px-6 relative z-10 text-center text-white pb-20">
+    <p #heroEyebrow class="uppercase tracking-[0.35em] text-xs md:text-sm text-[#B3E5FF] font-semibold mb-5">
+      {{ lang.t('hero.stat.available') }} · Cartagena de Indias
+    </p>
+    <h1 class="text-5xl md:text-7xl lg:text-8xl leading-[0.95] uppercase">
+      <span #heroLine1 class="block">{{ lang.t('hero.title1') }}</span>
+      <span #heroLine2 class="block text-[#FF6F61]">{{ lang.t('hero.title2') }}</span>
+    </h1>
+    <p #heroSub class="mt-6 max-w-2xl mx-auto text-base md:text-lg text-white/85">
+      {{ lang.t('hero.subtitle') }}
+    </p>
+    <div #heroCtas class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a routerLink="/paso-1"
+         class="btn inline-flex items-center gap-2 bg-[#FF6F61] hover:bg-[#FF8A75] text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-colors duration-300">
+        {{ lang.t('hero.ctaPrimary') }}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 12h15" />
+        </svg>
+      </a>
+      <a routerLink="/servicios"
+         class="btn inline-flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-colors duration-300">
+        {{ lang.t('hero.ctaSecondary') }}
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div #heroCue class="hidden md:flex absolute bottom-28 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1 text-white/70">
+    <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
 </section>
