@@ -144,6 +144,10 @@ interface NavItem {
     </div>
     </div>
   </div>
+  <div class="absolute bottom-0 left-0 h-[3px] w-full bg-[#FF6F61] origin-left pointer-events-none"
+       [style.transform]="'scaleX(' + scrollProgress() + ')'" aria-hidden="true"></div>
+  <div class="absolute bottom-0 left-0 h-[3px] w-full bg-[#FF6F61] origin-left pointer-events-none"
+       [style.transform]="'scaleX(' + scrollProgress() + ')'" aria-hidden="true"></div>
 </header>
 
 <!-- Mobile Menu - Full Screen Premium -->
@@ -333,6 +337,7 @@ export class HeaderComponent {
   currencyService = inject(CurrencyService);
   lang = inject(LanguageService);
   isScrolled = signal(false);
+  readonly scrollProgress = signal(0);
   mobileMenuOpen = signal(false);
   socialFabOpen = signal(false);
 
@@ -362,6 +367,8 @@ export class HeaderComponent {
   onWindowScroll() {
     if (isPlatformBrowser(this.platformId)) {
       this.isScrolled.set(window.scrollY > 20);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      this.scrollProgress.set(max > 0 ? Math.min(1, window.scrollY / max) : 0);
 
       // Cerrar el menú móvil automáticamente al hacer scroll
       if (this.mobileMenuOpen() && window.scrollY > 20) {

@@ -126,6 +126,33 @@ export class MotionService {
         return { kill: () => triggers.forEach((trigger) => trigger.kill()) };
     }
 
+    /**
+     * Parallax: moves an element slower than the page while it crosses the
+     * viewport. `toY` is the pixel offset applied at the end of the travel.
+     */
+    parallax(element: HTMLElement, options: { fromY?: number; toY?: number; trigger?: HTMLElement; start?: string; end?: string } = {}): MotionHandle {
+        if (this.reduced()) {
+            return { kill: () => undefined };
+        }
+
+        const tween = gsap.fromTo(
+            element,
+            { y: options.fromY ?? 0 },
+            {
+                y: options.toY ?? 60,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: options.trigger ?? element,
+                    start: options.start ?? 'top bottom',
+                    end: options.end ?? 'bottom top',
+                    scrub: true
+                }
+            }
+        );
+
+        return { kill: () => { tween.scrollTrigger?.kill(); tween.kill(); } };
+    }
+
     /** Kills a tween together with its scroll trigger. */
     destroy(tween: gsap.core.Tween | null): void {
         if (!tween) {

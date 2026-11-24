@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, signal, computed, OnInit, OnDestroy, Inject, PLATFORM_ID, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, signal, computed, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { BookingService } from '../../services/booking.service';
 import { CurrencyService } from '../../services/currency.service';
 import { LanguageService } from '../../services/language.service';
 import { Router } from '@angular/router';
+import { MotionService, MotionHandle } from '../../app/core/motion/motion.service';
 
 interface ServiceItem {
   id: string | number;
@@ -25,8 +26,9 @@ interface ServiceItem {
   standalone: true,
   imports: [CommonModule],
 })
-export class Vehicles3Component implements OnInit, OnDestroy {
+export class Vehicles3Component implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLElement>;
+  @ViewChild('glow') glow!: ElementRef<HTMLElement>;
 
   activeIndex = signal(0);
   highlightedIndex = signal<number>(-1);
@@ -38,6 +40,8 @@ export class Vehicles3Component implements OnInit, OnDestroy {
   private router = inject(Router);
   currencyService = inject(CurrencyService);
   lang = inject(LanguageService);
+  private motion = inject(MotionService);
+  private parallaxHandle: MotionHandle | null = null;
 
   // List of raw vehicles from API
   rawVehicles = signal<any[]>([]);
@@ -125,6 +129,12 @@ export class Vehicles3Component implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId) && this.glow) {
+      this.parallaxHandle = this.motion.parallax(this.glow.nativeElement, { toY: 60 });
+    }
+  }
+
   loadVehicles() {
     const state = this.bookingService.reservation();
     const hasDates = !!(state.pickup.date && state.dropoff.date);
@@ -161,6 +171,8 @@ export class Vehicles3Component implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopAutoScroll();
+    this.parallaxHandle?.kill();
+    this.parallaxHandle = null;
   }
 
   startAutoScroll() {
