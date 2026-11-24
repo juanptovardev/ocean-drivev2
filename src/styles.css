@@ -995,3 +995,8 @@ a:hover svg {
     border-radius: 10px;
 }
 
+/* Cifras tabulares: alineacion vertical en precios y columnas numericas */
+.font-bold, .font-black {
+    font-variant-numeric: tabular-nums;
+}
+

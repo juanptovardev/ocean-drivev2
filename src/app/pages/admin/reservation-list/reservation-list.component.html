@@ -757,7 +757,7 @@
                             @for(cost of manualBookingForm.additionalCosts; track $index) {
                             <div class="flex justify-between items-center text-xs font-bold text-emerald-600">
                                 <span>+ {{ cost.name }}</span>
-                                <span>{{ cost.price | currency:'COP':'symbol':'1.0-0' }}</span>
+                                <span class="tabular-nums">{{ cost.price | currency:'COP':'symbol':'1.0-0' }}</span>
                             </div>
                             }
 
