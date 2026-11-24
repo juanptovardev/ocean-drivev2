@@ -157,6 +157,7 @@ button,
   /* Design tokens: single source of truth for color, radius and shadow */
   --brand-900: #002b5b;
   --brand-800: #003875;
+  --brand-700: #1a3f6f;
   --brand-600: #14549b;
   --accent: #ff6f61;
   --accent-soft: #ff8a75;
@@ -164,6 +165,9 @@ button,
   --paper: #fbfbfd;
   --muted: #94a3b8;
   --line: #e2e8f0;
+  --glow: #b3e5ff;
+  --wa: #25d366;
+  --ig: #e1306c;
   --radius-sm: 8px;
   --radius-md: 16px;
   --shadow-1: 0 2px 8px rgba(0, 43, 91, 0.06);

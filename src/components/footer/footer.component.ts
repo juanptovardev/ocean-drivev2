@@ -23,7 +23,7 @@ import { LanguageService } from '../../services/language.service';
             <!-- Ola 3 -->
             <path class="wave wave-3" d="M0,70 C640,45 1280,95 1920,70 S3200,45 3840,70 L3840,120 L0,120 Z" fill="rgba(0, 43, 91, 0.5)"></path>
             <!-- Ola 4 (Fondo sólido, la más lenta) -->
-            <path class="wave wave-4" d="M0,80 C640,60 1280,100 1920,80 S3200,60 3840,80 L3840,120 L0,120 Z" fill="#002B5B"></path>
+            <path class="wave wave-4" d="M0,80 C640,60 1280,100 1920,80 S3200,60 3840,80 L3840,120 L0,120 Z" fill="var(--brand-900)"></path>
           </svg>
         </div>
 
@@ -31,7 +31,7 @@ import { LanguageService } from '../../services/language.service';
              class="pointer-events-none absolute left-0 right-0 bottom-0 -top-[150px] z-30 transition-opacity duration-300 ease-out mix-blend-screen opacity-0">
         </div>
 
-        <div class="bg-[#002B5B] text-white pt-2 -mt-1 relative z-20">
+        <div class="bg-[var(--brand-900)] text-white pt-2 -mt-1 relative z-20">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-overlay noise-bg"></div>
 
             <div class="container mx-auto px-6 relative z-10">
@@ -43,7 +43,7 @@ import { LanguageService } from '../../services/language.service';
 
                     <div class="text-center md:text-right">
                         <p class="text-white/80 text-sm">{{ lang.t('footer.callForInfo') }}</p>
-                        <a href="tel:+573012358181" class="text-2xl font-bold text-[#B3E5FF] hover:text-white transition-colors">+57 301 235 8181</a>
+                        <a href="tel:+573012358181" class="text-2xl font-bold text-[var(--glow)] hover:text-white transition-colors">+57 301 235 8181</a>
                     </div>
                 </div>
 
@@ -53,9 +53,9 @@ import { LanguageService } from '../../services/language.service';
                     <div class="lg:col-span-3 group animate-enter delay-200">
                         <h4 class="font-bold text-white mb-3 text-xl tracking-[0.15em]">{{ lang.t('footer.aboutUs') }}</h4>
                         <div class="flex items-center gap-1.5 mb-3">
-                            <div class="w-8 h-1 bg-[#FF6F61] transition-all duration-300 group-hover:w-12"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
+                            <div class="w-8 h-1 bg-[var(--accent)] transition-all duration-300 group-hover:w-12"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
                         </div>
                         <p class="text-base text-white/80 leading-relaxed">
                         {{ lang.t('footer.aboutText') }}
@@ -65,9 +65,9 @@ import { LanguageService } from '../../services/language.service';
                     <div class="lg:col-span-3 group animate-enter delay-300">
                         <h4 class="font-bold text-white mb-3 text-xl tracking-[0.15em]">{{ lang.t('footer.usefulLinks') }}</h4>
                         <div class="flex items-center gap-1.5 mb-3">
-                            <div class="w-8 h-1 bg-[#FF6F61] transition-all duration-300 group-hover:w-12"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
+                            <div class="w-8 h-1 bg-[var(--accent)] transition-all duration-300 group-hover:w-12"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
                         </div>
                         <ul class="grid grid-cols-2 gap-x-2 gap-y-2 text-base text-white/80">
                             @for(link of usefulLinks(); track $index) {
@@ -79,14 +79,14 @@ import { LanguageService } from '../../services/language.service';
                     <div class="lg:col-span-3 group animate-enter delay-400">
                         <h4 class="font-bold text-white mb-3 text-xl tracking-[0.15em]">{{ lang.t('footer.contactUs') }}</h4>
                         <div class="flex items-center gap-1.5 mb-3">
-                            <div class="w-8 h-1 bg-[#FF6F61] transition-all duration-300 group-hover:w-12"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
-                            <div class="w-1.5 h-1 bg-[#FF6F61]"></div>
+                            <div class="w-8 h-1 bg-[var(--accent)] transition-all duration-300 group-hover:w-12"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
+                            <div class="w-1.5 h-1 bg-[var(--accent)]"></div>
                         </div>
                         <ul class="space-y-2.5">
                             @for(item of contactItems(); track item.title) {
                             <li class="flex items-center gap-3">
-                                <span class="text-[#B3E5FF] shrink-0">
+                                <span class="text-[var(--glow)] shrink-0">
                                     @if(item.icon === 'phone') { 
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
@@ -108,12 +108,12 @@ import { LanguageService } from '../../services/language.service';
                                     <p class="text-base text-white/80">{{ item.title }}</p>
                                     @if(item.icon === 'phone') {
                                         <button (click)="copyToClipboard('+573012358181', 'phone')" 
-                                                class="font-semibold text-white hover:text-[#B3E5FF] transition-colors text-sm hover:underline cursor-pointer text-left">
+                                                class="font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
                                             {{ item.value }}
                                         </button>
                                     } @else if(item.icon === 'mail') {
                                         <button (click)="copyToClipboard('reservas@oceandrivecarental.com', 'email')" 
-                                                class="font-semibold text-white hover:text-[#B3E5FF] transition-colors text-sm hover:underline cursor-pointer text-left">
+                                                class="font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
                                             {{ item.value }}
                                         </button>
                                     } @else {
@@ -130,15 +130,15 @@ import { LanguageService } from '../../services/language.service';
 
                     <div class="lg:col-span-3 group animate-enter delay-500 flex flex-col justify-center h-full">
                         <form (ngSubmit)="onSubscribe()" #subForm="ngForm" class="flex flex-col gap-4 w-full">
-                            <input [(ngModel)]="subName" name="name" type="text" placeholder="Nombre" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[#FF6F61] transition-colors placeholder-white/60 text-sm">
-                            <input [(ngModel)]="subPhone" name="phone" type="tel" placeholder="Número" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[#FF6F61] transition-colors placeholder-white/60 text-sm">
-                            <input [(ngModel)]="subEmail" name="email" required type="email" placeholder="Correo" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[#FF6F61] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subName" name="name" type="text" placeholder="Nombre" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subPhone" name="phone" type="tel" placeholder="Número" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subEmail" name="email" required type="email" placeholder="Correo" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
                             
-                            <button type="submit" [disabled]="isLoading()" class="w-full bg-[#FF6F61] text-white hover:bg-white hover:text-[#FF6F61] font-medium text-sm rounded-lg transition-all duration-300 ease-in-out flex items-center justify-between shadow-lg transform hover:-translate-y-0.5 active:scale-95 group overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed">
+                            <button type="submit" [disabled]="isLoading()" class="w-full bg-[var(--accent)] text-white hover:bg-white hover:text-[var(--accent)] font-medium text-sm rounded-lg transition-all duration-300 ease-in-out flex items-center justify-between shadow-lg transform hover:-translate-y-0.5 active:scale-95 group overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed">
                                 <span class="px-4 py-3 transition-colors duration-300">
                                   @if(isLoading()) { {{ lang.t('footer.processing') }} } @else { {{ lang.t('footer.subscribe') }} }
                                 </span>
-                                <span class="bg-white text-[#FF6F61] p-3 h-full flex items-center border-l border-white/20 group-hover:bg-[#FF6F61] group-hover:text-white transition-colors duration-300">
+                                <span class="bg-white text-[var(--accent)] p-3 h-full flex items-center border-l border-white/20 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
@@ -157,7 +157,7 @@ import { LanguageService } from '../../services/language.service';
 
                     <div class="flex flex-wrap justify-center md:justify-end items-center gap-2 order-1 md:order-2">
                         <a href="https://www.instagram.com/oceandrivecarental/" target="_blank" class="px-3 py-1.5 text-[10px] font-bold tracking-widest text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full hover:scale-105 transition-all shadow-sm shadow-pink-900/20">INSTAGRAM</a>
-                        <a href="https://wa.me/573012358181" target="_blank" class="px-3 py-1.5 text-[10px] font-bold tracking-widest text-white bg-[#25D366] rounded-full hover:scale-105 transition-all shadow-sm shadow-green-900/20">WHATSAPP</a>
+                        <a href="https://wa.me/573012358181" target="_blank" class="px-3 py-1.5 text-[10px] font-bold tracking-widest text-white bg-[var(--wa)] rounded-full hover:scale-105 transition-all shadow-sm shadow-green-900/20">WHATSAPP</a>
                     </div>
                 </div>
             </div>
@@ -165,11 +165,11 @@ import { LanguageService } from '../../services/language.service';
 
         <!-- Success Modal (Premium UX) -->
         @if(showSuccessModal()) {
-            <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#002B5B]/40 backdrop-blur-md animate-fade-in" (click)="closeSuccessModal()">
+            <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[var(--brand-900)]/40 backdrop-blur-md animate-fade-in" (click)="closeSuccessModal()">
                 <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-sm overflow-hidden relative animate-scale-up border border-white/20" (click)="$event.stopPropagation()">
                     
                     <!-- Close Button -->
-                    <button aria-label="Cerrar" (click)="closeSuccessModal()" class="absolute top-4 right-4 text-gray-400 hover:text-[#FF6F61] transition-colors p-2 hover:bg-gray-50 rounded-full">
+                    <button aria-label="Cerrar" (click)="closeSuccessModal()" class="absolute top-4 right-4 text-gray-400 hover:text-[var(--accent)] transition-colors p-2 hover:bg-gray-50 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -184,17 +184,17 @@ import { LanguageService } from '../../services/language.service';
                             </svg>
                         </div>
 
-                        <h3 class="text-2xl font-black text-[#002B5B] mb-2 tracking-tight">{{ lang.t('footer.successTitle') }}</h3>
+                        <h3 class="text-2xl font-black text-[var(--brand-900)] mb-2 tracking-tight">{{ lang.t('footer.successTitle') }}</h3>
                         
-                        <div class="w-10 h-1 bg-[#FF6F61] rounded-full mb-4"></div>
+                        <div class="w-10 h-1 bg-[var(--accent)] rounded-full mb-4"></div>
 
                         <p class="text-sm text-slate-600 font-medium leading-relaxed mb-6">
                             {{ lang.t('footer.successMsg') }} <br><br>
-                            <span class="text-[#002B5B] font-bold">{{ lang.t('footer.successMsg2') }}</span>
+                            <span class="text-[var(--brand-900)] font-bold">{{ lang.t('footer.successMsg2') }}</span>
                         </p>
 
                         <button (click)="closeSuccessModal()" 
-                                class="w-full py-4 bg-[#002B5B] text-white font-bold rounded-2xl shadow-xl shadow-blue-900/20 hover:bg-[#003875] hover:shadow-2xl hover:-translate-y-0.5 transition-all active:scale-95 active:translate-y-0 uppercase tracking-widest text-xs flex items-center justify-center gap-2 group">
+                                class="w-full py-4 bg-[var(--brand-900)] text-white font-bold rounded-2xl shadow-xl shadow-blue-900/20 hover:bg-[var(--brand-800)] hover:shadow-2xl hover:-translate-y-0.5 transition-all active:scale-95 active:translate-y-0 uppercase tracking-widest text-xs flex items-center justify-center gap-2 group">
                             <span>{{ lang.t('footer.understood') }}</span>
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
