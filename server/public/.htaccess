@@ -1,0 +1,45 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /server/public/
+
+  # Permitir cabeceras de autorización
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # Bloquear acceso directo a archivos sensibles (MED-06 FIX)
+  RewriteRule ^debug_log\.txt$ - [F,L]
+  RewriteRule ^\.env$ - [F,L]
+
+  # Si no es un archivo o directorio real, redirigir a index.php
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/json application/javascript
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+
+  # CRIT-02 FIX: CORS manejado exclusivamente por Cors.php (no duplicar en Apache)
+  # Se eliminó "Access-Control-Allow-Origin: *" de aquí.
+  # El CORS dinámico con whitelist se gestiona desde server/src/Cors.php
+</IfModule>
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Bloquear acceso a archivos sensibles por extensión
+<FilesMatch "\.(log|txt|env|sql|bak|old)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>

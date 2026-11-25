@@ -200,8 +200,7 @@ dist/server/
 yarn.lock
 package-lock.json
 
-# Custom
-.htaccess
+# Apache routing and access rules are shipped with the PHP front controller.
 .htpasswd
 web.config
 
