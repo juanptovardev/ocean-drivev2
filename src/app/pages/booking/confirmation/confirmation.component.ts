@@ -32,7 +32,7 @@ import { FooterComponent } from '../../../../components/footer/footer.component'
         @if (bookingId()) {
           <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/10">
             <p class="text-gray-400 text-sm mb-2">Número de Reserva</p>
-            <p class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
+            <p class="text-3xl font-bold text-[var(--accent)]">
               #{{ bookingId() }}
             </p>
           </div>

@@ -11,7 +11,7 @@
                 <!-- Status Filter -->
                 <div class="relative group">
                     <select [(ngModel)]="selectedStatus"
-                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[140px]">
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[140px]">
                         <option value="all">Estado</option>
                         <option value="active">En Curso</option>
                         <option value="pending">Pendiente</option>
@@ -19,7 +19,7 @@
                         <option value="cancelled">Cancelada</option>
                     </select>
                     <div
-                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-600 transition-colors">
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-800 transition-colors">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -29,12 +29,12 @@
                 <!-- Category Filter -->
                 <div class="relative group">
                     <select [(ngModel)]="selectedCategory"
-                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[160px]">
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer uppercase tracking-wide hover:border-slate-300 min-w-[160px]">
                         <option value="all">Categorías</option>
                         <option *ngFor="let cat of categories()" [value]="cat.id">{{ cat.name }}</option>
                     </select>
                     <div
-                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-600 transition-colors">
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-800 transition-colors">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -47,7 +47,7 @@
                     <!-- Start Date -->
                     <div class="relative">
                         <button (click)="isStartDateOpen.set(!isStartDateOpen()); isEndDateOpen.set(false)"
-                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
+                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
                             <span [class.text-slate-400]="!dateStart()">{{ dateStart() ? (dateStart() |
                                 date:'dd/MM/yyyy') : 'Desde' }}</span>
                             <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors"
@@ -72,7 +72,7 @@
                     <!-- End Date -->
                     <div class="relative">
                         <button (click)="isEndDateOpen.set(!isEndDateOpen()); isStartDateOpen.set(false)"
-                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
+                            class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800 shadow-sm hover:border-slate-300 hover:text-slate-800 transition-all min-w-[110px] justify-between group active:scale-95">
                             <span [class.text-slate-400]="!dateEnd()">{{ dateEnd() ? (dateEnd() | date:'dd/MM/yyyy') :
                                 'Hasta' }}</span>
                             <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors"
@@ -278,7 +278,7 @@
                                 </span>
                                 <!-- Completed (Terminada) -->
                                 <span *ngSwitchCase="'completed'"
-                                    class="w-24 block text-center bg-slate-100 text-slate-600 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-slate-200">
+                                    class="w-24 block text-center bg-slate-100 text-slate-800 py-1 rounded text-[9px] font-black uppercase tracking-wider border border-slate-200">
                                     Terminada
                                 </span>
                                 <!-- Maintenance (Mantenimiento) - Removed from here generally as user asked to filter them out, but good to keep logic just in case -->
@@ -333,7 +333,7 @@
                             </button>
                             <!-- Edit (Gray) -->
                             <button (click)="editBooking(booking)" title="Editar Reserva"
-                                class="p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 rounded transition-colors">
+                                class="p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-800 rounded transition-colors">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -432,7 +432,7 @@
                         [ngClass]="{
                                 'bg-blue-100 text-blue-700': getBookingStatus(selectedBooking()) === 'pending',
                                 'bg-green-100 text-green-700': getBookingStatus(selectedBooking()) === 'active',
-                                'bg-slate-200 text-slate-600': getBookingStatus(selectedBooking()) === 'completed',
+                                'bg-slate-200 text-slate-800': getBookingStatus(selectedBooking()) === 'completed',
                                 'bg-red-100 text-red-700': getBookingStatus(selectedBooking()) === 'cancelled',
                                 'bg-orange-100 text-orange-700': getBookingStatus(selectedBooking()) === 'maintenance'
                             }">
@@ -504,16 +504,16 @@
                                     <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20 max-h-40 overflow-y-auto"
                                         (click)="showManualDDI.set(false)">
                                         <div role="button" tabindex="0" (click)="manualBookingForm.ddi = '+57'" (keydown.enter)="manualBookingForm.ddi = '+57'" (keydown.space)="manualBookingForm.ddi = '+57'; $event.preventDefault()"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             🇨🇴 +57</div>
                                         <div (click)="manualBookingForm.ddi = '+1'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             🇺🇸 +1</div>
                                         <div (click)="manualBookingForm.ddi = '+34'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             🇪🇸 +34</div>
                                         <div (click)="manualBookingForm.ddi = '+52'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             🇲🇽 +52</div>
                                     </div>
                                     }
@@ -542,13 +542,13 @@
                                     <div class="absolute top-full mt-1 left-0 w-full bg-white border border-slate-200 rounded-xl shadow-lg z-20"
                                         (click)="showManualDocType.set(false)">
                                         <div (click)="manualBookingForm.docType = 'CC'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             CC</div>
                                         <div (click)="manualBookingForm.docType = 'CE'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             CE</div>
                                         <div (click)="manualBookingForm.docType = 'PASSPORT'"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">
                                             PASS</div>
                                     </div>
                                     }
@@ -587,7 +587,7 @@
                     <!-- Trip Details -->
                     <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 space-y-4">
                         <h3
-                            class="text-xs font-black text-indigo-800 uppercase tracking-widest flex items-center gap-2">
+                            class="text-xs font-black text-[var(--brand-900)] uppercase tracking-widest flex items-center gap-2">
                             <span class="w-1 h-4 bg-indigo-500 rounded-full"></span>
                             Logística
                         </h3>
@@ -644,7 +644,7 @@
                                         (click)="showBookingPickupTime.set(false)">
                                         @for(time of timeOptions; track time) {
                                         <div (click)="selectBookingTime('pickup', time)"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-indigo-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-indigo-50 cursor-pointer">
                                             {{ time }}</div>
                                         }
                                     </div>
@@ -705,7 +705,7 @@
                                         (click)="showBookingDropoffTime.set(false)">
                                         @for(time of timeOptions; track time) {
                                         <div (click)="selectBookingTime('dropoff', time)"
-                                            class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-indigo-50 cursor-pointer">
+                                            class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-indigo-50 cursor-pointer">
                                             {{ time }}</div>
                                         }
                                     </div>

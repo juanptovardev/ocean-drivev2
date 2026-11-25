@@ -26,7 +26,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                       <!-- Category Filter (Custom Dropdown) -->
                       <div class="relative group">
                           <button (click)="isCategoryOpen.set(!isCategoryOpen()); isStatusOpen.set(false); isDatePickerOpen.set(false); $event.stopPropagation()"
-                                  class="flex items-center justify-between gap-2 pl-3 pr-2 py-1.5 text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200 rounded-lg outline-none cursor-pointer hover:bg-white transition-all uppercase tracking-wide min-w-[170px]">
+                                  class="flex items-center justify-between gap-2 pl-3 pr-2 py-1.5 text-[11px] font-bold text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none cursor-pointer hover:bg-white transition-all uppercase tracking-wide min-w-[170px]">
                               <span>{{ categoryFilter() === 'all' ? 'CATEGORÍAS' : categoryFilter() }}</span>
                               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                           </button>
@@ -34,7 +34,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                           @if(isCategoryOpen()) {
                               <div class="absolute top-full left-0 mt-1 w-full bg-white rounded-lg shadow-xl border border-slate-100 py-1 z-30 animate-fade-in max-h-[300px] overflow-y-auto custom-scrollbar">
                                    <button (click)="categoryFilter.set('all'); isCategoryOpen.set(false)" 
-                                           class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between"
+                                           class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between"
                                            [class.text-blue-600]="categoryFilter() === 'all'"
                                            [class.bg-blue-50]="categoryFilter() === 'all'">
                                        TODOS (CATEGORÍAS)
@@ -42,7 +42,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                    </button>
                                    @for (cat of getCategories(); track cat) {
                                        <button (click)="categoryFilter.set(cat); isCategoryOpen.set(false)"
-                                               class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between"
+                                               class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between"
                                                [class.text-blue-600]="categoryFilter() === cat"
                                                [class.bg-blue-50]="categoryFilter() === cat">
                                            {{ cat }}
@@ -57,7 +57,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                       <!-- Status Filter (Custom Dropdown) -->
                       <div class="relative group">
                           <button (click)="isStatusOpen.set(!isStatusOpen()); isCategoryOpen.set(false); isDatePickerOpen.set(false); $event.stopPropagation()"
-                                  class="flex items-center justify-between gap-2 pl-3 pr-2 py-1.5 text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200 rounded-lg outline-none cursor-pointer hover:bg-white transition-all uppercase tracking-wide min-w-[150px]">
+                                  class="flex items-center justify-between gap-2 pl-3 pr-2 py-1.5 text-[11px] font-bold text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none cursor-pointer hover:bg-white transition-all uppercase tracking-wide min-w-[150px]">
                               <span>
                                 @switch(statusFilter()) {
                                     @case('all') { ESTADOS }
@@ -71,19 +71,19 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
 
                            @if(isStatusOpen()) {
                               <div class="absolute top-full left-0 mt-1 w-full bg-white rounded-lg shadow-xl border border-slate-100 py-1 z-30 animate-fade-in">
-                                  <button (click)="statusFilter.set('all'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'all'" [class.bg-blue-50]="statusFilter() === 'all'">
+                                  <button (click)="statusFilter.set('all'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'all'" [class.bg-blue-50]="statusFilter() === 'all'">
                                       TODOS (ESTADOS)
                                       @if(statusFilter() === 'all') { <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> }
                                   </button>
-                                  <button (click)="statusFilter.set('booked'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'booked'" [class.bg-blue-50]="statusFilter() === 'booked'">
+                                  <button (click)="statusFilter.set('booked'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'booked'" [class.bg-blue-50]="statusFilter() === 'booked'">
                                       EN CURSO
                                       @if(statusFilter() === 'booked') { <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> }
                                   </button>
-                                  <button (click)="statusFilter.set('available'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'available'" [class.bg-blue-50]="statusFilter() === 'available'">
+                                  <button (click)="statusFilter.set('available'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'available'" [class.bg-blue-50]="statusFilter() === 'available'">
                                       DISPONIBLE
                                       @if(statusFilter() === 'available') { <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> }
                                   </button>
-                                  <button (click)="statusFilter.set('maintenance'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'maintenance'" [class.bg-blue-50]="statusFilter() === 'maintenance'">
+                                  <button (click)="statusFilter.set('maintenance'); isStatusOpen.set(false)" class="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors uppercase flex items-center justify-between" [class.text-blue-600]="statusFilter() === 'maintenance'" [class.bg-blue-50]="statusFilter() === 'maintenance'">
                                       MANTENIMIENTO
                                       @if(statusFilter() === 'maintenance') { <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> }
                                   </button>
@@ -131,7 +131,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                          <div class="absolute top-full left-0 mt-1 w-full bg-slate-50 rounded-lg shadow-xl border border-slate-200 max-h-[200px] overflow-y-auto custom-scrollbar z-30">
                                              @for (m of months; track $index) {
                                                  <button (click)="setPickerMonth($index); isMonthPickerOpen.set(false)"
-                                                         class="w-full text-left px-3 py-2 text-xs font-bold text-slate-600 hover:bg-blue-600 hover:text-white transition-colors uppercase"
+                                                         class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition-colors uppercase"
                                                          [class.bg-blue-600]="$index === pickerDate().getMonth()"
                                                          [class.text-white]="$index === pickerDate().getMonth()">
                                                      {{ m }}
@@ -154,7 +154,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                          <div class="absolute top-full left-0 mt-1 w-full bg-slate-50 rounded-lg shadow-xl border border-slate-200 max-h-[200px] overflow-y-auto custom-scrollbar z-30">
                                              @for (y of availableYears(); track y) {
                                                  <button (click)="setPickerYear(y); isYearPickerOpen.set(false)"
-                                                         class="w-full text-left px-3 py-2 text-xs font-bold text-slate-600 hover:bg-blue-600 hover:text-white transition-colors"
+                                                         class="w-full text-left px-3 py-2 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition-colors"
                                                          [class.bg-blue-600]="y === pickerDate().getFullYear()"
                                                          [class.text-white]="y === pickerDate().getFullYear()">
                                                      {{ y }}
@@ -173,7 +173,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                              <div class="grid grid-cols-7 gap-y-1 gap-x-0">
                                  @for (day of pickerDays(); track $index) {
                                      <div class="aspect-square flex items-center justify-center text-xs font-medium cursor-pointer relative group isolation-auto"
-                                          [class.text-slate-300]="!day.isCurrentMonth"
+                                          [class.text-slate-600]="!day.isCurrentMonth"
                                           [class.text-slate-700]="day.isCurrentMonth"
                                           (click)="selectWeekFromPicker(day.date)"
                                           (mouseenter)="hoverDate.set(day.date)"
@@ -308,7 +308,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                        <!-- Empty Slot with Ghost Icon -->
                                        <div class="w-full h-full flex items-center justify-center group/empty" 
                                             (click)="$event.stopPropagation(); selectEmptySlot(row.vehicle, dayStatus.date!)">
-                                            <div class="w-6 h-6 rounded border border-dashed border-slate-300 flex items-center justify-center text-slate-300 opacity-0 group-hover/empty:opacity-100 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500">
+                                            <div class="w-6 h-6 rounded border border-dashed border-slate-300 flex items-center justify-center text-slate-600 opacity-0 group-hover/empty:opacity-100 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500">
                                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                             </div>
                                        </div>
@@ -376,7 +376,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                            </div>
                            <h3 class="text-2xl font-black text-slate-800 uppercase tracking-widest">EDITAR TARIFAS: {{ editingCategory()?.name }}</h3>
                        </div>
-                       <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                       <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-800 transition-colors">
                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                        </button>
                    </div>
@@ -418,7 +418,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                            <div class="mb-2">
                                                <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nombre (Ej: Semana Santa)</label>
                                                <input type="text" [(ngModel)]="period.name" placeholder="Fin de año, Vacaciones..."
-                                                      class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[11px] font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-300">
+                                                      class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[11px] font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-600">
                                            </div>
  
                                            <div class="grid grid-cols-3 gap-2">
@@ -426,7 +426,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                    <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Desde</label>
                                                    <div class="relative">
                                                        <button type="button" (click)="toggleCalendar($index, 'start', $event)"
-                                                             class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-600 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
+                                                             class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-800 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
                                                            <span>{{ period.start ? (getPeriodDate(period.start) | date:'dd/MM/yyyy') : 'dd/mm/aaaa' }}</span>
                                                            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                                        </button>
@@ -448,7 +448,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                    <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Hasta</label>
                                                    <div class="relative">
                                                        <button type="button" (click)="toggleCalendar($index, 'end', $event)"
-                                                             class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-600 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
+                                                             class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-800 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
                                                             <span>{{ period.end ? (getPeriodDate(period.end) | date:'dd/MM/yyyy') : 'dd/mm/aaaa' }}</span>
                                                             <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                                        </button>
@@ -524,7 +524,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                       [ngClass]="{
                                           'bg-blue-100 text-blue-700': selectedFullBooking().status === 'pending',
                                           'bg-green-100 text-green-700': selectedFullBooking().status === 'confirmed' || selectedFullBooking().status === 'available',
-                                          'bg-slate-200 text-slate-600': selectedFullBooking().status === 'completed',
+                                          'bg-slate-200 text-slate-800': selectedFullBooking().status === 'completed',
                                           'bg-red-100 text-red-700': selectedFullBooking().status === 'cancelled',
                                           'bg-orange-100 text-orange-700': selectedFullBooking().status === 'maintenance'
                                       }">
@@ -632,7 +632,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDisplayDate(selectedFullBooking().start_date?.split('T')[0]) }}</p>
-                                                <p class="text-xs text-slate-600">{{ formatDisplayTime(selectedFullBooking().pickup_time || (selectedFullBooking().status === 'maintenance' ? '12:00' : '10:00')) }}</p>
+                                                <p class="text-xs text-slate-800">{{ formatDisplayTime(selectedFullBooking().pickup_time || (selectedFullBooking().status === 'maintenance' ? '12:00' : '10:00')) }}</p>
                                             </div>
 
                                             <div>
@@ -654,7 +654,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDisplayDate(selectedFullBooking().end_date?.split('T')[0]) }}</p>
-                                                <p class="text-xs text-slate-600">{{ formatDisplayTime(selectedFullBooking().dropoff_time || (selectedFullBooking().status === 'maintenance' ? '12:00' : '12:00')) }}</p>
+                                                <p class="text-xs text-slate-800">{{ formatDisplayTime(selectedFullBooking().dropoff_time || (selectedFullBooking().status === 'maintenance' ? '12:00' : '12:00')) }}</p>
                                             </div>
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Ubicación</p>
@@ -705,7 +705,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                     <div class="relative" [class.z-50]="statusPickerMode() === 'start'">
                                        <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Desde</label>
                                        <button type="button" (click)="togglePicker('start', $event)"
-                                               class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-[10px] font-bold"
+                                               class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-[10px] font-bold"
                                                [class.text-blue-600]="blockStart">
                                            <span>{{ blockStart ? formatDisplayDate(blockStart) : 'DD/MM/AAAA' }}</span>
                                            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -722,7 +722,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                     <div class="relative" [class.z-50]="statusPickerMode() === 'end'">
                                        <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Hasta</label>
                                        <button type="button" (click)="togglePicker('end', $event)"
-                                               class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-[10px] font-bold"
+                                               class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-[10px] font-bold"
                                                [class.text-blue-600]="blockEnd">
                                            <span>{{ blockEnd ? formatDisplayDate(blockEnd) : 'DD/MM/AAAA' }}</span>
                                            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -769,7 +769,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                               <!-- Notes -->
                               <div>
                                    <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-1">Notas</label>
-                                   <textarea [(ngModel)]="blockReason" class="w-full h-20 p-3 bg-slate-50 border border-slate-100 rounded-lg text-xs font-medium text-slate-600 resize-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all outline-none" placeholder="Motivo del bloqueo..."></textarea>
+                                   <textarea [(ngModel)]="blockReason" class="w-full h-20 p-3 bg-slate-50 border border-slate-100 rounded-lg text-xs font-medium text-slate-800 resize-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all outline-none" placeholder="Motivo del bloqueo..."></textarea>
                               </div>
                               
                               <button (click)="submitOverride()" class="w-full py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all uppercase tracking-wider shadow-lg shadow-slate-900/10 flex items-center justify-center gap-2">
@@ -902,7 +902,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                              <p class="text-xs font-medium">No hay reservas programadas para este vehículo en la semana seleccionada.</p>
                          </div>
                   } @else {
-                      <div class="flex flex-col items-center justify-center h-full text-slate-300 p-4">
+                      <div class="flex flex-col items-center justify-center h-full text-slate-600 p-4">
                           <svg class="w-12 h-12 mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                           <p class="text-xs font-bold uppercase tracking-widest text-center">Seleccione un vehículo o reserva de la tabla</p>
                       </div>
@@ -931,7 +931,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                </button>
                            }
-                           <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="p-2 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors">
+                           <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="p-2 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-800 transition-colors">
                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                            </button>
                       </div>
@@ -960,7 +960,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                       <div class="relative">
                                           <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Celular *</label>
                                           <div class="flex">
-                                              <button type="button" (click)="showManualDDI.set(!showManualDDI())" [disabled]="isMaintenanceBooking()" class="px-2 py-2 bg-slate-100 border border-slate-200 rounded-l-xl border-r-0 text-xs font-bold text-slate-600 flex items-center gap-1 hover:bg-slate-200 transition-colors disabled:opacity-60">
+                                              <button type="button" (click)="showManualDDI.set(!showManualDDI())" [disabled]="isMaintenanceBooking()" class="px-2 py-2 bg-slate-100 border border-slate-200 rounded-l-xl border-r-0 text-xs font-bold text-slate-800 flex items-center gap-1 hover:bg-slate-200 transition-colors disabled:opacity-60">
                                                   <span>{{ manualBookingForm.ddi }}</span>
                                                   <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                               </button>
@@ -1039,7 +1039,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                            <div class="space-y-2 mb-3">
                                                @for(cost of manualBookingForm.additionalCosts; track $index) {
                                                    <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-slate-100 shadow-sm">
-                                                       <span class="text-[10px] font-bold text-slate-600 flex-1 truncate">{{ cost.name }}</span>
+                                                       <span class="text-[10px] font-bold text-slate-800 flex-1 truncate">{{ cost.name }}</span>
                                                        <div class="flex items-center gap-1">
                                                             <span class="text-[10px] text-slate-400">$</span>
                                                             <input type="number" 
@@ -1054,7 +1054,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                    </div>
                                                }
                                                @if(manualBookingForm.additionalCosts.length === 0) {
-                                                   <p class="text-[9px] text-slate-300 italic text-center py-1">Sin costos adicionales</p>
+                                                   <p class="text-[9px] text-slate-600 italic text-center py-1">Sin costos adicionales</p>
                                                }
                                            </div>
   
@@ -1098,7 +1098,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                              <div class="relative" [class.z-50]="showBookingPickupDate()">
                                                  <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Fecha</label>
                                                  <button type="button" (click)="showBookingPickupDate.set(!showBookingPickupDate()); showBookingPickupTime.set(false)"
-                                                         class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                                         class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                                          [class.text-blue-600]="manualBookingForm.startDate" [class.font-bold]="manualBookingForm.startDate">
                                                      <span>{{ formatDisplayDate(manualBookingForm.startDate) }}</span>
                                                      <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -1113,7 +1113,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                              <div class="relative" [class.z-40]="showBookingPickupTime()">
                                                  <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Hora</label>
                                                  <button type="button" (click)="showBookingPickupTime.set(!showBookingPickupTime()); showBookingPickupDate.set(false)"
-                                                         class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                                         class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                                          [class.text-blue-600]="manualBookingForm.pickupTime" [class.font-bold]="manualBookingForm.pickupTime">
                                                      <span>{{ formatDisplayTime(manualBookingForm.pickupTime) }}</span>
                                                      <svg class="w-4 h-4 text-slate-400 transition-transform" [class.rotate-180]="showBookingPickupTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
@@ -1123,7 +1123,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                      <div class="absolute inset-x-0 z-[100] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-100 py-2 max-h-48 overflow-y-auto animate-scale-in custom-scrollbar bottom-full mb-1">
                                                          @for (time of timeOptions; track time) {
                                                              <button type="button" (click)="selectBookingTime('pickup', time)"
-                                                                     class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-500"
+                                                                     class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-blue-50 hover:text-blue-700 border-l-2 border-transparent hover:border-blue-500"
                                                                      [class.bg-blue-50]="manualBookingForm.pickupTime === time"
                                                                      [class.text-blue-700]="manualBookingForm.pickupTime === time"
                                                                      [class.border-blue-500]="manualBookingForm.pickupTime === time"
@@ -1158,15 +1158,15 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                         @if(showManualDropoffCity() && !isMaintenanceBooking()) {
                                                           <div class="fixed inset-0 z-[90]" (click)="showManualDropoffCity.set(false)"></div>
                                                           <div class="absolute z-[100] mt-1 w-full bg-white border border-slate-100 shadow-xl rounded-xl overflow-hidden animate-fade-in-up">
-                                                              <div (click)="selectManualDropoffCity('Cartagena')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Cartagena'">
+                                                              <div (click)="selectManualDropoffCity('Cartagena')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Cartagena'">
                                                                   <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Cartagena'"></span>
                                                                   Cartagena
                                                               </div>
-                                                              <div (click)="selectManualDropoffCity('Barranquilla')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Barranquilla'">
+                                                              <div (click)="selectManualDropoffCity('Barranquilla')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Barranquilla'">
                                                                   <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Barranquilla'"></span>
                                                                   Barranquilla
                                                               </div>
-                                                              <div (click)="selectManualDropoffCity('Santa Marta')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Santa Marta'">
+                                                              <div (click)="selectManualDropoffCity('Santa Marta')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Santa Marta'">
                                                                   <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Santa Marta'"></span>
                                                                   Santa Marta
                                                               </div>
@@ -1177,7 +1177,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                               <div class="relative" [class.z-50]="showBookingDropoffDate()">
                                                   <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Fecha</label>
                                                   <button type="button" (click)="showBookingDropoffDate.set(!showBookingDropoffDate()); showBookingDropoffTime.set(false)"
-                                                          class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                                          class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                                           [class.text-slate-700]="manualBookingForm.endDate" [class.font-bold]="manualBookingForm.endDate">
                                                       <span>{{ formatDisplayDate(manualBookingForm.endDate) }}</span>
                                                       <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -1192,7 +1192,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                               <div class="relative" [class.z-40]="showBookingDropoffTime()">
                                                   <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Hora</label>
                                                   <button type="button" (click)="showBookingDropoffTime.set(!showBookingDropoffTime()); showBookingDropoffDate.set(false)"
-                                                          class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                                          class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                                           [class.text-slate-700]="manualBookingForm.dropoffTime" [class.font-bold]="manualBookingForm.dropoffTime">
                                                       <span>{{ formatDisplayTime(manualBookingForm.dropoffTime) }}</span>
                                                       <svg class="w-4 h-4 text-slate-400 transition-transform" [class.rotate-180]="showBookingDropoffTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
@@ -1202,7 +1202,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                                       <div class="absolute inset-x-0 z-[100] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-100 py-2 max-h-48 overflow-y-auto animate-scale-in custom-scrollbar bottom-full mb-1">
                                                           @for (time of timeOptions; track time) {
                                                               <button type="button" (click)="selectBookingTime('dropoff', time)"
-                                                                      class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-slate-50 hover:text-slate-800 border-l-4 border-transparent hover:border-slate-500"
+                                                                      class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-slate-50 hover:text-slate-800 border-l-2 border-transparent hover:border-slate-500"
                                                                       [class.bg-slate-100]="manualBookingForm.dropoffTime === time"
                                                                       [class.text-slate-800]="manualBookingForm.dropoffTime === time"
                                                                       [class.border-slate-500]="manualBookingForm.dropoffTime === time"
@@ -1221,7 +1221,7 @@ import { CalendarComponent } from '../../../../components/calendar/calendar.comp
                                   <div class="flex flex-col gap-2 pt-3 pl-1">
                                       <div class="flex items-center gap-2">
                                           <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                                          <span class="text-[10px] font-black text-slate-600 uppercase tracking-wider">Notificar por correo</span>
+                                          <span class="text-[10px] font-black text-slate-800 uppercase tracking-wider">Notificar por correo</span>
                                       </div>
                                       <div class="flex items-center gap-4 pl-3.5">
                                           <label class="flex items-center gap-2 cursor-pointer group">

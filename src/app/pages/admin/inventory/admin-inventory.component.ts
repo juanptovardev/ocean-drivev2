@@ -258,7 +258,7 @@ const COUNTRIES: Country[] = [
                                         {{ vehicle.name }}
                                     </h4>
                                     <div class="w-10 h-0.5 bg-slate-100 mb-2"></div>
-                                    <p class="text-slate-400 text-[10px] italic line-clamp-2 leading-relaxed" [title]="vehicle.description">
+                                    <p class="text-slate-700 text-[10px] italic line-clamp-2 leading-relaxed" [title]="vehicle.description">
                                         {{ vehicle.description || 'Sin descripción' }}
                                     </p>
                                 </div>
@@ -268,7 +268,7 @@ const COUNTRIES: Country[] = [
                                          <span class="text-[9px] font-bold uppercase tracking-wider" 
                                                [class.text-blue-500]="vehicle.category_status === 'booked'"
                                                [class.text-orange-500]="vehicle.category_status === 'maintenance'"
-                                               [class.text-slate-400]="vehicle.category_status === 'available' && !vehicle.is_special_price"
+                                               [class.text-slate-700]="vehicle.category_status === 'available' && !vehicle.is_special_price"
                                                [class.text-emerald-500]="vehicle.category_status === 'available' && vehicle.is_special_price">
                                              @if (vehicle.category_status === 'booked') {
                                                  Reservados
@@ -296,7 +296,7 @@ const COUNTRIES: Country[] = [
                             <div class="grid grid-cols-4 gap-2 border-t border-slate-50 pt-3 text-center">
                                 <div class="flex flex-col">
                                      <span class="text-lg font-bold text-slate-800 leading-none">{{ vehicle.stock || 0 }}</span>
-                                     <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Unidades</span>
+                                     <span class="text-[9px] font-bold text-slate-700 uppercase tracking-widest mt-1">Unidades</span>
                                 </div>
                                 <div class="flex flex-col">
                                      <span class="text-lg font-bold text-green-600 leading-none">{{ vehicle.available_count || 0 }}</span>
@@ -307,8 +307,8 @@ const COUNTRIES: Country[] = [
                                      <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest mt-1">Activas</span>
                                 </div>
                                 <div class="flex flex-col">
-                                     <span class="text-lg font-bold text-slate-600 leading-none">{{ vehicle.month_bookings_count || 0 }}</span>
-                                     <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1" title="Reservas activas durante el mes actual">RES Mes</span>
+                                     <span class="text-lg font-bold text-slate-800 leading-none">{{ vehicle.month_bookings_count || 0 }}</span>
+                                     <span class="text-[9px] font-bold text-slate-700 uppercase tracking-widest mt-1" title="Reservas activas durante el mes actual">RES Mes</span>
                                 </div>
                             </div>
                         </div>
@@ -318,13 +318,13 @@ const COUNTRIES: Country[] = [
                 <!-- Add Category Button -->
                 <div class="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 hover:bg-white hover:border-blue-300 transition-all cursor-pointer group h-[200px] shadow-sm hover:shadow-md"
                      (click)="openCreateCategoryModal()">
-                    <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:scale-110 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-700 group-hover:text-blue-600 group-hover:scale-110 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
                     </div>
                     <div class="text-center">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors block">Nueva Categoría</span>
+                        <span class="text-[10px] font-black text-slate-700 uppercase tracking-widest group-hover:text-slate-800 transition-colors block">Nueva Categoría</span>
                         <span class="text-[9px] text-slate-300 font-medium italic mt-1 block">Añadir modelo de flota</span>
                     </div>
                 </div>
@@ -345,7 +345,7 @@ const COUNTRIES: Country[] = [
                             </div>
                             <h3 class="text-2xl font-black text-slate-800 uppercase tracking-widest">{{ isEditingCategory() ? 'EDITAR CATEGORÍA' : 'NUEVA CATEGORÍA' }}</h3>
                         </div>
-                        <button aria-label="Cerrar" (click)="showCreateCategoryModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <button aria-label="Cerrar" (click)="showCreateCategoryModal.set(false)" class="text-slate-700 hover:text-slate-800 transition-colors">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -368,7 +368,7 @@ const COUNTRIES: Country[] = [
                                         <div role="button" tabindex="0" (click)="fileInput.click()" (keydown.enter)="fileInput.click()" (keydown.space)="fileInput.click(); $event.preventDefault()" 
                                              class="w-full px-4 h-[46px] bg-slate-50 border border-slate-200 border-dashed rounded-xl flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-all">
                                             <span class="text-xs font-bold truncate pr-3" 
-                                                  [class.text-slate-400]="!selectedCategoryFile && !newCategoryForm.image_url" 
+                                                  [class.text-slate-700]="!selectedCategoryFile && !newCategoryForm.image_url" 
                                                   [class.text-blue-600]="selectedCategoryFile || newCategoryForm.image_url">
                                                 @if (selectedCategoryFile) {
                                                     {{ selectedCategoryFile.name }}
@@ -382,7 +382,7 @@ const COUNTRIES: Country[] = [
                                                 @if (selectedCategoryFile || newCategoryForm.image_url) {
                                                     <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
                                                 }
-                                                <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg class="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                                 </svg>
                                             </div>
@@ -396,7 +396,7 @@ const COUNTRIES: Country[] = [
                                 <div>
                                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Precio Base (Por Día) *</label>
                                     <div class="relative">
-                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">$</span>
+                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 font-bold text-xs">$</span>
                                         <input type="number" [(ngModel)]="newCategoryForm.base_price"
                                                class="w-full pl-7 pr-3 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                     </div>
@@ -419,7 +419,7 @@ const COUNTRIES: Country[] = [
                                             <button (click)="transmissionDropdownOpen.set(!transmissionDropdownOpen())" 
                                                     class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-black text-slate-800 flex items-center justify-between hover:border-blue-400 hover:bg-white transition-all focus:ring-4 focus:ring-blue-500/10 shadow-sm">
                                                 <span>{{ newCategoryForm.transmission }}</span>
-                                                <svg class="w-4 h-4 text-slate-400 transition-transform duration-300" [class.rotate-180]="transmissionDropdownOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg class="w-4 h-4 text-slate-700 transition-transform duration-300" [class.rotate-180]="transmissionDropdownOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </button>
@@ -428,7 +428,7 @@ const COUNTRIES: Country[] = [
                                                 <div class="fixed inset-0 z-[100]" (click)="transmissionDropdownOpen.set(false)"></div>
                                                 <div class="absolute top-full mt-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-[101] overflow-hidden animate-scale-in origin-top">
                                                     <div role="button" tabindex="0" (click)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false)" (keydown.enter)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false)" (keydown.space)="newCategoryForm.transmission = 'Automático'; transmissionDropdownOpen.set(false); $event.preventDefault()" 
-                                                         class="px-4 py-3 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer transition-all flex items-center justify-between"
+                                                         class="px-4 py-3 text-sm font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-700 cursor-pointer transition-all flex items-center justify-between"
                                                          [class.bg-blue-50]="newCategoryForm.transmission === 'Automático'"
                                                          [class.text-blue-700]="newCategoryForm.transmission === 'Automático'">
                                                         <span>Automático</span>
@@ -437,7 +437,7 @@ const COUNTRIES: Country[] = [
                                                         }
                                                     </div>
                                                     <div (click)="newCategoryForm.transmission = 'Manual'; transmissionDropdownOpen.set(false)" 
-                                                         class="px-4 py-3 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-700 cursor-pointer transition-all border-t border-slate-50 flex items-center justify-between"
+                                                         class="px-4 py-3 text-sm font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-700 cursor-pointer transition-all border-t border-slate-50 flex items-center justify-between"
                                                          [class.bg-blue-50]="newCategoryForm.transmission === 'Manual'"
                                                          [class.text-blue-700]="newCategoryForm.transmission === 'Manual'">
                                                         <span>Manual</span>
@@ -468,7 +468,7 @@ const COUNTRIES: Country[] = [
                                                  <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                                                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                                                  </div>
-                                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Agregar Temporada</p>
+                                                 <p class="text-[10px] font-bold text-slate-700 uppercase tracking-wide">Agregar Temporada</p>
                                              </div>
                                          }
                                          @for(period of specialPeriods(); track $index) {
@@ -478,19 +478,19 @@ const COUNTRIES: Country[] = [
                                                  </button>
 
                                                  <div class="mb-2">
-                                                     <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nombre (Ej: Semana Santa)</label>
+                                                     <label class="block text-[9px] font-bold text-slate-700 uppercase tracking-wider mb-1">Nombre (Ej: Semana Santa)</label>
                                                      <input type="text" [(ngModel)]="period.name" placeholder="Fin de año, Vacaciones..."
                                                             class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[11px] font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-300">
                                                  </div>
 
                                                  <div class="grid grid-cols-3 gap-2">
                                                      <div>
-                                                         <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Desde</label>
+                                                         <label class="block text-[8px] font-bold text-slate-700 uppercase tracking-wider mb-0.5">Desde</label>
                                                          <div class="relative">
                                                              <button type="button" (click)="toggleCalendar($index, 'start', $event)"
-                                                                   class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-600 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
+                                                                   class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-800 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
                                                                  <span>{{ period.start ? (getPeriodDate(period.start) | date:'dd/MM/yyyy') : 'dd/mm/aaaa' }}</span>
-                                                                 <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                                 <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                                              </button>
                                                              
                                                              @if (isCalendarOpen($index, 'start')) {
@@ -507,12 +507,12 @@ const COUNTRIES: Country[] = [
                                                          </div>
                                                      </div>
                                                      <div>
-                                                         <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Hasta</label>
+                                                         <label class="block text-[8px] font-bold text-slate-700 uppercase tracking-wider mb-0.5">Hasta</label>
                                                          <div class="relative">
                                                              <button type="button" (click)="toggleCalendar($index, 'end', $event)"
-                                                                   class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-600 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
+                                                                   class="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-800 flex items-center justify-between hover:bg-slate-100 focus:outline-none focus:border-blue-500 transition-all">
                                                                   <span>{{ period.end ? (getPeriodDate(period.end) | date:'dd/MM/yyyy') : 'dd/mm/aaaa' }}</span>
-                                                                  <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                                  <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                                              </button>
 
                                                              @if (isCalendarOpen($index, 'end')) {
@@ -529,7 +529,7 @@ const COUNTRIES: Country[] = [
                                                          </div>
                                                      </div>
                                                      <div>
-                                                         <label class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Precio Diario</label>
+                                                         <label class="block text-[8px] font-bold text-slate-700 uppercase tracking-wider mb-0.5">Precio Diario</label>
                                                          <div class="relative">
                                                              <span class="absolute left-2 top-1/2 -translate-y-1/2 text-blue-500 font-bold text-[9px]">$</span>
                                                              <input type="number" [(ngModel)]="period.price" placeholder="0"
@@ -543,7 +543,7 @@ const COUNTRIES: Country[] = [
                                             <div class="mt-2 flex justify-center">
                                                 <div class="px-3 py-1.5 border border-dashed border-blue-200 rounded-lg bg-white/50 flex items-center justify-center gap-1.5 cursor-pointer hover:bg-blue-50 transition-colors group" (click)="addSpecialPeriod()">
                                                     <svg class="w-4 h-4 text-blue-400 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
-                                                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wide group-hover:text-blue-600 transition-colors">Agregar Otra Temporada</span>
+                                                    <span class="text-[9px] font-bold text-slate-700 uppercase tracking-wide group-hover:text-blue-600 transition-colors">Agregar Otra Temporada</span>
                                                 </div>
                                             </div>
                                          }
@@ -555,7 +555,7 @@ const COUNTRIES: Country[] = [
                             <div class="col-span-1 md:col-span-2">
                                 <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Descripción</label>
                                 <textarea [(ngModel)]="newCategoryForm.description" rows="2" placeholder="Mercedes, Bwm, audi, etc."
-                                          class="w-full px-4 py-2 h-[72px] bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"></textarea>
+                                          class="w-full px-4 py-2 h-[72px] bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"></textarea>
                             </div>
                         </div> <!-- Close Grid -->
                     </div> <!-- Close Modal Body -->
@@ -593,11 +593,11 @@ const COUNTRIES: Country[] = [
                             </h3>
                         </div>
                         <div class="flex items-center gap-6">
-                            <span class="hidden md:block text-sm font-bold text-slate-400 uppercase tracking-wider">Gestión de Unidades</span>
+                            <span class="hidden md:block text-sm font-bold text-slate-700 uppercase tracking-wider">Gestión de Unidades</span>
                             
                             <div class="relative">
                                 <button aria-label="Menú de categoría" (click)="categoryMenuOpen.set(!categoryMenuOpen())" 
-                                        class="p-2 hover:bg-white rounded-full transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+                                        class="p-2 hover:bg-white rounded-full transition-colors text-slate-700 hover:text-slate-800 shadow-sm border border-transparent hover:border-slate-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                                     </svg>
@@ -624,7 +624,7 @@ const COUNTRIES: Country[] = [
                                 }
                             </div>
 
-                            <button aria-label="Cerrar" (click)="closeCategoryDetail()" class="p-2 hover:bg-white rounded-full transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+                            <button aria-label="Cerrar" (click)="closeCategoryDetail()" class="p-2 hover:bg-white rounded-full transition-colors text-slate-700 hover:text-slate-800 shadow-sm border border-transparent hover:border-slate-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -646,7 +646,7 @@ const COUNTRIES: Country[] = [
                             </div>
 
                             <div class="flex-1 overflow-y-auto custom-scrollbar p-2">
-                                <div *ngIf="instancesLoading()" class="p-8 text-center text-slate-400 text-sm">Cargando...</div>
+                                <div *ngIf="instancesLoading()" class="p-8 text-center text-slate-700 text-sm">Cargando...</div>
                                 <div class="space-y-2">
                                     @for (instance of instances(); track instance.id) {
                                         <div (click)="selectInstance(instance)" 
@@ -662,7 +662,7 @@ const COUNTRIES: Country[] = [
                                                 <div class="flex items-center gap-3">
                                                     <div class="text-[10px] font-bold text-right leading-tight">
                                                         <div [class]="getStatusColor(instance.current_status)">{{ instance.status_label }}</div>
-                                                        <div class="text-slate-400 font-normal whitespace-pre">{{ getStatusSubtitle(instance) }}</div>
+                                                        <div class="text-slate-700 font-normal whitespace-pre">{{ getStatusSubtitle(instance) }}</div>
                                                     </div>
                                                     <span class="w-2.5 h-2.5 rounded-full shadow-sm ring-1 ring-white"
                                                        [class.bg-green-500]="instance.current_status === 'available'" 
@@ -672,7 +672,7 @@ const COUNTRIES: Country[] = [
 
                                                     <!-- Menu Dot Button -->
                                                     <div class="relative">
-                                                        <button aria-label="Menú de vehículo" (click)="toggleInstanceMenu(instance.id, $event, instance)" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors text-slate-400 hover:text-slate-600 focus:outline-none">
+                                                        <button aria-label="Menú de vehículo" (click)="toggleInstanceMenu(instance.id, $event, instance)" class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors text-slate-700 hover:text-slate-800 focus:outline-none">
                                                              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
                                                         </button>
                                                         
@@ -681,7 +681,7 @@ const COUNTRIES: Country[] = [
                                                             <div class="fixed inset-0 z-30 cursor-default" (click)="closeInstanceMenu(); $event.stopPropagation()"></div>
                                                             <!-- Dropdown -->
                                                             <div class="absolute top-8 right-0 z-40 bg-white/90 backdrop-blur-xl border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl w-36 py-1 overflow-hidden animate-scale-in origin-top-right flex flex-col" (click)="$event.stopPropagation()">
-                                                                 <button class="flex items-center gap-2 px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors bg-transparent w-full text-left mt-1" (click)="openEditRatesModal(instance)">
+                                                                 <button class="flex items-center gap-2 px-3 py-2 text-[10px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-600 transition-colors bg-transparent w-full text-left mt-1" (click)="openEditRatesModal(instance)">
                                                                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                                                      Lavada
                                                                  </button>
@@ -721,16 +721,16 @@ const COUNTRIES: Country[] = [
                                         <div class="flex items-center bg-white rounded-lg p-1 border border-slate-200 shadow-sm gap-2">
                                             <!-- Arrows & Refresh -->
                                             <div class="flex items-center gap-1">
-                                                <button (click)="refreshCurrentBooking()" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-blue-600 transition-colors" title="Recargar Calendario">
+                                                <button (click)="refreshCurrentBooking()" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-700 hover:text-blue-600 transition-colors" title="Recargar Calendario">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                                     </svg>
                                                 </button>
                                                 <div class="w-px h-4 bg-slate-200 mx-1"></div>
-                                                <button aria-label="Vista anterior" (click)="navigateView(-1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
+                                                <button aria-label="Vista anterior" (click)="navigateView(-1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-700 hover:text-slate-800 transition-colors">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                                                 </button>
-                                                <button aria-label="Vista siguiente" (click)="navigateView(1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-400 hover:text-slate-600 transition-colors">
+                                                <button aria-label="Vista siguiente" (click)="navigateView(1)" class="p-1.5 hover:bg-slate-50 rounded-md text-slate-700 hover:text-slate-800 transition-colors">
                                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                                 </button>
                                             </div>
@@ -741,17 +741,17 @@ const COUNTRIES: Country[] = [
                                             <div class="flex items-center gap-1">
                                                  <button (click)="setViewMode('month')" 
                                                          class="px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all"
-                                                         [ngClass]="viewMode() === 'month' ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50'">
+                                                         [ngClass]="viewMode() === 'month' ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:text-slate-800 hover:bg-slate-50'">
                                                      {{ currentMonthName() }}
                                                  </button>
                                                  <button (click)="setViewMode('quarter')"
                                                          class="px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all hidden md:block"
-                                                         [ngClass]="viewMode() === 'quarter' ? 'bg-blue-50 text-blue-600 font-black' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50'">
+                                                         [ngClass]="viewMode() === 'quarter' ? 'bg-blue-50 text-blue-600 font-black' : 'text-slate-700 hover:text-slate-800 hover:bg-slate-50'">
                                                      TRIMESTRAL
                                                  </button>
                                                  <button (click)="setViewMode('semester')"
                                                          class="px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all hidden md:block"
-                                                         [ngClass]="viewMode() === 'semester' ? 'bg-blue-50 text-blue-600 font-black' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50'">
+                                                         [ngClass]="viewMode() === 'semester' ? 'bg-blue-50 text-blue-600 font-black' : 'text-slate-700 hover:text-slate-800 hover:bg-slate-50'">
                                                      SEMESTRAL
                                                  </button>
                                             </div>
@@ -760,7 +760,7 @@ const COUNTRIES: Country[] = [
                                             
                                             <!-- Filter -->
                                             <div class="relative ml-1 pl-1 border-l border-slate-200">
-                                                <button aria-label="Filtros de calendario" (click)="showCalendarFilters.set(!showCalendarFilters())" class="p-1.5 rounded-md text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-sm transition-all">
+                                                <button aria-label="Filtros de calendario" (click)="showCalendarFilters.set(!showCalendarFilters())" class="p-1.5 rounded-md text-slate-700 hover:text-blue-600 hover:bg-white hover:shadow-sm transition-all">
                                                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
                                                 </button>
 
@@ -768,13 +768,13 @@ const COUNTRIES: Country[] = [
                                                     <div class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-100 z-50 p-4 animate-scale-in" (click)="$event.stopPropagation()">
                                                         <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
                                                              <h4 class="text-xs font-black text-slate-800 uppercase tracking-wide">Filtros de Calendario</h4>
-                                                             <button aria-label="Cerrar filtros" (click)="showCalendarFilters.set(false)" class="text-slate-400 hover:text-slate-600"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                                                             <button aria-label="Cerrar filtros" (click)="showCalendarFilters.set(false)" class="text-slate-700 hover:text-slate-800"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                                                         </div>
                                                         
                                                         <div class="space-y-4">
                                                             <!-- Toggles -->
                                                              <div class="space-y-1.5">
-                                                                 <label class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 block ml-0.5">Visibilidad de Eventos</label>
+                                                                 <label class="text-[9px] font-bold text-slate-700 uppercase tracking-widest mb-1.5 block ml-0.5">Visibilidad de Eventos</label>
                                                                  
                                                                  <!-- Retiros Toggle -->
                                                                  <div (click)="showPickups.set(!showPickups())" class="flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all border border-transparent hover:bg-slate-50 group select-none" [class.bg-green-50]="showPickups()" [class.border-green-100]="showPickups()">
@@ -825,12 +825,12 @@ const COUNTRIES: Country[] = [
                                     <!-- Grid Calendario -->
                                     <div class="grid grid-cols-7 gap-px bg-slate-200 border border-slate-200 rounded-lg overflow-hidden">
                                         @for(dayName of ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']; track $index) {
-                                            <div class="bg-slate-50 py-2 text-center text-[10px] font-bold text-slate-400 uppercase">{{ dayName }}</div>
+                                            <div class="bg-slate-50 py-2 text-center text-[10px] font-bold text-slate-700 uppercase">{{ dayName }}</div>
                                         }
                                         @for (day of calendarDaysComputed(); track $index) {
                                             <div class="min-h-[80px] bg-white p-1 flex flex-col group" [class.bg-slate-50]="day.isOtherMonth">
                                                 <span class="text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full"
-                                                      [class.bg-slate-900]="day.isToday" [class.text-white]="day.isToday" [class.text-slate-400]="!day.isToday">
+                                                      [class.bg-slate-900]="day.isToday" [class.text-white]="day.isToday" [class.text-slate-700]="!day.isToday">
                                                     {{ day.dayNum }}
                                                 </span>
                                                 <div class="mt-1 space-y-0.5">
@@ -848,10 +848,10 @@ const COUNTRIES: Country[] = [
                                     
                                     <!-- Legend -->
                                     <div class="flex gap-4 mt-4 pt-3 border-t border-slate-50">
-                                        <span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Retiro</span>
-                                        <span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Entrega</span>
-                                        <span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Reserva</span>
-                                        <span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Mant.</span>
+                                        <span class="text-[9px] font-bold text-slate-700 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Retiro</span>
+                                        <span class="text-[9px] font-bold text-slate-700 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Entrega</span>
+                                        <span class="text-[9px] font-bold text-slate-700 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Reserva</span>
+                                        <span class="text-[9px] font-bold text-slate-700 uppercase flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Mant.</span>
                                     </div>
                                 </div>
 
@@ -868,11 +868,11 @@ const COUNTRIES: Country[] = [
                                                  
                                                  <div class="flex items-center gap-2 self-end xl:self-auto">
                                                      <div class="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm mr-1">
-                                                         <button (click)="refreshCurrentBooking()" class="p-1.5 hover:bg-slate-50 rounded text-slate-400 hover:text-blue-600 transition-colors" title="Recargar Reserva">
+                                                         <button (click)="refreshCurrentBooking()" class="p-1.5 hover:bg-slate-50 rounded text-slate-700 hover:text-blue-600 transition-colors" title="Recargar Reserva">
                                                              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                                                          </button>
                                                          <button (click)="openEditModal(b, 'view')" 
-                                                                 class="p-1.5 hover:bg-slate-50 rounded text-slate-400 hover:text-blue-600 transition-colors" 
+                                                                 class="p-1.5 hover:bg-slate-50 rounded text-slate-700 hover:text-blue-600 transition-colors" 
                                                                  [title]="(isBookingPast(b) || b.status === 'cancelled') ? 'Ver Detalles' : 'Editar Reserva'">
                                                              @if(isBookingPast(b) || b.status === 'cancelled') {
                                                                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -881,7 +881,7 @@ const COUNTRIES: Country[] = [
                                                              }
                                                          </button>
                                                          @if(!isBookingPast(b) && b.status !== 'cancelled') {
-                                                             <button (click)="cancelCurrentBooking(b)" class="flex items-center gap-1 px-2 py-1.5 hover:bg-red-50 rounded text-slate-400 hover:text-red-600 transition-colors group" title="Cancelar Reserva">
+                                                             <button (click)="cancelCurrentBooking(b)" class="flex items-center gap-1 px-2 py-1.5 hover:bg-red-50 rounded text-slate-700 hover:text-red-600 transition-colors group" title="Cancelar Reserva">
                                                                  <svg class="w-4 h-4 group-hover:text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
                                                                  <span class="text-[10px] font-bold hidden xl:inline">Cancelar</span>
                                                              </button>
@@ -897,7 +897,7 @@ const COUNTRIES: Country[] = [
                                                               'bg-red-100 text-red-700': isBookingPast(b) || b.status === 'cancelled',
                                                               'bg-blue-100 text-blue-700': !isBookingPast(b) && (b.status === 'pending' || b.status === 'booked'),
                                                               'bg-green-100 text-green-700': !isBookingPast(b) && (b.status === 'confirmed' || b.status === 'available'),
-                                                              'bg-slate-200 text-slate-600': !isBookingPast(b) && b.status === 'completed',
+                                                              'bg-slate-200 text-slate-800': !isBookingPast(b) && b.status === 'completed',
                                                               'bg-orange-100 text-orange-700': b.status === 'maintenance'
                                                           }">
                                                           @if(isBookingPast(b)) { FINALIZADO }
@@ -919,34 +919,34 @@ const COUNTRIES: Country[] = [
                                                     
                                                     <!-- 1. Customer Info -->
                                                     <div class="space-y-3">
-                                                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Información del Cliente</h3>
+                                                        <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2">Información del Cliente</h3>
                                                         <div class="flex items-start gap-3">
                                                              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-500 shrink-0">
                                                                 {{ (b.customer_name || 'C').charAt(0) }}
                                                              </div>
                                                              <div class="space-y-1 w-full">
                                                                  <div>
-                                                                     <p class="text-[9px] text-slate-400 font-bold uppercase">Nombre Completo</p>
+                                                                     <p class="text-[9px] text-slate-700 font-bold uppercase">Nombre Completo</p>
                                                                      <p class="text-sm font-bold text-slate-800">{{ b.customer_name || 'Cliente' }}</p>
                                                                  </div>
                                                                  <div class="grid grid-cols-2 gap-2">
                                                                      <div>
-                                                                         <p class="text-[9px] text-slate-400 font-bold uppercase">Documento</p>
+                                                                         <p class="text-[9px] text-slate-700 font-bold uppercase">Documento</p>
                                                                          <p class="text-[10px] text-slate-700">{{ b.customer_doc_type || 'ID' }} {{ b.customer_doc_number || '---' }}</p>
                                                                      </div>
                                                                      <div>
-                                                                         <p class="text-[9px] text-slate-400 font-bold uppercase">Nacionalidad</p>
+                                                                         <p class="text-[9px] text-slate-700 font-bold uppercase">Nacionalidad</p>
                                                                          <p class="text-[10px] text-slate-700">{{ b.customer_nationality || '---' }}</p>
                                                                      </div>
                                                                  </div>
                                                                  <div>
-                                                                     <p class="text-[9px] text-slate-400 font-bold uppercase">Contacto</p>
+                                                                     <p class="text-[9px] text-slate-700 font-bold uppercase">Contacto</p>
                                                                      <p class="text-[10px] text-slate-700 flex items-center gap-1 truncate">
-                                                                        <svg class="w-3 h-3 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                                                        <svg class="w-3 h-3 text-slate-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                                                                         {{ b.customer_email || 'Sin email' }}
                                                                      </p>
                                                                      <p class="text-[10px] text-slate-700 flex items-center gap-1 mt-0.5">
-                                                                        <svg class="w-3 h-3 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                                                        <svg class="w-3 h-3 text-slate-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                                                                         {{ b.customer_phone || 'Sin teléfono' }}
                                                                      </p>
                                                                  </div>
@@ -956,10 +956,10 @@ const COUNTRIES: Country[] = [
                                                     
                                                     <!-- 2. Reservation Details -->
                                                     <div class="space-y-3">
-                                                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Detalles de la Reserva</h3>
+                                                        <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2">Detalles de la Reserva</h3>
                                                         <div class="grid grid-cols-2 gap-3">
                                                             <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                                                <p class="text-[9px] font-bold text-slate-400 uppercase">Vehículo</p>
+                                                                <p class="text-[9px] font-bold text-slate-700 uppercase">Vehículo</p>
                                                                 <div class="flex items-center gap-2 mt-1">
                                                                     <div class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-slate-500 shrink-0">
                                                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
@@ -970,7 +970,7 @@ const COUNTRIES: Country[] = [
                                                                 </div>
                                                             </div>
                                                             <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                                                <p class="text-[9px] font-bold text-slate-400 uppercase">Seguro</p>
+                                                                <p class="text-[9px] font-bold text-slate-700 uppercase">Seguro</p>
                                                                 <p class="text-xs font-bold text-slate-800 capitalize mt-1 truncate">{{ b.insurance_type || 'Básico' }}</p>
                                                             </div>
                                                             <div class="col-span-2 border-t border-slate-100 pt-2 flex justify-between items-end">
@@ -986,7 +986,7 @@ const COUNTRIES: Country[] = [
                                                     
                                                     <!-- 3. Logistics -->
                                                     <div class="space-y-3">
-                                                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Logística</h3>
+                                                        <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2">Logística</h3>
                                                         <div class="space-y-3">
                                                             <!-- Pickup -->
                                                             <div class="bg-green-50/50 p-3 rounded-xl border border-green-100 flex gap-3">
@@ -996,7 +996,7 @@ const COUNTRIES: Country[] = [
                                                                 <div class="min-w-0">
                                                                     <p class="text-[9px] font-black text-green-700 uppercase tracking-wider mb-1">Retiro</p>
                                                                     <p class="text-xs font-bold text-slate-800">{{ formatFullDate(b.start_date) }} <span class="text-slate-500 font-normal">| {{ b.pickup_time || '10:00' }}</span></p>
-                                                                    <p class="text-[10px] text-slate-600 truncate">{{ b.pickup_location || 'Cartagena' }}</p>
+                                                                    <p class="text-[10px] text-slate-800 truncate">{{ b.pickup_location || 'Cartagena' }}</p>
                                                                 </div>
                                                             </div>
                                                             <!-- Dropoff -->
@@ -1007,7 +1007,7 @@ const COUNTRIES: Country[] = [
                                                                 <div class="min-w-0">
                                                                     <p class="text-[9px] font-black text-red-700 uppercase tracking-wider mb-1">Entrega</p>
                                                                     <p class="text-xs font-bold text-slate-800">{{ formatFullDate(b.end_date) }} <span class="text-slate-500 font-normal">| {{ b.dropoff_time || '10:00' }}</span></p>
-                                                                    <p class="text-[10px] text-slate-600 truncate">{{ b.dropoff_location || 'Cartagena' }}</p>
+                                                                    <p class="text-[10px] text-slate-800 truncate">{{ b.dropoff_location || 'Cartagena' }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1016,13 +1016,13 @@ const COUNTRIES: Country[] = [
                                                     <!-- 4. Notes -->
                                                     @if(b.notes) {
                                                         <div class="space-y-3">
-                                                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Notas / Observaciones</h3>
+                                                            <h3 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2">Notas / Observaciones</h3>
                                                             <div class="bg-indigo-50/30 p-4 rounded-xl border border-indigo-100/50 flex gap-3">
                                                                 <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-500 flex items-center justify-center shrink-0">
                                                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                                                                 </div>
                                                                 <div class="w-full">
-                                                                    <p class="text-xs font-medium text-slate-600 italic leading-relaxed whitespace-pre-wrap">{{ b.notes }}</p>
+                                                                    <p class="text-xs font-medium text-slate-800 italic leading-relaxed whitespace-pre-wrap">{{ b.notes }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1032,7 +1032,7 @@ const COUNTRIES: Country[] = [
                                             
                                             <!-- Footer -->
                                             <div class="px-5 py-3 border-t border-slate-100 bg-slate-50/50 shrink-0 text-right">
-                                                <p class="text-[9px] text-slate-400">Creada el {{ formatFullDate(b.created_at || b.start_date) }}</p>
+                                                <p class="text-[9px] text-slate-700">Creada el {{ formatFullDate(b.created_at || b.start_date) }}</p>
                                             </div>
                                         } @else {
                                              <!-- Empty State -->
@@ -1062,14 +1062,14 @@ const COUNTRIES: Country[] = [
                                         <div class="grid grid-cols-2 gap-4 mb-6">
                                              <!-- Desde -->
                                              <div class="relative">
-                                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">DESDE</label>
+                                                <label class="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-2">DESDE</label>
                                                 <div (click)="togglePicker('start', $event)" 
                                                      class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm cursor-pointer hover:border-blue-300 transition-all flex items-center select-none"
                                                      [class.ring-2]="pickerMode() === 'start'" [class.ring-blue-500]="pickerMode() === 'start'"
                                                      [class.text-slate-700]="!blockStart" [class.text-slate-900]="blockStart">
                                                      <span [class.text-slate-300]="!blockStart" [class.font-medium]="!blockStart">{{ blockStart ? (blockStart | date:'dd/MM/yyyy') : 'DD/MM/AAAA' }}</span>
                                                 </div>
-                                                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-9" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                <svg class="w-4 h-4 text-slate-700 absolute left-3 top-9" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                                 
                                                 @if (pickerMode() === 'start') {
                                                     <div class="fixed inset-0 z-40" (click)="closePicker()"></div>
@@ -1081,7 +1081,7 @@ const COUNTRIES: Country[] = [
                                                          </div>
                                                          <div class="grid grid-cols-7 mb-2">
                                                              @for(d of weekDays; track d) {
-                                                                <div class="text-[10px] font-black text-slate-400 text-center uppercase">{{ d }}</div>
+                                                                <div class="text-[10px] font-black text-slate-700 text-center uppercase">{{ d }}</div>
                                                              }
                                                          </div>
                                                          <div class="grid grid-cols-7 gap-1">
@@ -1109,14 +1109,14 @@ const COUNTRIES: Country[] = [
                                              </div>
                                              <!-- Hasta -->
                                              <div class="relative">
-                                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">HASTA</label>
+                                                <label class="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-2">HASTA</label>
                                                 <div (click)="togglePicker('end', $event)" 
                                                      class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold shadow-sm cursor-pointer hover:border-blue-300 transition-all flex items-center select-none"
                                                      [class.ring-2]="pickerMode() === 'end'" [class.ring-blue-500]="pickerMode() === 'end'"
                                                      [class.text-slate-700]="!blockEnd" [class.text-slate-900]="blockEnd">
                                                      <span [class.text-slate-300]="!blockEnd" [class.font-medium]="!blockEnd">{{ blockEnd ? (blockEnd | date:'dd/MM/yyyy') : 'DD/MM/AAAA' }}</span>
                                                 </div>
-                                                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-9" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                <svg class="w-4 h-4 text-slate-700 absolute left-3 top-9" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
 
                                                 @if (pickerMode() === 'end') {
                                                     <div class="fixed inset-0 z-40" (click)="closePicker()"></div>
@@ -1128,7 +1128,7 @@ const COUNTRIES: Country[] = [
                                                          </div>
                                                          <div class="grid grid-cols-7 mb-2">
                                                              @for(d of weekDays; track d) {
-                                                                <div class="text-[10px] font-black text-slate-400 text-center uppercase">{{ d }}</div>
+                                                                <div class="text-[10px] font-black text-slate-700 text-center uppercase">{{ d }}</div>
                                                              }
                                                          </div>
                                                          <div class="grid grid-cols-7 gap-1">
@@ -1158,7 +1158,7 @@ const COUNTRIES: Country[] = [
 
                                         <!-- Status Select -->
                                         <div class="mb-6">
-                                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"><span class="text-slate-900/50 mr-1">◎</span> ACCIÓN / ESTADO</label>
+                                             <label class="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-2"><span class="text-slate-900/50 mr-1">◎</span> ACCIÓN / ESTADO</label>
                                               <div class="relative">
                                                   <button (click)="toggleStatusDropdown($event)" class="w-full text-left pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 shadow-sm hover:border-blue-300 transition-all flex items-center justify-between">
                                                       <span class="flex items-center gap-2">
@@ -1166,7 +1166,7 @@ const COUNTRIES: Country[] = [
                                                           @else if(overrideStatus === 'booked') { <span>📅 Reserva Manual</span> }
                                                           @else if(overrideStatus === 'available') { <span>✅ Liberar / Disponible</span> }
                                                       </span>
-                                                      <svg class="w-4 h-4 text-slate-400 transition-transform duration-200" [class.rotate-180]="statusDropdownOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                                      <svg class="w-4 h-4 text-slate-700 transition-transform duration-200" [class.rotate-180]="statusDropdownOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                                   </button>
                                                   
                                                   @if(statusDropdownOpen()) {
@@ -1188,8 +1188,8 @@ const COUNTRIES: Country[] = [
 
                                         <!-- Notes -->
                                         <div class="flex-1 mb-8">
-                                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"><span class="text-slate-900/50 mr-1">💬</span> NOTAS</label>
-                                             <textarea [(ngModel)]="blockReason" class="w-full h-24 p-4 bg-slate-50 border border-slate-100 rounded-2xl text-xs font-medium text-slate-600 resize-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all outline-none" placeholder="Escribe el motivo del bloqueo o detalles relevantes..."></textarea>
+                                             <label class="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-2"><span class="text-slate-900/50 mr-1">💬</span> NOTAS</label>
+                                             <textarea [(ngModel)]="blockReason" class="w-full h-24 p-4 bg-slate-50 border border-slate-100 rounded-2xl text-xs font-medium text-slate-800 resize-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all outline-none" placeholder="Escribe el motivo del bloqueo o detalles relevantes..."></textarea>
                                         </div>
 
                                         <!-- Button -->
@@ -1199,7 +1199,7 @@ const COUNTRIES: Country[] = [
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
                                         </button>
-                                        <p class="text-[9px] text-center text-slate-400 font-medium mt-4">Esta acción actualizará el estado inmediatamente.</p>
+                                        <p class="text-[9px] text-center text-slate-700 font-medium mt-4">Esta acción actualizará el estado inmediatamente.</p>
 
                                     </div>
                                 </div>
@@ -1230,19 +1230,19 @@ const COUNTRIES: Country[] = [
                                     Eliminar Reserva
                                 </button>
                             }
-                            <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="text-slate-400 hover:text-slate-600 transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                            <button aria-label="Cerrar" (click)="closeManualBookingModal()" class="text-slate-700 hover:text-slate-800 transition-colors"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
                         </div>
                     </div>
                     <div class="max-h-[70vh] overflow-y-auto custom-scrollbar">
                         <div class="p-6 grid grid-cols-2 gap-4" [ngClass]="{'opacity-50 pointer-events-none': editingBookingId && (isDropoffPassed() || editingBookingStatus() === 'cancelled')}">
                             <!-- Customer Info -->
-                            <div class="col-span-2"><h4 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2 mb-2">Cliente</h4></div>
+                            <div class="col-span-2"><h4 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2 mb-2">Cliente</h4></div>
                         
                         <!-- Left Column: Name, Phone, Docs -->
                         <div class="col-span-2 md:col-span-1 space-y-3">
                              <div>
                                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nombre Completo *</label>
-                                 <input type="text" [(ngModel)]="manualBookingForm.fullName" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-400">
+                                 <input type="text" [(ngModel)]="manualBookingForm.fullName" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-700">
                              </div>
 
                              <!-- DDI & Phone Row (30/70) -->
@@ -1251,10 +1251,10 @@ const COUNTRIES: Country[] = [
                                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">DDI</label>
                                      <div (click)="!isMaintenanceBooking() && showManualDDI.set(!showManualDDI())" 
                                           class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg bg-white flex justify-between items-center transition-colors"
-                                          [ngClass]="{'cursor-pointer hover:border-blue-300': !isMaintenanceBooking(), 'bg-slate-50 text-slate-400 cursor-not-allowed': isMaintenanceBooking()}">
+                                          [ngClass]="{'cursor-pointer hover:border-blue-300': !isMaintenanceBooking(), 'bg-slate-50 text-slate-700 cursor-not-allowed': isMaintenanceBooking()}">
                                          <span>{{ manualBookingForm.ddi }}</span>
                                          @if(!isMaintenanceBooking()) {
-                                             <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                             <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                          }
                                      </div>
                                       @if(showManualDDI()) {
@@ -1269,7 +1269,7 @@ const COUNTRIES: Country[] = [
                                              </div>
                                              <div class="max-h-48 overflow-y-auto custom-scrollbar">
                                                  @for(country of filteredDDI(); track country.code) {
-                                                     <div (click)="selectManualDDI(country)" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center justify-between group">
+                                                     <div (click)="selectManualDDI(country)" class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center justify-between group">
                                                          <div class="flex items-center gap-2">
                                                              <span class="text-lg">{{ country.flag }}</span>
                                                              <span>{{ country.name }}</span>
@@ -1278,7 +1278,7 @@ const COUNTRIES: Country[] = [
                                                      </div>
                                                  }
                                                  @if(filteredDDI().length === 0) {
-                                                     <div class="px-3 py-4 text-center text-xs text-slate-400 italic">No se encontraron resultados</div>
+                                                     <div class="px-3 py-4 text-center text-xs text-slate-700 italic">No se encontraron resultados</div>
                                                  }
                                              </div>
                                          </div>
@@ -1287,7 +1287,7 @@ const COUNTRIES: Country[] = [
 
                                  <div>
                                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Celular *</label>
-                                     <input type="text" [(ngModel)]="manualBookingForm.phone" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-400">
+                                     <input type="text" [(ngModel)]="manualBookingForm.phone" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-700">
                                  </div>
                              </div>
 
@@ -1297,26 +1297,26 @@ const COUNTRIES: Country[] = [
                                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tipo</label>
                                      <div (click)="!isMaintenanceBooking() && showManualDocType.set(!showManualDocType())" 
                                           class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg bg-white flex justify-between items-center transition-colors"
-                                          [ngClass]="{'cursor-pointer hover:border-blue-300': !isMaintenanceBooking(), 'bg-slate-50 text-slate-400 cursor-not-allowed': isMaintenanceBooking()}">
+                                          [ngClass]="{'cursor-pointer hover:border-blue-300': !isMaintenanceBooking(), 'bg-slate-50 text-slate-700 cursor-not-allowed': isMaintenanceBooking()}">
                                          <span>{{ manualBookingForm.docType }}</span>
                                          @if(!isMaintenanceBooking()) {
-                                             <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                             <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                          }
                                      </div>
                                      @if(showManualDocType()) {
                                          <div class="fixed inset-0 z-[90]" (click)="showManualDocType.set(false)"></div>
                                          <div class="absolute z-[100] mt-1 w-full bg-white border border-slate-100 shadow-xl rounded-xl overflow-hidden animate-fade-in-up">
-                                             <div (click)="selectManualDocType('CC')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">CC</div>
-                                             <div (click)="selectManualDocType('CE')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">CE</div>
-                                             <div (click)="selectManualDocType('PAS')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">PAS</div>
-                                             <div (click)="selectManualDocType('ID EX')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer">ID EX</div>
+                                             <div (click)="selectManualDocType('CC')" class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">CC</div>
+                                             <div (click)="selectManualDocType('CE')" class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">CE</div>
+                                             <div (click)="selectManualDocType('PAS')" class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">PAS</div>
+                                             <div (click)="selectManualDocType('ID EX')" class="px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer">ID EX</div>
                                          </div>
                                      }
                                  </div>
 
                                  <div>
                                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">No. Documento</label>
-                                     <input type="text" [(ngModel)]="manualBookingForm.docNumber" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-400">
+                                     <input type="text" [(ngModel)]="manualBookingForm.docNumber" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-700">
                                  </div>
                              </div>
                         </div>
@@ -1325,18 +1325,18 @@ const COUNTRIES: Country[] = [
                         <div class="col-span-2 md:col-span-1 space-y-3">
                              <div>
                                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Email *</label>
-                                 <input type="email" [(ngModel)]="manualBookingForm.email" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-400">
+                                 <input type="email" [(ngModel)]="manualBookingForm.email" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-700">
                              </div>
 
                              <div>
                                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nacionalidad</label>
-                                 <input type="text" [(ngModel)]="manualBookingForm.nationality" placeholder="Colombia" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-400">
+                                 <input type="text" [(ngModel)]="manualBookingForm.nationality" placeholder="Colombia" [disabled]="isMaintenanceBooking()" class="w-full px-3 py-2 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 outline-none disabled:bg-slate-50 disabled:text-slate-700">
                              </div>
 
                              @if(manualBookingForm.createdAt) {
                                  <div>
                                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Fecha de Creación</label>
-                                     <div class="w-full px-3 py-2 text-xs font-bold text-slate-400 bg-slate-50 border border-slate-100 rounded-lg cursor-not-allowed">
+                                     <div class="w-full px-3 py-2 text-xs font-bold text-slate-700 bg-slate-50 border border-slate-100 rounded-lg cursor-not-allowed">
                                          {{ manualBookingForm.createdAt | date:'dd/MM/yyyy HH:mm' }}
                                      </div>
                                  </div>
@@ -1361,7 +1361,7 @@ const COUNTRIES: Country[] = [
                                                   }
                                                   <input type="checkbox" [(ngModel)]="manualBookingForm.notifyAdmin" class="absolute inset-0 opacity-0 cursor-pointer">
                                               </div>
-                                              <span class="text-[10px] font-bold text-slate-600 uppercase group-hover:text-blue-600 transition-colors">Admin</span>
+                                              <span class="text-[10px] font-bold text-slate-800 uppercase group-hover:text-blue-600 transition-colors">Admin</span>
                                           </label>
 
                                           <label class="flex items-center gap-2 cursor-pointer group">
@@ -1375,7 +1375,7 @@ const COUNTRIES: Country[] = [
                                                   }
                                                   <input type="checkbox" [(ngModel)]="manualBookingForm.notifyUser" class="absolute inset-0 opacity-0 cursor-pointer">
                                               </div>
-                                              <span class="text-[10px] font-bold text-slate-600 uppercase group-hover:text-blue-600 transition-colors">Usuario</span>
+                                              <span class="text-[10px] font-bold text-slate-800 uppercase group-hover:text-blue-600 transition-colors">Usuario</span>
                                           </label>
                                       </div>
                                   </div>
@@ -1383,7 +1383,7 @@ const COUNTRIES: Country[] = [
                         </div>
 
                          <!-- Reservation Info -->
-                         <div class="col-span-2 mt-2"><h4 class="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2 mb-2">Detalles Reserva</h4></div>
+                         <div class="col-span-2 mt-2"><h4 class="text-xs font-black text-slate-700 uppercase tracking-widest border-b border-slate-100 pb-2 mb-2">Detalles Reserva</h4></div>
 
                          <!-- Pickup Details (LEFT) -->
                          <div class="col-span-1 rounded-xl p-3 border transition-all"
@@ -1401,20 +1401,20 @@ const COUNTRIES: Country[] = [
                              
                               <div class="space-y-3" [ngClass]="{'opacity-60 pointer-events-none': isPickupPassed() || isMaintenanceBooking()}">
                                   <div>
-                                      <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Ciudad</label>
+                                      <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Ciudad</label>
                                       <div class="w-full px-3 py-2.5 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg bg-slate-100 flex items-center gap-2">
                                           <svg class="w-3.5 h-3.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                           <span>{{ isMaintenanceBooking() ? 'TALLER/OFICINA' : 'Cartagena' }}</span>
-                                          <span class="ml-auto text-[8px] text-slate-400 uppercase">{{ isMaintenanceBooking() ? 'MTTO' : 'Único' }}</span>
+                                          <span class="ml-auto text-[8px] text-slate-700 uppercase">{{ isMaintenanceBooking() ? 'MTTO' : 'Único' }}</span>
                                       </div>
                                   </div>
                                  <div class="relative" [class.z-50]="showBookingPickupDate()">
-                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Fecha</label>
+                                     <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Fecha</label>
                                      <button type="button" (click)="showBookingPickupDate.set(!showBookingPickupDate()); showBookingPickupTime.set(false)"
-                                             class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                             class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                              [class.text-blue-600]="manualBookingForm.startDate" [class.font-bold]="manualBookingForm.startDate">
                                          <span>{{ formatDisplayDate(manualBookingForm.startDate) }}</span>
-                                         <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                         <svg class="w-4 h-4 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                      </button>
                                      @if (showBookingPickupDate()) {
                                          <div class="fixed inset-0 z-[90]" (click)="showBookingPickupDate.set(false)"></div>
@@ -1424,19 +1424,19 @@ const COUNTRIES: Country[] = [
                                      }
                                  </div>
                                  <div class="relative" [class.z-40]="showBookingPickupTime()">
-                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Hora</label>
+                                     <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Hora</label>
                                      <button type="button" (click)="showBookingPickupTime.set(!showBookingPickupTime()); showBookingPickupDate.set(false)"
-                                             class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                             class="w-full px-3 py-2 bg-slate-50 hover:bg-white border border-slate-200 hover:border-blue-300 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                              [class.text-blue-600]="manualBookingForm.pickupTime" [class.font-bold]="manualBookingForm.pickupTime">
                                          <span>{{ formatDisplayTime(manualBookingForm.pickupTime) }}</span>
-                                         <svg class="w-4 h-4 text-slate-400 transition-transform" [class.rotate-180]="showBookingPickupTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                         <svg class="w-4 h-4 text-slate-700 transition-transform" [class.rotate-180]="showBookingPickupTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                      </button>
                                      @if (showBookingPickupTime()) {
                                          <div class="fixed inset-0 z-[90]" (click)="showBookingPickupTime.set(false)"></div>
                                          <div class="absolute inset-x-0 z-[100] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-100 py-2 max-h-48 overflow-y-auto animate-scale-in custom-scrollbar bottom-full mb-1">
                                              @for (time of timeOptions; track time) {
                                                  <button type="button" (click)="selectBookingTime('pickup', time)"
-                                                         class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-500"
+                                                         class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-blue-50 hover:text-blue-700 border-l-2 border-transparent hover:border-blue-500"
                                                          [class.bg-blue-50]="manualBookingForm.pickupTime === time"
                                                          [class.text-blue-700]="manualBookingForm.pickupTime === time"
                                                          [class.border-blue-500]="manualBookingForm.pickupTime === time"
@@ -1459,27 +1459,27 @@ const COUNTRIES: Country[] = [
                              
                              <div class="space-y-3">
                                  <div>
-                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Ciudad</label>
+                                     <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Ciudad</label>
                                      <div class="relative">
                                          <div (click)="showManualDropoffCity.set(!showManualDropoffCity())" class="w-full px-3 py-2.5 text-xs font-bold text-slate-700 border border-slate-200 rounded-lg bg-white cursor-pointer flex items-center gap-2 hover:border-slate-400 transition-colors">
-                                             <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                             <svg class="w-3.5 h-3.5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                               <span class="flex-1">{{ isMaintenanceBooking() ? 'TALLER/OFICINA' : manualBookingForm.dropoffLocation }}</span>
                                               @if(!isMaintenanceBooking()) {
-                                                  <svg class="w-3 h-3 text-slate-400 transition-transform" [class.rotate-180]="showManualDropoffCity()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                                  <svg class="w-3 h-3 text-slate-700 transition-transform" [class.rotate-180]="showManualDropoffCity()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                               }
                                           </div>
                                            @if(showManualDropoffCity() && !isMaintenanceBooking()) {
                                              <div class="fixed inset-0 z-[90]" (click)="showManualDropoffCity.set(false)"></div>
                                              <div class="absolute z-[100] mt-1 w-full bg-white border border-slate-100 shadow-xl rounded-xl overflow-hidden animate-fade-in-up">
-                                                 <div (click)="selectManualDropoffCity('Cartagena')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Cartagena'">
+                                                 <div (click)="selectManualDropoffCity('Cartagena')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Cartagena'">
                                                      <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Cartagena'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Cartagena'"></span>
                                                      Cartagena
                                                  </div>
-                                                 <div (click)="selectManualDropoffCity('Barranquilla')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Barranquilla'">
+                                                 <div (click)="selectManualDropoffCity('Barranquilla')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Barranquilla'">
                                                      <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Barranquilla'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Barranquilla'"></span>
                                                      Barranquilla
                                                  </div>
-                                                 <div (click)="selectManualDropoffCity('Santa Marta')" class="px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Santa Marta'">
+                                                 <div (click)="selectManualDropoffCity('Santa Marta')" class="px-3 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 cursor-pointer flex items-center gap-2" [class.bg-blue-50]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.text-blue-600]="manualBookingForm.dropoffLocation === 'Santa Marta'">
                                                      <span class="w-1.5 h-1.5 rounded-full" [class.bg-blue-500]="manualBookingForm.dropoffLocation === 'Santa Marta'" [class.bg-slate-300]="manualBookingForm.dropoffLocation !== 'Santa Marta'"></span>
                                                      Santa Marta
                                                  </div>
@@ -1488,12 +1488,12 @@ const COUNTRIES: Country[] = [
                                      </div>
                                  </div>
                                  <div class="relative" [class.z-50]="showBookingDropoffDate()">
-                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Fecha</label>
+                                     <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Fecha</label>
                                      <button type="button" (click)="showBookingDropoffDate.set(!showBookingDropoffDate()); showBookingDropoffTime.set(false)"
-                                             class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                             class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                              [class.text-slate-700]="manualBookingForm.endDate" [class.font-bold]="manualBookingForm.endDate">
                                          <span>{{ formatDisplayDate(manualBookingForm.endDate) }}</span>
-                                         <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                         <svg class="w-4 h-4 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                      </button>
                                      @if (showBookingDropoffDate()) {
                                          <div class="fixed inset-0 z-[90]" (click)="showBookingDropoffDate.set(false)"></div>
@@ -1503,19 +1503,19 @@ const COUNTRIES: Country[] = [
                                      }
                                  </div>
                                  <div class="relative" [class.z-40]="showBookingDropoffTime()">
-                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Hora</label>
+                                     <label class="block text-[9px] font-bold text-slate-700 uppercase mb-1">Hora</label>
                                      <button type="button" (click)="showBookingDropoffTime.set(!showBookingDropoffTime()); showBookingDropoffDate.set(false)"
-                                             class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-600 text-xs font-bold"
+                                             class="w-full px-3 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl transition-all text-left flex items-center justify-between text-slate-800 text-xs font-bold"
                                              [class.text-slate-700]="manualBookingForm.dropoffTime" [class.font-bold]="manualBookingForm.dropoffTime">
                                          <span>{{ formatDisplayTime(manualBookingForm.dropoffTime) }}</span>
-                                         <svg class="w-4 h-4 text-slate-400 transition-transform" [class.rotate-180]="showBookingDropoffTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                         <svg class="w-4 h-4 text-slate-700 transition-transform" [class.rotate-180]="showBookingDropoffTime()" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                      </button>
                                      @if (showBookingDropoffTime()) {
                                          <div class="fixed inset-0 z-[90]" (click)="showBookingDropoffTime.set(false)"></div>
                                          <div class="absolute inset-x-0 z-[100] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-100 py-2 max-h-48 overflow-y-auto animate-scale-in custom-scrollbar bottom-full mb-1">
                                              @for (time of timeOptions; track time) {
                                                  <button type="button" (click)="selectBookingTime('dropoff', time)"
-                                                         class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-slate-50 hover:text-slate-800 border-l-4 border-transparent hover:border-slate-500"
+                                                         class="w-full px-4 py-2 text-left text-xs font-medium transition-all hover:bg-slate-50 hover:text-slate-800 border-l-2 border-transparent hover:border-slate-500"
                                                          [class.bg-slate-100]="manualBookingForm.dropoffTime === time"
                                                          [class.text-slate-800]="manualBookingForm.dropoffTime === time"
                                                          [class.border-slate-500]="manualBookingForm.dropoffTime === time"
@@ -1536,26 +1536,26 @@ const COUNTRIES: Country[] = [
                                       <!-- Base Controls -->
                                        <div class="grid grid-cols-2 gap-3" [class.opacity-50]="isMaintenanceBooking()">
                                            <div>
-                                               <label class="block text-[8px] font-bold text-slate-400 uppercase mb-0.5">Base Día</label>
+                                               <label class="block text-[8px] font-bold text-slate-700 uppercase mb-0.5">Base Día</label>
                                                <input type="number" [ngModel]="isMaintenanceBooking() ? null : manualBookingForm.pricePerDay" (ngModelChange)="manualBookingForm.pricePerDay = $event; calculateManualPrice('price')" [disabled]="isMaintenanceBooking()" class="w-full px-2 py-2 text-xs font-bold border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50">
                                            </div>
                                            <div>
-                                               <label class="block text-[8px] font-bold text-slate-400 uppercase mb-0.5">Lavado</label>
+                                               <label class="block text-[8px] font-bold text-slate-700 uppercase mb-0.5">Lavado</label>
                                                <input type="number" [ngModel]="isMaintenanceBooking() ? null : manualBookingForm.washFee" (ngModelChange)="manualBookingForm.washFee = $event; calculateManualPrice('other')" [disabled]="isMaintenanceBooking()" class="w-full px-2 py-2 text-xs font-bold border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50">
                                            </div>
                                        </div>
 
                                       <!-- Additional Costs Manager -->
                                       <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                          <h5 class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Costos Adicionales</h5>
+                                          <h5 class="text-[9px] font-black text-slate-700 uppercase tracking-widest mb-2">Costos Adicionales</h5>
                                           
                                           <!-- List -->
                                           <div class="space-y-2 mb-3">
                                               @for(cost of manualBookingForm.additionalCosts; track $index) {
                                                   <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-slate-100 shadow-sm">
-                                                      <span class="text-[10px] font-bold text-slate-600 flex-1 truncate">{{ cost.name }}</span>
+                                                      <span class="text-[10px] font-bold text-slate-800 flex-1 truncate">{{ cost.name }}</span>
                                                       <div class="flex items-center gap-1">
-                                                           <span class="text-[10px] text-slate-400">$</span>
+                                                           <span class="text-[10px] text-slate-700">$</span>
                                                            <input type="number" 
                                                                   [ngModel]="cost.price" 
                                                                   (ngModelChange)="cost.price = $event; calculateManualPrice('other')" 
@@ -1574,8 +1574,8 @@ const COUNTRIES: Country[] = [
 
                                           <!-- Add New -->
                                            <div class="flex items-center gap-2">
-                                               <input type="text" [(ngModel)]="newCostName" [disabled]="isMaintenanceBooking()" placeholder="Nombre (ej. Domicilio)" class="flex-[2] px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-400">
-                                               <input type="number" [(ngModel)]="newCostPrice" [disabled]="isMaintenanceBooking()" placeholder="Valor" class="flex-1 px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-400">
+                                               <input type="text" [(ngModel)]="newCostName" [disabled]="isMaintenanceBooking()" placeholder="Nombre (ej. Domicilio)" class="flex-[2] px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-700">
+                                               <input type="number" [(ngModel)]="newCostPrice" [disabled]="isMaintenanceBooking()" placeholder="Valor" class="flex-1 px-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-300 disabled:bg-slate-50 disabled:text-slate-700">
                                                <button aria-label="Agregar costo" (click)="addAdditionalCost()" [disabled]="!newCostName || newCostPrice === null || isMaintenanceBooking()" class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                                </button>
@@ -1589,7 +1589,7 @@ const COUNTRIES: Country[] = [
                              <!-- Clean Integrated Summary Section -->
                              <div class="mt-4 pt-4 border-t border-slate-100 col-span-2">
                                  <div class="flex items-center justify-between mb-3">
-                                     <h5 class="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                     <h5 class="text-[10px] font-black text-slate-700 uppercase tracking-widest flex items-center gap-2">
                                          Resumen de Cuenta
                                          <button (click)="calculateManualPrice('price')" class="p-1 rounded-lg hover:bg-slate-100 text-blue-500 transition-colors" title="Recalcular">
                                              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
@@ -1606,7 +1606,7 @@ const COUNTRIES: Country[] = [
                                           <div class="flex justify-between text-xs text-slate-500 font-medium">
                                               <span>Lavado</span>
                                               <div class="flex items-center ml-auto">
-                                                  <span class="text-slate-400 mr-1">$</span>
+                                                  <span class="text-slate-700 mr-1">$</span>
                                                   <input type="number" [ngModel]="isMaintenanceBooking() ? null : manualBookingForm.washFee" (ngModelChange)="manualBookingForm.washFee = $event; calculateManualPrice('other')" [disabled]="isMaintenanceBooking()" class="w-20 text-right text-xs font-bold text-slate-700 border-b border-slate-200 hover:border-blue-400 focus:border-blue-600 outline-none bg-transparent py-0.5 transition-colors disabled:border-transparent">
                                               </div>
                                           </div>
@@ -1625,7 +1625,7 @@ const COUNTRIES: Country[] = [
                                      </div>
                                      
                                      <div class="flex flex-col items-end justify-center" [class.opacity-50]="isMaintenanceBooking()">
-                                         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total a Pagar</p>
+                                         <p class="text-[9px] font-bold text-slate-700 uppercase tracking-widest">Total a Pagar</p>
                                          <p class="text-3xl font-black text-slate-900 tracking-tighter leading-none">{{ isMaintenanceBooking() ? '---' : (manualBookingForm.totalPrice | currency:'COP':'symbol':'1.0-0') }}</p>
                                      </div>
                                  </div>
@@ -1695,7 +1695,7 @@ const COUNTRIES: Country[] = [
                     <!-- Header -->
                     <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                         <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight">Costo Lavada</h3>
-                        <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <button aria-label="Cerrar" (click)="showEditRatesModal.set(false)" class="text-slate-700 hover:text-slate-800 transition-colors">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -1722,10 +1722,10 @@ const COUNTRIES: Country[] = [
                                 <div>
                                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Costo Lavado</label>
                                     <div class="relative">
-                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 font-bold">$</span>
                                         <input type="number" [(ngModel)]="editRatesData.currentWashPrice" class="w-full pl-7 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                     </div>
-                                    <p class="text-[9px] text-slate-400 mt-1">Costo específico para esta unidad.</p>
+                                    <p class="text-[9px] text-slate-700 mt-1">Costo específico para esta unidad.</p>
                                 </div>
                                 <!-- Removed Costo Diario (Ajuste) -->
                              </div>
@@ -3413,7 +3413,7 @@ export class AdminInventoryComponent {
         // Conflict check (High Priority styling)
         if (ev.isConflicting) {
             return {
-                'bg-slate-100 text-slate-400 border border-slate-200 opacity-80': true
+                'bg-slate-100 text-slate-700 border border-slate-200 opacity-80': true
             };
         }
 

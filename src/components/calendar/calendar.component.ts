@@ -55,7 +55,7 @@ import { FormsModule } from '@angular/forms';
                             class="aspect-square w-full rounded-lg flex items-center justify-center text-sm transition-all duration-200 relative font-bold"
                             [ngClass]="{
                                 'text-slate-200 cursor-not-allowed': day.disabled,
-                                'hover:bg-blue-50 hover:text-[#002B5B] text-slate-600 cursor-pointer': !day.disabled && !day.selected,
+                                'hover:bg-blue-50 hover:text-[#002B5B] text-slate-800 cursor-pointer': !day.disabled && !day.selected,
                                 'bg-[#002B5B] text-white shadow-md shadow-blue-900/10 scale-105 z-10': day.selected,
                                 'invisible': day.empty
                             }">
@@ -74,7 +74,7 @@ import { FormsModule } from '@angular/forms';
                               class="p-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all"
                               [ngClass]="{
                                   'bg-[#002B5B] text-white shadow-lg': $index === currentDate().getMonth() && !isMonthDisabled($index),
-                                  'bg-slate-50 text-slate-600 hover:bg-blue-50 hover:text-[#002B5B] hover:scale-105 active:scale-95': $index !== currentDate().getMonth() && !isMonthDisabled($index),
+                                  'bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-[#002B5B] hover:scale-105 active:scale-95': $index !== currentDate().getMonth() && !isMonthDisabled($index),
                                   'opacity-30 cursor-not-allowed text-slate-400': isMonthDisabled($index)
                               }">
                           {{ month }}
@@ -91,7 +91,7 @@ import { FormsModule } from '@angular/forms';
                               class="p-2 rounded-xl text-sm font-bold transition-all"
                               [ngClass]="{
                                   'bg-[#002B5B] text-white shadow-lg': year === currentDate().getFullYear() && !isYearBlocked(year),
-                                  'bg-slate-50 text-slate-600 hover:bg-blue-50 hover:text-[#002B5B] hover:scale-105 active:scale-95': year !== currentDate().getFullYear() && !isYearBlocked(year),
+                                  'bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-[#002B5B] hover:scale-105 active:scale-95': year !== currentDate().getFullYear() && !isYearBlocked(year),
                                   'opacity-30 cursor-not-allowed text-slate-400': isYearBlocked(year)
                               }">
                           {{ year }}

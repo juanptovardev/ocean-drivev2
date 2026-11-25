@@ -14,7 +14,7 @@ import { LanguageService } from '../../../services/language.service';
       <div class="text-center max-w-2xl mx-auto">
         <!-- Animated 404 -->
         <div class="relative mb-8">
-          <h1 class="text-[12rem] md:text-[16rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500 leading-none select-none animate-pulse">
+          <h1 class="text-[12rem] md:text-[16rem] font-black text-[var(--brand-900)] leading-none select-none animate-pulse">
             404
           </h1>
           <div class="absolute inset-0 blur-3xl bg-gradient-to-r from-blue-500/30 via-teal-400/30 to-emerald-500/30 -z-10"></div>

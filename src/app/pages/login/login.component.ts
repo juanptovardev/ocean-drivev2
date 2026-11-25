@@ -54,7 +54,7 @@ import { LanguageService } from '../../../services/language.service';
                     
                     <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] text-[#002B5B] mb-4">
                         {{ authMode === 'login' ? lang.t('auth.loginTitle1') : (authMode === 'forgot' ? lang.t('auth.recoverTitle1') : lang.t('auth.resetTitle1')) }}
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#002B5B] to-[#004e9a]">
+                        <span class="text-[var(--brand-900)] font-bold">
                             {{ authMode === 'login' ? lang.t('auth.loginTitle2') : (authMode === 'forgot' ? lang.t('auth.recoverTitle2') : lang.t('auth.resetTitle2')) }}
                         </span>
                     </h1>
@@ -70,7 +70,7 @@ import { LanguageService } from '../../../services/language.service';
 
                 <!-- Notifications -->
                 @if (errorMessage) {
-                    <div class="mb-8 p-4 bg-red-50/50 backdrop-blur-sm border-l-4 border-[#FF6F61] rounded-r-xl animate-fade-in flex items-start gap-3 shadow-sm">
+                    <div class="mb-8 p-4 bg-red-50/50 backdrop-blur-sm border-l-2 border-[#FF6F61] rounded-r-xl animate-fade-in flex items-start gap-3 shadow-sm">
                         <svg class="w-5 h-5 text-[#FF6F61] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                         <div>
                             <h4 class="text-xs font-bold text-[#FF6F61] uppercase tracking-wider mb-1">{{ lang.t('auth.errorAccess') }}</h4>
@@ -80,7 +80,7 @@ import { LanguageService } from '../../../services/language.service';
                 }
 
                 @if (successMessage) {
-                    <div class="mb-8 p-4 bg-emerald-50/50 backdrop-blur-sm border-l-4 border-emerald-500 rounded-r-xl animate-fade-in flex items-start gap-3 shadow-sm">
+                    <div class="mb-8 p-4 bg-emerald-50/50 backdrop-blur-sm border-l-2 border-emerald-500 rounded-r-xl animate-fade-in flex items-start gap-3 shadow-sm">
                         <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         <div>
                             <h4 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">{{ lang.t('auth.success') }}</h4>

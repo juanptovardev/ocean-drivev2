@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </div>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{{ adminUsers().length }} admins registrados</p>
+                            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-tighter">{{ adminUsers().length }} admins registrados</p>
                         </div>
                     </div>
 
@@ -109,7 +109,7 @@ import { FormsModule } from '@angular/forms';
                                             <td class="py-4 pr-2">
                                                 <div class="flex items-center justify-end gap-2">
                                                     <button (click)="openEditModal(user)" 
-                                                            class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
+                                                            class="p-2 text-slate-700 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
                                                             title="Editar Usuario">
                                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -117,14 +117,14 @@ import { FormsModule } from '@angular/forms';
                                                     </button>
                                                     @if (!isCurrentUser(user)) {
                                                         <button (click)="demoteToUser(user)" 
-                                                                class="p-2 text-slate-400 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all"
+                                                                class="p-2 text-slate-700 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all"
                                                                 title="Degradar a Usuario">
                                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                                                             </svg>
                                                         </button>
                                                         <button (click)="confirmDelete(user)" 
-                                                                class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                                                                class="p-2 text-slate-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                                                                 title="Eliminar Permanente">
                                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -144,7 +144,7 @@ import { FormsModule } from '@angular/forms';
                         <!-- Pagination for Admins -->
                         @if (totalAdminPages() > 1) {
                             <div class="mt-6 flex items-center justify-between border-t border-gray-50 pt-4">
-                                <p class="text-[10px] text-slate-400 font-bold uppercase">Paginado: {{ ADMINS_PER_PAGE }} por vista</p>
+                                <p class="text-[10px] text-slate-700 font-bold uppercase">Paginado: {{ ADMINS_PER_PAGE }} por vista</p>
                                 <div class="flex gap-2">
                                     <button (click)="prevPage('admin')" 
                                             [disabled]="adminPage() === 1"
@@ -177,7 +177,7 @@ import { FormsModule } from '@angular/forms';
                         </div>
                         <div>
                             <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest">Usuarios Registrados</h2>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{{ regularUsers().length }} usuarios</p>
+                            <p class="text-[10px] font-bold text-slate-700 uppercase tracking-tighter">{{ regularUsers().length }} usuarios</p>
                         </div>
                     </div>
 
@@ -185,7 +185,7 @@ import { FormsModule } from '@angular/forms';
                         <!-- User Search -->
                         <div class="relative flex-1">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-4 w-4 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </span>
@@ -253,7 +253,7 @@ import { FormsModule } from '@angular/forms';
                                         <td class="py-4 pr-2">
                                             <div class="flex items-center justify-end gap-2">
                                                 <button (click)="openEditModal(user)" 
-                                                        class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
+                                                        class="p-2 text-slate-700 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
                                                         title="Editar Usuario">
                                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -372,7 +372,7 @@ import { FormsModule } from '@angular/forms';
             <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-modal-enter" (click)="$event.stopPropagation()">
                 <div class="px-6 py-5 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
                     <h3 class="text-lg font-bold">Crear Nuevo {{ createRole() === 'admin' ? 'Administrador' : 'Usuario' }}</h3>
-                    <p class="text-sm text-slate-400">{{ createRole() === 'admin' ? 'Los administradores tienen acceso completo al panel' : 'Los usuarios pueden realizar reservas y ver su perfil' }}</p>
+                    <p class="text-sm text-slate-700">{{ createRole() === 'admin' ? 'Los administradores tienen acceso completo al panel' : 'Los usuarios pueden realizar reservas y ver su perfil' }}</p>
                 </div>
                 
                 <form (ngSubmit)="createUser()" class="p-6 space-y-5">

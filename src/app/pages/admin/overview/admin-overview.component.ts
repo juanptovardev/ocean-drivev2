@@ -58,7 +58,7 @@ import { FormsModule } from '@angular/forms';
                                         <div class="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-[8px] font-bold text-slate-500 shrink-0">
                                             {{ getInitials(booking.customer_name || booking.user_name) }}
                                         </div>
-                                        <p class="text-[10px] font-medium text-slate-600 truncate">
+                                        <p class="text-[10px] font-medium text-slate-800 truncate">
                                             {{ booking.customer_name || booking.user_name }}
                                         </p>
                                     </div>
@@ -142,7 +142,7 @@ import { FormsModule } from '@angular/forms';
                                 <div class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-100 z-50 p-4 animate-scale-in" (click)="$event.stopPropagation()">
                                     <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-50">
                                          <h4 class="text-xs font-black text-slate-800 uppercase tracking-wide">Filtros de Calendario</h4>
-                                         <button aria-label="Cerrar filtros" (click)="showCalendarFilters.set(false)" class="text-slate-400 hover:text-slate-600"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                                         <button aria-label="Cerrar filtros" (click)="showCalendarFilters.set(false)" class="text-slate-400 hover:text-slate-800"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                                     </div>
                                     
                                     <div class="space-y-4">
@@ -160,12 +160,12 @@ import { FormsModule } from '@angular/forms';
                                                     <div class="fixed inset-0 z-40" (click)="categoryDropdownOpen.set(false)"></div>
                                                     
                                                     <div class="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-100 rounded-xl shadow-xl z-50 overflow-hidden max-h-48 overflow-y-auto custom-scrollbar animate-scale-in flex flex-col p-1">
-                                                         <button (click)="selectCategory('all')" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors" [class.text-blue-600]="selectedCategory() === 'all'" [class.bg-blue-50]="selectedCategory() === 'all'" [class.text-slate-600]="selectedCategory() !== 'all'">
+                                                         <button (click)="selectCategory('all')" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors" [class.text-blue-600]="selectedCategory() === 'all'" [class.bg-blue-50]="selectedCategory() === 'all'" [class.text-slate-800]="selectedCategory() !== 'all'">
                                                              <span>Todas las Categorías</span>
                                                              @if (selectedCategory() === 'all') { <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> }
                                                          </button>
                                                          @for (v of vehicles(); track v.id) {
-                                                             <button (click)="selectCategory(v.id)" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors mt-0.5" [class.text-blue-600]="selectedCategory() === v.id" [class.bg-blue-50]="selectedCategory() === v.id" [class.text-slate-600]="selectedCategory() !== v.id">
+                                                             <button (click)="selectCategory(v.id)" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors mt-0.5" [class.text-blue-600]="selectedCategory() === v.id" [class.bg-blue-50]="selectedCategory() === v.id" [class.text-slate-800]="selectedCategory() !== v.id">
                                                                  <span>{{ v.name }}</span>
                                                                  @if (selectedCategory() === v.id) { <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> }
                                                              </button>
@@ -301,7 +301,7 @@ import { FormsModule } from '@angular/forms';
                                                            [class.bg-blue-600]="day.isToday"
                                                            [class.text-white]="day.isToday"
                                                            [class.text-slate-300]="!day.isToday && !day.inMonth"
-                                                           [class.text-slate-600]="!day.isToday && day.inMonth">
+                                                           [class.text-slate-800]="!day.isToday && day.inMonth">
                                                          {{ day.dayNum }}
                                                      </span>
                                                     
@@ -428,7 +428,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 1. RETIROS -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Retiros', stats().upcomingPickups, 'bookings_pickup')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Retiros</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Retiros</span>
                         <span class="text-xl font-black text-green-600 transition-transform group-hover:scale-105">{{ stats().upcomingPickups }}</span>
                     </div>
                  </div>
@@ -436,7 +436,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 2. ENTREGAS -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Entregas', stats().upcomingDropoffs, 'bookings_dropoff')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Entregas</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Entregas</span>
                         <span class="text-xl font-black text-red-600 transition-transform group-hover:scale-105">{{ stats().upcomingDropoffs }}</span>
                     </div>
                  </div>
@@ -444,7 +444,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 3. MANTENIMIENTO -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Mantenimiento', stats().maintenanceCount, 'maintenance')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Mantenimiento</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Mantenimiento</span>
                         <span class="text-xl font-black text-orange-500 transition-transform group-hover:scale-105">{{ stats().maintenanceCount }}</span>
                     </div>
                  </div>
@@ -452,7 +452,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 4. RESERVAS (Old En Ruta) -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Reservas', stats().reservedToday, 'active')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Reservas</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Reservas</span>
                         <span class="text-xl font-black text-blue-600 transition-transform group-hover:scale-105">{{ stats().reservedToday }}</span>
                     </div>
                  </div>
@@ -460,7 +460,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 5. DISPONIBLES (Old Libres) -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Disponibles', stats().availableCount, 'available')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Disponibles</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Disponibles</span>
                         <span class="text-xl font-black text-purple-600 transition-transform group-hover:scale-105">{{ stats().availableCount }}</span>
                     </div>
                  </div>
@@ -468,7 +468,7 @@ import { FormsModule } from '@angular/forms';
                  <!-- 6. INGRESOS MENSUALES -->
                  <div class="group cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors" (click)="openSummaryModal('Ingresos del Mes', stats().totalRevenue, 'revenue')">
                     <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-600">Ingresos Mes</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider group-hover:text-slate-800">Ingresos Mes</span>
                         <span class="text-xl font-black text-slate-800 transition-transform group-hover:scale-105">\${{ stats().totalRevenue | number:'1.0-0' }}</span>
                     </div>
                  </div>
@@ -493,7 +493,7 @@ import { FormsModule } from '@angular/forms';
                                       [ngClass]="{
                                           'bg-blue-100 text-blue-700': selectedBooking().status === 'pending',
                                           'bg-green-100 text-green-700': selectedBooking().status === 'confirmed' || selectedBooking().status === 'available',
-                                          'bg-slate-200 text-slate-600': selectedBooking().status === 'completed',
+                                          'bg-slate-200 text-slate-800': selectedBooking().status === 'completed',
                                           'bg-red-100 text-red-700': selectedBooking().status === 'cancelled',
                                           'bg-orange-100 text-orange-700': selectedBooking().status === 'maintenance'
                                       }">
@@ -601,7 +601,7 @@ import { FormsModule } from '@angular/forms';
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDateFull(selectedBooking().start_date) }}</p>
-                                                <p class="text-xs text-slate-600">{{ selectedBooking().pickup_time || '10:00' }}</p>
+                                                <p class="text-xs text-slate-800">{{ selectedBooking().pickup_time || '10:00' }}</p>
                                             </div>
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Ubicación</p>
@@ -622,7 +622,7 @@ import { FormsModule } from '@angular/forms';
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDateFull(selectedBooking().end_date) }}</p>
-                                                <p class="text-xs text-slate-600">{{ selectedBooking().dropoff_time || '10:00' }}</p>
+                                                <p class="text-xs text-slate-800">{{ selectedBooking().dropoff_time || '10:00' }}</p>
                                             </div>
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Ubicación</p>
@@ -656,7 +656,7 @@ import { FormsModule } from '@angular/forms';
                 <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-scale-in flex flex-col max-h-[85vh]" (click)="$event.stopPropagation()">
                     <div class="px-5 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center shrink-0">
                         <h3 class="text-sm font-black text-slate-800 uppercase tracking-wide">{{ summaryModal().title }}</h3>
-                        <button aria-label="Cerrar" (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-600">
+                        <button aria-label="Cerrar" (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-800">
                              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -691,7 +691,7 @@ import { FormsModule } from '@angular/forms';
                                                  <span class="text-[9px] font-black text-slate-700 uppercase leading-none">{{ item.category_name }}</span>
                                                  
                                                  <div class="flex flex-col items-end gap-0.5">
-                                                     <span class="text-[8px] font-bold text-slate-600 bg-slate-100 px-1 py-0.5 rounded border border-slate-200">{{ item.plate }}</span>
+                                                     <span class="text-[8px] font-bold text-slate-800 bg-slate-100 px-1 py-0.5 rounded border border-slate-200">{{ item.plate }}</span>
                                                      <span class="text-[8px] font-bold text-white bg-purple-500 px-1.5 py-0.5 rounded shadow-sm">DISP</span>
                                                  </div>
                                              </div>
@@ -725,7 +725,7 @@ import { FormsModule } from '@angular/forms';
                                                         @if(summaryModal().title === 'Retiros') { {{ item.pickup_time || '10:00' }} }
                                                         @else { {{ formatDateShort(item.end_date) }} }
                                                     </span>
-                                                    <span class="text-[9px] text-slate-600 font-bold truncate max-w-[65%] text-right">
+                                                    <span class="text-[9px] text-slate-800 font-bold truncate max-w-[65%] text-right">
                                                         {{ (item.customer_name || item.user_name || 'Cliente').split(' ')[0] }}
                                                     </span>
                                                 </div>

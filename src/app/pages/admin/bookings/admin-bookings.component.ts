@@ -156,7 +156,7 @@ import { ApiService } from '../../../../services/api.service';
                                                            [class.bg-blue-600]="day.isToday"
                                                            [class.text-white]="day.isToday"
                                                            [class.text-slate-300]="!day.isToday && !day.inMonth"
-                                                           [class.text-slate-600]="!day.isToday && day.inMonth">
+                                                           [class.text-slate-800]="!day.isToday && day.inMonth">
                                                          {{ day.dayNum }}
                                                      </span>
                                                     
@@ -199,12 +199,12 @@ import { ApiService } from '../../../../services/api.service';
                                     <div class="fixed inset-0 z-40" (click)="categoryDropdownOpen.set(false)"></div>
                                     
                                     <div class="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-100 rounded-xl shadow-xl z-50 overflow-hidden max-h-48 overflow-y-auto custom-scrollbar animate-scale-in origin-top flex flex-col p-1">
-                                            <button (click)="selectCategory('all')" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors" [class.text-blue-600]="selectedCategory() === 'all'" [class.bg-blue-50]="selectedCategory() === 'all'" [class.text-slate-600]="selectedCategory() !== 'all'">
+                                            <button (click)="selectCategory('all')" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors" [class.text-blue-600]="selectedCategory() === 'all'" [class.bg-blue-50]="selectedCategory() === 'all'" [class.text-slate-800]="selectedCategory() !== 'all'">
                                                 <span>Todas las Categorías</span>
                                                 @if (selectedCategory() === 'all') { <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> }
                                             </button>
                                             @for (v of vehicles(); track v.id) {
-                                                <button (click)="selectCategory(v.id)" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors mt-0.5" [class.text-blue-600]="selectedCategory() === v.id" [class.bg-blue-50]="selectedCategory() === v.id" [class.text-slate-600]="selectedCategory() !== v.id">
+                                                <button (click)="selectCategory(v.id)" class="w-full px-3 py-2 text-[10px] font-bold text-left uppercase hover:bg-slate-50 rounded-lg flex items-center justify-between group transition-colors mt-0.5" [class.text-blue-600]="selectedCategory() === v.id" [class.bg-blue-50]="selectedCategory() === v.id" [class.text-slate-800]="selectedCategory() !== v.id">
                                                     <span>{{ v.name }}</span>
                                                     @if (selectedCategory() === v.id) { <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> }
                                                 </button>
@@ -283,7 +283,7 @@ import { ApiService } from '../../../../services/api.service';
                                         <div class="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-[8px] font-bold text-slate-500 shrink-0">
                                             {{ getInitials(booking.customer_name || 'AN') }}
                                         </div>
-                                        <p class="text-[10px] font-medium text-slate-600 truncate">
+                                        <p class="text-[10px] font-medium text-slate-800 truncate">
                                             {{ booking.customer_name || 'Anónimo' }}
                                         </p>
                                     </div>
@@ -316,7 +316,7 @@ import { ApiService } from '../../../../services/api.service';
                                       [ngClass]="{
                                           'bg-blue-100 text-blue-700': selectedBooking().status === 'pending',
                                           'bg-green-100 text-green-700': selectedBooking().status === 'confirmed' || selectedBooking().status === 'available',
-                                          'bg-slate-200 text-slate-600': selectedBooking().status === 'completed',
+                                          'bg-slate-200 text-slate-800': selectedBooking().status === 'completed',
                                           'bg-red-100 text-red-700': selectedBooking().status === 'cancelled',
                                           'bg-orange-100 text-orange-700': selectedBooking().status === 'maintenance'
                                       }">
@@ -424,7 +424,7 @@ import { ApiService } from '../../../../services/api.service';
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDateFull(selectedBooking().start_date) }}</p>
-                                                <p class="text-xs text-slate-600">{{ selectedBooking().pickup_time || '10:00' }}</p>
+                                                <p class="text-xs text-slate-800">{{ selectedBooking().pickup_time || '10:00' }}</p>
                                             </div>
 
                                             <div>
@@ -446,7 +446,7 @@ import { ApiService } from '../../../../services/api.service';
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Fecha y Hora</p>
                                                 <p class="text-sm font-bold text-slate-800">{{ formatDateFull(selectedBooking().end_date) }}</p>
-                                                <p class="text-xs text-slate-600">{{ selectedBooking().dropoff_time || '10:00' }}</p>
+                                                <p class="text-xs text-slate-800">{{ selectedBooking().dropoff_time || '10:00' }}</p>
                                             </div>
                                             <div>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Ubicación</p>
@@ -480,7 +480,7 @@ import { ApiService } from '../../../../services/api.service';
                <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-scale-in flex flex-col max-h-[85vh]" (click)="$event.stopPropagation()">
                    <div class="px-5 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center shrink-0">
                        <h3 class="text-lg font-black text-slate-800 uppercase tracking-wide">{{ modal.title }}</h3>
-                       <button aria-label="Cerrar" (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-600">
+                       <button aria-label="Cerrar" (click)="closeSummaryModal()" class="text-slate-400 hover:text-slate-800">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                        </button>
                    </div>
@@ -519,7 +519,7 @@ import { ApiService } from '../../../../services/api.service';
                                             <span class="text-[9px] text-slate-400 font-medium tracking-tight">
                                                 {{ item.booking?.pickup_time || item.booking?.dropoff_time || '---' }}
                                             </span>
-                                            <span class="text-[9px] text-slate-600 font-bold truncate max-w-[65%] text-right">
+                                            <span class="text-[9px] text-slate-800 font-bold truncate max-w-[65%] text-right">
                                                 {{ (item.booking?.customer_name || item.booking?.user_name || 'Cliente').split(' ')[0] }}
                                             </span>
                                         </div>

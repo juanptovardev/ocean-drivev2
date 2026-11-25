@@ -75,7 +75,7 @@ import { LanguageService } from '../../services/language.service';
 
              <!-- Path Visual -->
              <div class="flex-1 flex flex-col items-center px-2">
-                 <div class="text-[0.5rem] whitespace-nowrap font-bold text-gray-800 uppercase tracking-widest mb-1 bg-red-50 px-2 h-4 inline-flex items-center justify-center rounded-full leading-none">{{ rentalDays() }} {{ lang.t('ticket.days') }}</div>
+                 <div class="text-[0.5rem] whitespace-nowrap font-bold text-red-800 uppercase tracking-widest mb-1 bg-red-50 px-2 h-4 inline-flex items-center justify-center rounded-full leading-none">{{ rentalDays() }} {{ lang.t('ticket.days') }}</div>
                  <div class="w-full h-px bg-gray-200 relative flex items-center justify-between mt-1">
                      <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
                      <!-- Plane/Auto Icon -->
@@ -266,7 +266,7 @@ import { LanguageService } from '../../services/language.service';
                                <div class="absolute inset-x-0 z-[100] mt-1 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/50 py-2 max-h-60 overflow-y-auto animate-scale-in custom-scrollbar">
                                    @for(time of availableTimes; track time) {
                                        <button type="button" (click)="selectTime(time)"
-                                               class="w-full px-5 py-2.5 text-left text-sm font-medium transition-all duration-200 flex items-center gap-3 hover:bg-blue-50/50 hover:text-[#002B5B] hover:font-bold border-l-4 border-transparent hover:border-[#FF6F61]"
+                                               class="w-full px-5 py-2.5 text-left text-sm font-medium transition-all duration-200 flex items-center gap-3 hover:bg-blue-50/50 hover:text-[#002B5B] hover:font-bold border-l-2 border-transparent hover:border-[#FF6F61]"
                                                [ngClass]="{
                                                  'bg-blue-50/30 text-[#002B5B] font-bold border-[#FF6F61]': currentEditTime() === time,
                                                  'text-gray-600': currentEditTime() !== time
