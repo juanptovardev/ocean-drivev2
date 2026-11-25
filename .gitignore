@@ -247,3 +247,6 @@ metadata.json
 # Herramientas locales de OpenCode (no publicar)
 .opencode/
 .playwright-mcp/
+
+# Enlace local de Vercel
+.vercel/
