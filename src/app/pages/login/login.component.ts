@@ -257,7 +257,7 @@ import { LanguageService } from '../../../services/language.service';
         <aside class="hidden lg:block w-1/2 relative bg-gray-900 overflow-hidden">
             <!-- Background Image -->
             <div class="absolute inset-0 transition-transform duration-[20s] hover:scale-105">
-                <img src="assets/imgs/auth/login-split.png" alt="Luxury Car Detail" class="w-full h-full object-cover">
+                <img src="assets/imgs/auth/login-split.webp" alt="Luxury Car Detail" class="w-full h-full object-cover">
             </div>
             
             <!-- Overlay Gradients -->

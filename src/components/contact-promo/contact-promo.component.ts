@@ -224,7 +224,7 @@ export class CalendarComponent {
                   </div>
               </div>
               <div class="hidden lg:block w-7/12 h-[500px] relative rounded-[32px] overflow-hidden shadow-2xl group border border-white/5 animate-enter delay-200 order-1 lg:order-2">
-                  <img src="assets/imgs/servicios/form/fondo.webp" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                  <img src="assets/imgs/servicios/form/fondo.webp" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 opacity-80 group-hover:opacity-100">
                   <div class="absolute inset-0 bg-gradient-to-t from-[#050914] via-transparent to-transparent opacity-90"></div>
                   <div class="absolute top-8 right-8 bg-black/50 backdrop-blur-md border border-[#FF6F61]/30 text-[#FF6F61] px-4 py-1.5 rounded-full font-bold tracking-wider text-[10px] shadow-[0_0_15px_rgba(255,111,97,0.2)]">MARCAS PREMIUM</div>
               </div>

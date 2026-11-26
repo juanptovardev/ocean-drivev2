@@ -115,7 +115,7 @@
       // 2. Crear nuevo elemento link
       var link = document.createElement('link');
       link.rel = 'icon';
-      link.type = 'image/png';
+      link.type = 'image/webp';
       document.head.appendChild(link);
 
       // 3. Definir Assets (Corregido: Negativo es Azul, Positivo es Blanco)
@@ -133,8 +133,7 @@
           // Claro -> Azul
           var selectedIcon = isDark ? whiteIcon : blueIcon;
 
-          // Cache busting para forzar actualización
-          link.href = selectedIcon + '?v=' + new Date().getTime();
+          link.href = selectedIcon;
 
         } catch (e) {
           link.href = blueIcon; // Fallback a azul

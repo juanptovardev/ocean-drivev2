@@ -19,13 +19,13 @@ import { MotionDirective } from '../../app/core/motion/motion.directive';
           @for(brand of brands(); track brand.name) {
             <div class="relative flex flex-col items-center justify-center w-24 h-10 md:w-32 md:h-14 group/brand cursor-pointer">
                <!-- Imagen Azul (Base) -->
-               <img [src]="'assets/imgs/slider/Azul/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Azul/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-100 group-hover/brand:opacity-0"
                     [class]="brand.className || ''">
                
                <!-- Imagen Color (Hover) -->
-               <img [src]="'assets/imgs/slider/Color/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Color/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name + ' Color'"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover/brand:opacity-100"
                     [class]="brand.className || ''">
@@ -35,11 +35,11 @@ import { MotionDirective } from '../../app/core/motion/motion.directive';
           <!-- Set 2 (Duplicado para loop infinito) -->
           @for(brand of brands(); track brand.name + '_dup') {
             <div class="relative flex flex-col items-center justify-center w-24 h-10 md:w-32 md:h-14 group/brand cursor-pointer">
-               <img [src]="'assets/imgs/slider/Azul/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Azul/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-100 group-hover/brand:opacity-0"
                     [class]="brand.className || ''">
-               <img [src]="'assets/imgs/slider/Color/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Color/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name + ' Color'"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover/brand:opacity-100"
                     [class]="brand.className || ''">
@@ -49,11 +49,11 @@ import { MotionDirective } from '../../app/core/motion/motion.directive';
           <!-- Set 3 (Triplicado para pantallas anchas) -->
           @for(brand of brands(); track brand.name + '_tri') {
             <div class="relative flex flex-col items-center justify-center w-24 h-10 md:w-32 md:h-14 group/brand cursor-pointer">
-               <img [src]="'assets/imgs/slider/Azul/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Azul/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-100 group-hover/brand:opacity-0"
                     [class]="brand.className || ''">
-               <img [src]="'assets/imgs/slider/Color/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Color/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name + ' Color'"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover/brand:opacity-100"
                     [class]="brand.className || ''">
@@ -63,11 +63,11 @@ import { MotionDirective } from '../../app/core/motion/motion.directive';
            <!-- Set 4 (Cuadruplicado para pantallas ultra-anchas) -->
           @for(brand of brands(); track brand.name + '_quad') {
             <div class="relative flex flex-col items-center justify-center w-24 h-10 md:w-32 md:h-14 group/brand cursor-pointer">
-               <img [src]="'assets/imgs/slider/Azul/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Azul/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-100 group-hover/brand:opacity-0"
                     [class]="brand.className || ''">
-               <img [src]="'assets/imgs/slider/Color/' + brand.file" 
+               <img [src]="'assets/imgs/slider/Color/' + brand.file" loading="lazy" decoding="async" 
                     [alt]="brand.name + ' Color'"
                     class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover/brand:opacity-100"
                     [class]="brand.className || ''">

@@ -57,7 +57,7 @@
 
           <!-- Full Background Image -->
           <div class="absolute inset-0 w-full h-full bg-gray-200">
-            <img [src]="service.imageUrl" [alt]="service.title"
+            <img [src]="service.imageUrl" [alt]="service.title" loading="lazy" decoding="async"
               class="object-cover w-full h-full transition-transform duration-[2s] ease-out group-hover/card:scale-110">
           </div>
 
