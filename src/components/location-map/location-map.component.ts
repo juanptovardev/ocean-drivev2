@@ -48,22 +48,22 @@ import { MotionDirective } from '../../app/core/motion/motion.directive';
                           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                       </div>
-                      <span class="text-xs text-gray-400 font-medium">(690)</span>
+                      <span class="text-[12px] text-gray-400 font-medium">(690)</span>
                   </div>
 
-                  <a href="https://maps.app.goo.gl/tJBr35ETjXJ2Eqwx7" target="_blank" class="text-xs font-semibold text-[#4285F4] hover:text-[#002B5B] hover:underline transition-colors">
+                  <a href="https://maps.app.goo.gl/tJBr35ETjXJ2Eqwx7" target="_blank" class="inline-flex items-center min-h-[44px] text-[12px] font-semibold text-[#4285F4] hover:text-[#002B5B] hover:underline transition-colors">
                       Ampliar mapa
                   </a>
               </div>
 
               <!-- Right: Directions Button (Integrated) -->
-              <a href="https://maps.app.goo.gl/tJBr35ETjXJ2Eqwx7" target="_blank" class="group/dir flex flex-col items-center shrink-0">
+              <a href="https://maps.app.goo.gl/tJBr35ETjXJ2Eqwx7" target="_blank" class="group/dir flex flex-col items-center shrink-0 min-w-[44px]">
                  <!-- Icon Container -->
                  <div class="w-10 h-10 bg-[#4285F4] rounded-lg shadow-md flex items-center justify-center transition-all duration-300 group-hover/dir:bg-[#3367D6] group-hover/dir:scale-105 group-hover/dir:shadow-lg">
                     <!-- Direction Arrow Icon -->
                     <svg class="w-6 h-6 text-white transform group-hover/dir:translate-x-0.5 group-hover/dir:-translate-y-0.5 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
                  </div>
-                 <span class="text-[10px] font-bold text-[#4285F4] mt-1.5 uppercase tracking-wide group-hover/dir:text-[#3367D6]">Llegar</span>
+                 <span class="text-[12px] font-bold text-[#4285F4] mt-1.5 uppercase tracking-wide group-hover/dir:text-[#3367D6]">Llegar</span>
               </a>
 
           </div>

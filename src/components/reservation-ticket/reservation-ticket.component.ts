@@ -26,7 +26,7 @@ import { LanguageService } from '../../services/language.service';
                 <div>
                    <p class="text-[0.55rem] font-bold text-gray-300 uppercase tracking-widest mb-1">{{ lang.t('ticket.assigned') }}</p>
                    <h3 class="text-white font-black text-2xl italic tracking-tighter leading-none mb-1">{{ car.title }}</h3>
-                   <p class="text-[0.65rem] text-gray-200 font-bold leading-tight mb-2 uppercase">{{ carDescription || car.category || car.description }}</p>
+                   <p class="text-[12px] text-gray-200 font-bold leading-tight mb-2 uppercase">{{ carDescription || car.category || car.description }}</p>
                    
                    <!-- Additional specs -->
                    <div class="flex flex-wrap gap-x-3 gap-y-1 opacity-90 pt-1.5 border-t border-white/20">
@@ -61,7 +61,7 @@ import { LanguageService } from '../../services/language.service';
              <div class="text-left group/edit">
                  <p class="text-[0.55rem] font-bold text-gray-400 uppercase tracking-widest mb-1">{{ lang.t('ticket.pickup') }}</p>
                  <div class="text-[#002B5B] font-black text-3xl uppercase tracking-tighter leading-none">{{ pickupCityCode }}</div>
-                 <p class="text-[0.65rem] text-gray-500 font-bold mt-1">{{ formatDate(pickupDate()) }}</p>
+                 <p class="text-[12px] text-gray-500 font-bold mt-1">{{ formatDate(pickupDate()) }}</p>
                  <p class="text-[0.6rem] text-gray-400">{{ pickupTime() }}</p>
                  
                  <!-- Always Visible Edit Button -->
@@ -88,7 +88,7 @@ import { LanguageService } from '../../services/language.service';
              <div class="text-right group/edit">
                  <p class="text-[0.55rem] font-bold text-gray-400 uppercase tracking-widest mb-1">{{ lang.t('ticket.dropoff') }}</p>
                  <div class="text-[#002B5B] font-black text-3xl uppercase tracking-tighter leading-none">{{ dropoffCityCode }}</div>
-                 <p class="text-[0.65rem] text-gray-500 font-bold mt-1">{{ formatDate(dropoffDate()) }}</p>
+                 <p class="text-[12px] text-gray-500 font-bold mt-1">{{ formatDate(dropoffDate()) }}</p>
                  <p class="text-[0.6rem] text-gray-400">{{ dropoffTime() }}</p>
 
                  <!-- Always Visible Edit Button -->
@@ -180,7 +180,7 @@ import { LanguageService } from '../../services/language.service';
                <form class="space-y-6">
                    <!-- City Selector (Premium Dropdown) -->
                    <div class="group relative" [class.z-[60]]="isCityDropdownOpen" [class.z-20]="!isCityDropdownOpen">
-                       <label class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.city') }}</label>
+                       <label class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.city') }}</label>
                        
                        <div class="relative">
                             <button type="button" (click)="toggleDropdown('city')" 
@@ -220,7 +220,7 @@ import { LanguageService } from '../../services/language.service';
 
                    <!-- Date Picker -->
                     <div class="group relative" [class.z-[60]]="isDateDropdownOpen" [class.z-20]="!isDateDropdownOpen">
-                       <label class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.date') }}</label>
+                       <label class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.date') }}</label>
                        <div class="relative">
                            <button type="button" (click)="toggleDropdown('date')"
                                    [class.opacity-50]="isDateDisabled()"
@@ -245,7 +245,7 @@ import { LanguageService } from '../../services/language.service';
 
                    <!-- Time Selector -->
                     <div class="group relative" [class.z-[60]]="isTimeDropdownOpen" [class.z-20]="!isTimeDropdownOpen">
-                       <label class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.time') }}</label>
+                       <label class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">{{ lang.t('ticket.time') }}</label>
                        
                        <div class="relative">
                             <button type="button" (click)="toggleDropdown('time')"
@@ -323,7 +323,7 @@ import { LanguageService } from '../../services/language.service';
                         <p class="text-3xl font-black text-[#002B5B] tracking-tighter">
                             +{{ currencyService.formatPrice(pendingDropoffFee()) }}
                         </p>
-                        <p class="text-[0.65rem] text-slate-400 font-medium mt-1">{{ lang.t('ticket.modal.note') }}</p>
+                        <p class="text-[12px] text-slate-400 font-medium mt-1">{{ lang.t('ticket.modal.note') }}</p>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <button (click)="cancelDropoffModal()" class="w-full py-2.5 text-xs font-bold text-slate-500 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200 uppercase tracking-wider">{{ lang.t('ticket.cancel') }}</button>

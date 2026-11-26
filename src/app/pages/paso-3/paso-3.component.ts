@@ -38,7 +38,7 @@ import { LanguageService } from '../../../services/language.service';
             <!-- Page Title -->
              <div class="relative z-20 text-center text-white drop-shadow-md px-4 shrink-0">
                  <h2 class="text-2xl md:text-3xl font-extrabold uppercase tracking-widest italic leading-tight">{{ lang.t('paso3.title') }}</h2>
-                 <p class="text-[0.65rem] md:text-xs font-light opacity-90 mt-1">{{ lang.t('paso3.subtitle') }}</p>
+                 <p class="text-[12px] md:text-xs font-light opacity-90 mt-1">{{ lang.t('paso3.subtitle') }}</p>
              </div>
 
             <!-- Step Progress -->
@@ -70,7 +70,7 @@ import { LanguageService } from '../../../services/language.service';
                             <div class="relative h-full flex flex-col p-6 z-10 text-white">
                                 <!-- Title Section -->
                                 <div class="mb-auto">
-                                    <div class="flex items-center gap-2 mb-2 text-[#FF6F61] uppercase tracking-widest text-[0.65rem] font-bold">
+                                    <div class="flex items-center gap-2 mb-2 text-[#FF6F61] uppercase tracking-widest text-[12px] font-bold">
                                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                          <span>{{ lang.t('paso3.selected_service') }}</span>
                                     </div>
@@ -168,7 +168,7 @@ import { LanguageService } from '../../../services/language.service';
                                     </span>
                                     <div>
                                         <span class="block text-xs font-bold text-slate-700 leading-tight">{{ lang.t('paso3.doc_identity') }}</span>
-                                        <span class="text-[0.65rem] text-slate-500">{{ lang.t('paso3.doc_identity_desc') }}</span>
+                                        <span class="text-[12px] text-slate-500">{{ lang.t('paso3.doc_identity_desc') }}</span>
                                     </div>
                                 </li>
                                 <li class="flex items-start gap-3">
@@ -177,7 +177,7 @@ import { LanguageService } from '../../../services/language.service';
                                     </span>
                                     <div>
                                         <span class="block text-xs font-bold text-slate-700 leading-tight">{{ lang.t('paso3.doc_license') }}</span>
-                                        <span class="text-[0.65rem] text-slate-500">{{ lang.t('paso3.doc_license_desc') }}</span>
+                                        <span class="text-[12px] text-slate-500">{{ lang.t('paso3.doc_license_desc') }}</span>
                                     </div>
                                 </li>
                                 <li class="flex items-start gap-3">
@@ -186,7 +186,7 @@ import { LanguageService } from '../../../services/language.service';
                                     </span>
                                     <div>
                                         <span class="block text-xs font-bold text-slate-700 leading-tight">{{ lang.t('paso3.doc_payment') }}</span>
-                                        <span class="text-[0.65rem] text-slate-500">{{ lang.t('paso3.doc_payment_desc') }}</span>
+                                        <span class="text-[12px] text-slate-500">{{ lang.t('paso3.doc_payment_desc') }}</span>
                                     </div>
                                 </li>
                             </ul>

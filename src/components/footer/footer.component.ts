@@ -43,7 +43,7 @@ import { LanguageService } from '../../services/language.service';
 
                     <div class="text-center md:text-right">
                         <p class="text-white/80 text-sm">{{ lang.t('footer.callForInfo') }}</p>
-                        <a href="tel:+573012358181" class="text-2xl font-bold text-[var(--glow)] hover:text-white transition-colors">+57 301 235 8181</a>
+                        <a href="tel:+573012358181" class="inline-flex items-center min-h-[44px] text-2xl font-bold text-[var(--glow)] hover:text-white transition-colors">+57 301 235 8181</a>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@ import { LanguageService } from '../../services/language.service';
                         </div>
                         <ul class="grid grid-cols-2 gap-x-2 gap-y-2 text-base text-white/80">
                             @for(link of usefulLinks(); track $index) {
-                            <li><a href="{{ link.href }}" class="hover:text-white transition-colors whitespace-pre-line">{{ link.label }}</a></li>
+                            <li><a href="{{ link.href }}" class="max-md:inline-flex max-md:min-h-[44px] max-md:items-center hover:text-white transition-colors whitespace-pre-line">{{ link.label }}</a></li>
                             }
                         </ul>
                     </div>
@@ -108,17 +108,17 @@ import { LanguageService } from '../../services/language.service';
                                     <p class="text-base text-white/80">{{ item.title }}</p>
                                     @if(item.icon === 'phone') {
                                         <button (click)="copyToClipboard('+573012358181', 'phone')" 
-                                                class="font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
+                                                class="max-md:inline-flex max-md:min-h-[44px] max-md:items-center font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
                                             {{ item.value }}
                                         </button>
                                     } @else if(item.icon === 'mail') {
                                         <button (click)="copyToClipboard('reservas@oceandrivecarental.com', 'email')" 
-                                                class="font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
+                                                class="max-md:inline-flex max-md:min-h-[44px] max-md:items-center font-semibold text-white hover:text-[var(--glow)] transition-colors text-sm hover:underline cursor-pointer text-left">
                                             {{ item.value }}
                                         </button>
                                     } @else {
                                         <a [href]="item.href || '#'" [target]="item.href ? '_blank' : '_self'" 
-                                           class="font-semibold text-white hover:text-gray-200 transition-colors text-sm hover:underline">
+                                           class="max-md:inline-flex max-md:min-h-[44px] max-md:items-center font-semibold text-white hover:text-gray-200 transition-colors text-sm hover:underline">
                                             {{ item.value }}
                                         </a>
                                     }
@@ -130,11 +130,11 @@ import { LanguageService } from '../../services/language.service';
 
                     <div class="lg:col-span-3 group animate-enter delay-500 flex flex-col justify-center h-full">
                         <form (ngSubmit)="onSubscribe()" #subForm="ngForm" class="flex flex-col gap-4 w-full">
-                            <input [(ngModel)]="subName" name="name" type="text" placeholder="Nombre" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
-                            <input [(ngModel)]="subPhone" name="phone" type="tel" placeholder="Número" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
-                            <input [(ngModel)]="subEmail" name="email" required type="email" placeholder="Correo" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subName" name="name" type="text" placeholder="Nombre" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 min-h-[44px] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subPhone" name="phone" type="tel" placeholder="Número" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 min-h-[44px] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
+                            <input [(ngModel)]="subEmail" name="email" required type="email" placeholder="Correo" class="bg-transparent border-b border-white/30 text-white w-full py-1.5 min-h-[44px] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder-white/60 text-sm">
                             
-                            <button type="submit" [disabled]="isLoading()" class="w-full bg-[var(--accent)] text-white hover:bg-white hover:text-[var(--accent)] font-medium text-sm rounded-lg transition-all duration-300 ease-in-out flex items-center justify-between shadow-lg transform hover:-translate-y-0.5 active:scale-95 group overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed">
+                            <button type="submit" [disabled]="isLoading()" class="w-full min-h-[44px] bg-[var(--accent)] text-white hover:bg-white hover:text-[var(--accent)] font-medium text-sm rounded-lg transition-all duration-300 ease-in-out flex items-center justify-between shadow-lg transform hover:-translate-y-0.5 active:scale-95 group overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed">
                                 <span class="px-4 py-3 transition-colors duration-300">
                                   @if(isLoading()) { {{ lang.t('footer.processing') }} } @else { {{ lang.t('footer.subscribe') }} }
                                 </span>
@@ -156,8 +156,8 @@ import { LanguageService } from '../../services/language.service';
                     </p>
 
                     <div class="flex flex-wrap justify-center md:justify-end items-center gap-2 order-1 md:order-2">
-                        <a href="https://www.instagram.com/oceandrivecarental/" target="_blank" class="px-3 py-1.5 text-[10px] font-bold tracking-widest text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full hover:scale-105 transition-all shadow-sm shadow-pink-900/20">INSTAGRAM</a>
-                        <a href="https://wa.me/573012358181" target="_blank" class="px-3 py-1.5 text-[10px] font-bold tracking-widest text-white bg-[var(--wa)] rounded-full hover:scale-105 transition-all shadow-sm shadow-green-900/20">WHATSAPP</a>
+                        <a href="https://www.instagram.com/oceandrivecarental/" target="_blank" class="inline-flex items-center justify-center min-h-[44px] px-4 text-[12px] font-bold tracking-widest text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full hover:scale-105 transition-all shadow-sm shadow-pink-900/20">INSTAGRAM</a>
+                        <a href="https://wa.me/573012358181" target="_blank" class="inline-flex items-center justify-center min-h-[44px] px-4 text-[12px] font-bold tracking-widest text-white bg-[var(--wa)] rounded-full hover:scale-105 transition-all shadow-sm shadow-green-900/20">WHATSAPP</a>
                     </div>
                 </div>
             </div>
@@ -194,7 +194,7 @@ import { LanguageService } from '../../services/language.service';
                         </p>
 
                         <button (click)="closeSuccessModal()" 
-                                class="w-full py-4 bg-[var(--brand-900)] text-white font-bold rounded-2xl shadow-xl shadow-blue-900/20 hover:bg-[var(--brand-800)] hover:shadow-2xl hover:-translate-y-0.5 transition-all active:scale-95 active:translate-y-0 uppercase tracking-widest text-xs flex items-center justify-center gap-2 group">
+                                class="w-full py-4 bg-[var(--brand-900)] text-white font-bold rounded-2xl shadow-xl shadow-blue-900/20 hover:bg-[var(--brand-800)] hover:shadow-2xl hover:-translate-y-0.5 transition-all active:scale-95 active:translate-y-0 uppercase tracking-widest text-[12px] flex items-center justify-center gap-2 group">
                             <span>{{ lang.t('footer.understood') }}</span>
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -216,7 +216,7 @@ import { LanguageService } from '../../services/language.service';
                     </div>
                     <div>
                         <p class="font-semibold text-sm">{{ toastMessage() }}</p>
-                        <p class="text-xs text-gray-400">{{ lang.t('footer.thanksSubscribe') }}</p>
+                        <p class="text-[12px] text-gray-400">{{ lang.t('footer.thanksSubscribe') }}</p>
                     </div>
                 </div>
             </div>

@@ -76,7 +76,7 @@ import { LanguageService } from '../../../services/language.service';
                             <p class="text-3xl font-black text-[#002B5B] tracking-tighter">
                                 +{{ reservationForm.currencyService.formatPrice(reservationForm.pendingDropoffFee()) }}
                             </p>
-                            <p class="text-[0.65rem] text-slate-400 font-medium mt-1">{{ lang.t('reservas.dropoff_modal.note') }}</p>
+                            <p class="text-[12px] text-slate-400 font-medium mt-1">{{ lang.t('reservas.dropoff_modal.note') }}</p>
                             @if(reservationForm.pendingDropoffCity() && reservationForm.cityConfig[reservationForm.pendingDropoffCity()] && reservationForm.cityConfig[reservationForm.pendingDropoffCity()].minDays > 1) {
                                 <p class="text-[0.6rem] text-[#FF6F61] font-bold mt-2 uppercase tracking-wider">
                                     ⚠️ {{ lang.t('form.modal.dropoff.warn') }} {{ reservationForm.cityConfig[reservationForm.pendingDropoffCity()].minDays }} {{ lang.t('form.modal.dropoff.warnDays') }}

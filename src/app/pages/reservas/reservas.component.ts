@@ -804,7 +804,7 @@ const COUNTRIES: Country[] = [
                                 <p class="text-3xl font-black text-[#002B5B] tracking-tighter">
                                     +{{ currencyService.formatPrice(dropoffModalData().fee ?? 0) }}
                                 </p>
-                                <p class="text-[0.65rem] text-slate-400 font-medium mt-1">{{ lang.t('reservas.dropoff_modal.note') }}</p>
+                                <p class="text-[12px] text-slate-400 font-medium mt-1">{{ lang.t('reservas.dropoff_modal.note') }}</p>
                             </div>
 
                             <!-- Footer Actions -->

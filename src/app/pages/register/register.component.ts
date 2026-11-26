@@ -117,7 +117,7 @@ import { LanguageService } from '../../../services/language.service';
                                                         [class.bg-blue-50]="dialCode === country.dialCode">
                                                         <span class="text-xl shrink-0">{{ country.flag }}</span>
                                                         <div class="flex flex-col">
-                                                            <span class="text-[0.65rem] font-bold text-[#002B5B]">{{ country.name }}</span>
+                                                            <span class="text-[12px] font-bold text-[#002B5B]">{{ country.name }}</span>
                                                             <span class="text-[0.55rem] text-gray-400 font-bold">{{ country.dialCode }}</span>
                                                         </div>
                                                     </button>

@@ -55,7 +55,7 @@ export type InsuranceType = 'basic' | 'total';
         <div class="flex-1 border-2 rounded-2xl p-4 md:p-6 relative flex flex-col bg-gray-100 border-gray-200 opacity-60 cursor-not-allowed">
 
           <!-- Unavailable Badge -->
-          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-500 text-white text-[0.65rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-2 shadow-lg ring-4 ring-white">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-500 text-white text-[12px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-2 shadow-lg ring-4 ring-white">
              <span class="pt-0.5">{{ lang.t('insurance.not_available') }}</span>
              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
           </div>
@@ -63,7 +63,7 @@ export type InsuranceType = 'basic' | 'total';
           <div class="text-center mb-4 mt-1">
               <h4 class="text-gray-500 font-black text-lg uppercase tracking-wide">{{ lang.t('insurance.total_title') }}</h4>
               <p class="text-gray-400 font-bold text-lg mt-1 flex items-center justify-center gap-1 line-through">
-                + COP 77.000 <span class="text-gray-300 text-[0.65rem] font-normal">/{{ lang.t('booking.perDay') }}</span>
+                + COP 77.000 <span class="text-gray-300 text-[12px] font-normal">/{{ lang.t('booking.perDay') }}</span>
               </p>
           </div>
 

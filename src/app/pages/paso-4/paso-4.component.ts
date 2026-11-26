@@ -252,7 +252,7 @@ const COUNTRIES: Country[] = [
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
                             <!-- Nombre -->
                             <div class="relative group">
-                                <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.full_name') }} *</label>
+                                <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.full_name') }} *</label>
                                 <input type="text" autocomplete="name" [placeholder]="lang.t('paso4.full_name_ph')" 
                                        [value]="fullName()"
                                        [disabled]="isEditing()"
@@ -262,7 +262,7 @@ const COUNTRIES: Country[] = [
 
                             <!-- Nacionalidad Custom Dropdown -->
                             <div class="relative group" #nationalityRef>
-                                <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.nationality') }} *</label>
+                                <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.nationality') }} *</label>
                                 <div role="button" tabindex="0" (click)="!isEditing() && toggleNationality()" (keydown.enter)="!isEditing() && toggleNationality()" (keydown.space)="!isEditing() && toggleNationality(); $event.preventDefault()" 
                                      class="w-full border-b-2 border-gray-100 py-3 cursor-pointer flex justify-between items-center group-focus-within:border-[#FF6F61]"
                                      [class.opacity-50]="isEditing()" [class.cursor-not-allowed]="isEditing()">
@@ -299,7 +299,7 @@ const COUNTRIES: Country[] = [
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
                             <!-- Email con Validación -->
                             <div class="relative group">
-                                <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors"
+                                <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors"
                                        [class.text-red-500]="emailTouched() && !emailValid()"
                                        [class.group-focus-within:text-[#FF6F61]="emailValid() || !emailTouched()">{{ lang.t('paso4.email') }} *</label>
                                 <input type="email" autocomplete="email" spellcheck="false" [placeholder]="lang.t('paso4.email_ph')" 
@@ -317,7 +317,7 @@ const COUNTRIES: Country[] = [
                             <!-- DDI + Phone (Editable DDI) -->
                             <div class="grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] gap-6">
                                 <div class="relative group" #ddiRef>
-                                    <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.ddi') }} *</label>
+                                    <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.ddi') }} *</label>
                                     <div class="w-full border-b-2 border-gray-100 py-3 flex items-center gap-2 group-focus-within:border-[#FF6F61]"
                                          [class.opacity-50]="isEditing()">
                                         <span class="text-xl shrink-0 cursor-pointer hover:scale-110 transition-transform" 
@@ -356,7 +356,7 @@ const COUNTRIES: Country[] = [
                                     </div>
                                 </div>
                                 <div class="relative group">
-                                    <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.cellphone') }} *</label>
+                                    <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.cellphone') }} *</label>
                                     <input type="tel" autocomplete="tel" placeholder="300 000 0000" 
                                            [value]="phoneNumber()"
                                            [disabled]="isEditing()"
@@ -372,7 +372,7 @@ const COUNTRIES: Country[] = [
                             <!-- Document Details (Custom Premium Select) -->
                             <div class="grid grid-cols-[160px_1fr] md:grid-cols-[200px_1fr] gap-6">
                                 <div class="relative group" #docTypeRef>
-                                    <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_type') }} *</label>
+                                    <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_type') }} *</label>
                                     <div role="button" tabindex="0" (click)="!isEditing() && toggleDocType()" (keydown.enter)="!isEditing() && toggleDocType()" (keydown.space)="!isEditing() && toggleDocType(); $event.preventDefault()" 
                                          class="w-full border-b-2 border-gray-100 py-3 cursor-pointer flex justify-between items-center group-focus-within:border-[#FF6F61]"
                                          [class.opacity-50]="isEditing()" [class.cursor-not-allowed]="isEditing()">
@@ -398,7 +398,7 @@ const COUNTRIES: Country[] = [
                                     </div>
                                 </div>
                                 <div class="relative group">
-                                    <label class="block text-[#002B5B] font-extrabold text-[0.65rem] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_id') }} *</label>
+                                    <label class="block text-[#002B5B] font-extrabold text-[12px] uppercase tracking-widest mb-2 transition-colors group-focus-within:text-[#FF6F61]">{{ lang.t('paso4.doc_id') }} *</label>
                                     <input type="text" spellcheck="false" [placeholder]="lang.t('paso4.doc_id_ph')" 
                                            [value]="docNumber()"
                                            [disabled]="isEditing()"

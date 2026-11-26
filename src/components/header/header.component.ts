@@ -69,7 +69,7 @@ interface NavItem {
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer select-none border border-[var(--brand-700)]/40 hover:border-[var(--brand-700)] hover:scale-105 active:scale-95 backdrop-blur-sm"
           [ngClass]="displayScrolled() ? 'bg-[var(--brand-700)]/10 text-[var(--brand-700)]' : 'bg-white/15 text-white'"
           title="Seleccionar Idioma">
-          <span class="text-[11px] font-bold tracking-widest">{{ lang.currentLang() }}</span>
+          <span class="text-[12px] font-bold tracking-widest">{{ lang.currentLang() }}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-300" [class.rotate-180]="isLangMenuOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
           </svg>
@@ -98,7 +98,7 @@ interface NavItem {
         class="flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded-full transition-all duration-300 cursor-pointer select-none border border-[var(--brand-700)]/40 hover:border-[var(--brand-700)] hover:scale-105 active:scale-95 backdrop-blur-sm"
         [ngClass]="currencyService.showUsd() ? (displayScrolled() ? 'bg-[var(--brand-700)]/10' : 'bg-white/15') : 'bg-transparent'"
         [title]="lang.t('currency.convert')">
-        <span class="text-[11px] font-bold tracking-widest transition-colors duration-300"
+        <span class="text-[12px] font-bold tracking-widest transition-colors duration-300"
           [ngClass]="displayScrolled() ? 'text-[var(--brand-700)]' : 'text-white'">
           {{ currencyService.showUsd() ? 'USD' : 'COP' }}
         </span>
@@ -126,7 +126,7 @@ interface NavItem {
     
     <!-- Hamburger Button with Animation -->
     <div class="lg:hidden">
-      <button aria-label="Abrir menú" (click)="toggleMobileMenu()" class="relative w-10 h-10 flex items-center justify-center focus:outline-none active:scale-95 transition-all duration-200 rounded-lg" [class]="displayScrolled() || mobileMenuOpen() ? 'text-gray-800' : 'text-white'">
+      <button aria-label="Abrir menú" (click)="toggleMobileMenu()" class="relative w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none active:scale-95 transition-all duration-200 rounded-lg" [class]="displayScrolled() || mobileMenuOpen() ? 'text-gray-800' : 'text-white'">
         <div class="w-5 h-4 flex flex-col justify-between">
           <span class="h-0.5 w-full rounded-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 [ngClass]="mobileMenuOpen() ? 'rotate-45 translate-y-1.5 bg-gray-800' : (displayScrolled() ? 'bg-gray-800' : 'bg-white')">
@@ -144,8 +144,6 @@ interface NavItem {
     </div>
     </div>
   </div>
-  <div class="absolute bottom-0 left-0 h-[3px] w-full bg-[var(--accent)] origin-left pointer-events-none"
-       [style.transform]="'scaleX(' + scrollProgress() + ')'" aria-hidden="true"></div>
   <div class="absolute bottom-0 left-0 h-[3px] w-full bg-[var(--accent)] origin-left pointer-events-none"
        [style.transform]="'scaleX(' + scrollProgress() + ')'" aria-hidden="true"></div>
 </header>
@@ -168,7 +166,7 @@ interface NavItem {
       <div class="flex items-center justify-between">
         <img src="assets/imgs/header/logo-color.webp" alt="Ocean Drive" class="h-10 transition-transform duration-300 hover:scale-105 drop-shadow-sm">
         <button aria-label="Cerrar menú" (click)="toggleMobileMenu()"
-          class="p-2.5 hover:bg-gradient-to-br hover:from-gray-100 hover:to-gray-50 rounded-xl transition-all duration-300 active:scale-90 group relative overflow-hidden">
+          class="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-gradient-to-br hover:from-gray-100 hover:to-gray-50 rounded-xl transition-all duration-300 active:scale-90 group relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/5 to-[var(--accent)]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <svg class="w-6 h-6 text-gray-700 relative z-10 transition-transform duration-300 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
@@ -208,17 +206,17 @@ interface NavItem {
     </nav>
 
     <div class="px-6 py-6 border-t border-gray-200/50 bg-gray-50/30 md:hidden">
-        <p class="text-[0.65rem] text-[var(--brand-700)]/40 mb-4 font-black uppercase tracking-[0.2em]">{{ lang.t('lang.select') }} & {{ lang.t('currency.convert') }}</p>
+        <p class="text-[12px] text-[var(--brand-700)]/40 mb-4 font-black uppercase tracking-[0.2em]">{{ lang.t('lang.select') }} & {{ lang.t('currency.convert') }}</p>
         <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between bg-white/80 border border-[var(--brand-700)]/10 rounded-2xl p-2 shadow-sm">
                 <div class="flex gap-1 flex-1">
                     <button (click)="setLang('ES')" 
-                        class="flex-1 py-2.5 rounded-xl text-[11px] font-black tracking-widest transition-all duration-300 active:scale-95"
+                        class="flex-1 py-2.5 min-h-[44px] rounded-xl text-[12px] font-black tracking-widest transition-all duration-300 active:scale-95"
                         [class]="lang.currentLang() === 'ES' ? 'bg-[var(--brand-700)] text-white shadow-lg shadow-[var(--brand-700)]/20' : 'text-[var(--brand-700)]/50 hover:bg-[var(--brand-700)]/5'">
                         ESPAÑOL
                     </button>
                     <button (click)="setLang('EN')" 
-                        class="flex-1 py-2.5 rounded-xl text-[11px] font-black tracking-widest transition-all duration-300 active:scale-95"
+                        class="flex-1 py-2.5 min-h-[44px] rounded-xl text-[12px] font-black tracking-widest transition-all duration-300 active:scale-95"
                         [class]="lang.currentLang() === 'EN' ? 'bg-[var(--brand-700)] text-white shadow-lg shadow-[var(--brand-700)]/20' : 'text-[var(--brand-700)]/50 hover:bg-[var(--brand-700)]/5'">
                         ENGLISH
                     </button>

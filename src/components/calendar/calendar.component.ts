@@ -42,7 +42,7 @@ import { FormsModule } from '@angular/forms';
                   <!-- Weekdays -->
                   <div class="grid grid-cols-7 gap-1 mb-2 shrink-0">
                       @for(day of weekDays; track day) {
-                        <div class="text-center text-[0.65rem] font-bold text-slate-400 uppercase tracking-wider py-1 select-none">
+                        <div class="text-center text-[12px] font-bold text-slate-400 uppercase tracking-wider py-1 select-none">
                             {{ day }}
                         </div>
                       }

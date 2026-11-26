@@ -15,13 +15,13 @@
                 <!-- Pickup City -->
                 <div class="group relative" [class.z-[60]]="showCityDropdown()" [class.z-20]="!showCityDropdown()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.city.pickup') }}
                     </label>
                     <div class="relative" #cityWrapper>
                         <button type="button" (click)="!isPickupLocked() && toggleCityDropdown()"
                             [class.cursor-not-allowed]="isPickupLocked()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="selectedCity()" [class.font-bold]="selectedCity()"
                             [class.opacity-60]="isPickupLocked()">
                             <div class="flex flex-col leading-tight">
@@ -65,14 +65,14 @@
                 <!-- Pickup Date -->
                 <div class="group relative" [class.z-[60]]="showPickupCalendar()" [class.z-20]="!showPickupCalendar()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.date.pickup') }}
                     </label>
                     <div class="relative" #dateWrapper>
                         <button type="button" (click)="!isPickupLocked() && togglePickupCalendar()"
                             [class.opacity-50]="isPickupDateDisabled()"
                             [class.cursor-not-allowed]="isPickupDateDisabled()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="pickupDate()" [class.font-bold]="pickupDate()">
                             <span class="text-[0.9rem] tracking-tight">{{ formatDate(pickupDate()) ||
                                 lang.t('form.select.date') }}</span>
@@ -95,14 +95,14 @@
                 <!-- Pickup Time -->
                 <div class="group relative" [class.z-[60]]="showTimeDropdown()" [class.z-20]="!showTimeDropdown()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.time.pickup') }}
                     </label>
                     <div class="relative" #timeWrapper>
                         <button type="button" (click)="!isPickupLocked() && toggleTimeDropdown()"
                             [class.opacity-50]="isPickupTimeDisabled()"
                             [class.cursor-not-allowed]="isPickupTimeDisabled()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="selectedTime()" [class.font-bold]="selectedTime()">
                             <span class="text-[0.9rem] tracking-tight">{{ selectedTime() || '00:00' }}</span>
                             <svg class="w-4 h-4 text-gray-400 transition-transform duration-300 group-hover:text-[#FF6F61]"
@@ -146,14 +146,14 @@
                 <div *ngIf="showDropoffCity()" class="group relative" [class.z-[60]]="showDropoffCityDropdown()"
                     [class.z-20]="!showDropoffCityDropdown()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.city.dropoff') }}
                     </label>
                     <div class="relative" #dropoffCityWrapper>
                         <button type="button" (click)="toggleDropoffCityDropdown()"
                             [class.opacity-50]="isDropoffCityDisabled()"
                             [class.cursor-not-allowed]="isDropoffCityDisabled()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="selectedDropoffCity()" [class.font-bold]="selectedDropoffCity()">
                             <div class="flex flex-col leading-tight">
                                 <span class="text-[0.9rem] tracking-tight">{{ selectedDropoffCity() ||
@@ -196,14 +196,14 @@
                 <div class="group relative" [class.z-[60]]="showDropoffCalendar()"
                     [class.z-20]="!showDropoffCalendar()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.date.dropoff') }}
                     </label>
                     <div class="relative" #dropoffDateWrapper>
                         <button type="button" (click)="toggleDropoffCalendar()"
                             [class.opacity-50]="isDropoffDateDisabled()"
                             [class.cursor-not-allowed]="isDropoffDateDisabled()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="dropoffDate()" [class.font-bold]="dropoffDate()">
                             <span class="text-[0.9rem] tracking-tight">{{ formatDate(dropoffDate()) ||
                                 lang.t('form.select.date') }}</span>
@@ -228,14 +228,14 @@
                 <div class="group relative" [class.z-[60]]="showDropoffTimeDropdown()"
                     [class.z-20]="!showDropoffTimeDropdown()">
                     <label
-                        class="block text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
+                        class="block text-[12px] font-extrabold uppercase tracking-[0.2em] text-gray-500 mb-2 pl-1 transition-colors group-hover:text-[#FF6F61]">
                         {{ lang.t('form.time.dropoff') }}
                     </label>
                     <div class="relative" #dropoffTimeWrapper>
                         <button type="button" (click)="toggleDropoffTimeDropdown()"
                             [class.opacity-50]="isDropoffTimeDisabled()"
                             [class.cursor-not-allowed]="isDropoffTimeDisabled()"
-                            class="w-full px-5 py-2 bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
+                            class="w-full px-5 py-2 min-h-[44px] bg-slate-50/50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5 outline-none text-left flex items-center justify-between text-gray-600 group-hover:text-[#002B5B] touch-manipulation focus:ring-2 focus:ring-[#FF6F61]/20"
                             [class.text-[#002B5B]]="selectedDropoffTime()" [class.font-bold]="selectedDropoffTime()">
                             <span class="text-[0.9rem] tracking-tight">{{ selectedDropoffTime() || '00:00' }}</span>
                             <svg class="w-4 h-4 text-gray-400 transition-transform duration-300 group-hover:text-[#FF6F61]"
@@ -310,13 +310,13 @@
                             +{{ currencyService.formatPrice(proratedDropoffFee()) }} <span
                                 class="text-xs font-normal text-gray-500">{{ lang.t('vehicles.perDay') }}</span>
                         </p>
-                        <p class="text-[0.65rem] text-gray-500 font-medium mt-1 leading-tight">
+                        <p class="text-[12px] text-gray-500 font-medium mt-1 leading-tight">
                             {{ lang.t('form.fee.total') }}: {{
                             currencyService.formatPrice(cityConfig[selectedDropoffCity()].dropoffFee) }}
                             ({{ rentalDays() }} {{ lang.t('booking.days') }})
                         </p>
                         @if(cityConfig[selectedDropoffCity()].minDays > 0) {
-                        <p class="text-[0.65rem] text-red-500 font-bold mt-1 leading-tight"
+                        <p class="text-[12px] text-red-500 font-bold mt-1 leading-tight"
                             *ngIf="rentalDays() < cityConfig[selectedDropoffCity()].minDays">
                             {{ lang.t('form.warn.minDays') }} {{ cityConfig[selectedDropoffCity()].minDays }} {{
                             lang.t('form.warn.days') }}. {{ lang.t('form.warn.current') }} {{
@@ -334,7 +334,7 @@
         <!-- Submit Button (CORAL) -->
         <div class="mt-5 relative z-0">
             <button (click)="startReservation()" type="button"
-                class="group w-full py-3 rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-base flex items-center justify-center gap-4">
+                class="group w-full py-3 min-h-[44px] rounded-xl bg-gradient-to-r from-[#FF6F61] to-[#FF8A75] text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(255,111,97,0.3)] hover:shadow-[0_0_40px_rgba(255,111,97,0.5)] hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden text-base flex items-center justify-center gap-4">
 
                 <span class="relative z-10 flex items-center justify-center gap-4">{{ isInitialStep() ?
                     lang.t('vehicles.book') :
@@ -404,7 +404,7 @@
                     <p class="text-3xl font-black text-[#002B5B] tracking-tighter">
                         +{{ currencyService.formatPrice(pendingDropoffFee()) }}
                     </p>
-                    <p class="text-[0.65rem] text-slate-400 font-medium mt-1">{{ lang.t('form.modal.dropoff.note') }}
+                    <p class="text-[12px] text-slate-400 font-medium mt-1">{{ lang.t('form.modal.dropoff.note') }}
                     </p>
                     @if(pendingDropoffCity() && cityConfig[pendingDropoffCity()] &&
                     cityConfig[pendingDropoffCity()].minDays > 1) {
@@ -511,7 +511,7 @@
                             class="font-black text-[#002B5B] group-hover:text-white uppercase italic tracking-tighter text-sm transition-colors">
                             {{ suggested.name }}</h4>
                         <p
-                            class="text-[0.65rem] font-bold text-slate-400 group-hover:text-white/60 uppercase transition-colors">
+                            class="text-[12px] font-bold text-slate-400 group-hover:text-white/60 uppercase transition-colors">
                             {{ lang.t('form.modal.avail.now') }}</p>
                     </div>
                     <div
