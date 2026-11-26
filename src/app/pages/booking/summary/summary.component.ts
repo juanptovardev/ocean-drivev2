@@ -62,10 +62,10 @@ import { CurrencyService } from '../../../../services/currency.service';
 
             <!-- Actions -->
             <div class="p-6 flex flex-col sm:flex-row gap-4">
-              <button (click)="goBack()" class="flex-1 py-3 px-6 border-2 border-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+              <button (click)="goBack()" class="flex-1 py-3 px-6 min-h-[44px] border-2 border-gray-200 rounded-full text-gray-700 font-medium hover:bg-gray-50 transition-colors">
                 Volver
               </button>
-              <button (click)="confirmBooking()" [disabled]="confirming()" class="flex-1 py-3 px-6 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all disabled:opacity-70">
+              <button (click)="confirmBooking()" [disabled]="confirming()" class="flex-1 py-3 px-6 min-h-[44px] bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all disabled:opacity-70">
                 {{ confirming() ? 'Procesando...' : 'Confirmar Reserva' }}
               </button>
             </div>
